@@ -1,7 +1,9 @@
-//Ici, inscrire les noeuds et leurs voisins au format suivant :
-//;place dans le tableau
-//voisin1;distance1
-//voisin2;distance2
-//;place dans le tableau
-//voisin1;distance1
-//effacer les lignes précédentes ainsi que celle-ci
+;0
+1;4
+2;7
+;1
+0;4
+2;3
+;2
+0;7
+1;3

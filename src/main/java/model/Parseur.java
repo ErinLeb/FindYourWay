@@ -5,12 +5,19 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Parseur {
+    /**
+     * le scanner utilisé pour parcourir le fichier
+     */
     Scanner sc;
+    /**
+     * le batîment que l'on veut remplir
+     */
     Batiment bat;
 
     public Parseur(Batiment bat, String path) {
         //on initialise le scanner
-        Scanner sc = null;
+        this.bat = bat;
+        this.sc = null;
         try {
             sc = new Scanner(new File(path));
         } catch (IOException e) {
@@ -18,6 +25,7 @@ public class Parseur {
             e.printStackTrace();
             System.exit(1);
         }
+        
     }
 
     /**

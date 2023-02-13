@@ -66,7 +66,7 @@ public class Batiment{
     }
     
     /**
-     * getter
+     * Retourne la liste de noeuds du bâtiment
      * @return la liste de noeuds du bâtiment
      */
     public List<Noeud> getNoeuds() {
@@ -74,7 +74,7 @@ public class Batiment{
     }
 
     /**
-     * getter
+     * Retourne le noeud situé à l'indice i de la liste de noeuds
      * @param i
      * @return le noeud situé à l'indice i de la liste de noeuds
      */

@@ -1,9 +1,10 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Salle{
-    //Attributs
+    // Attributs
 
     /**
      * identifiant de la salle
@@ -15,17 +16,17 @@ public class Salle{
      */
     private ArrayList<Porte> portes;
 
-    //Constructeurs
+    // Constructeurs
 
     Salle(String id){
         this.id = id;
-        portes  = new ArrayList<Porte>();
+        portes  = new ArrayList<>();
     }
 
-    //Méthodes
+    // Méthodes
 
     /**
-     * ajoute une porte à la liste de portes qui mènent à la salle
+     * Ajoute une porte à la liste de portes qui mènent à la salle
      * @param porte
      */
     public void addPorte(Porte porte){
@@ -33,10 +34,10 @@ public class Salle{
     }
 
     /**
-     * renvoie la liste des portes qui mènent à la salle
+     * Renvoie la liste des portes qui mènent à la salle
      * @return renvoie la liste des portes qui mènent à la salle
      */
-    public ArrayList<Porte> getPortes(){
+    public List<Porte> getPortes(){
         return portes;
     }
 }

@@ -64,17 +64,7 @@ public class Batiment{
             }
         }
     }
-
-    public static void main(String[] args) {
-        Batiment haf = new Batiment(6, 5, 0);
-
-        Iterator<Noeud> it = haf.noeuds.iterator();
-        while(it.hasNext()){
-            System.out.println(it.next());
-            
-        }
-    }
-
+    
     /**
      * getter
      * @return la liste de noeuds du bâtiment
@@ -91,4 +81,15 @@ public class Batiment{
     public Noeud getNoeud(int i) {
         return this.noeuds.get(i);
     }
+
+    public static void main(String[] args) {
+        Batiment haf = new Batiment(6, 5, 0);
+
+        Iterator<Noeud> it = haf.noeuds.iterator();
+        while(it.hasNext()){
+            System.out.println(it.next());
+            
+        }
+    }
+
 }

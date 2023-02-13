@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,25 +11,29 @@ import java.util.Map;
  */
 public class Dijkstra {
 
+    private Dijkstra(){
+        //Jamais instancié car classe utilitaire 
+    }
+    
     /**
-     * Methode qui trouve le chemin le plus court pour aller d'un noeud de début à un
-     * noeud de fin
+     * Methode qui trouve le chemin le plus court pour aller d'un noeud de début à
+     * un noeud de fin
      * 
      * @param debut noeud de départ du parcours
      * @param fin   noeud de fin du parcours
      * @return une liste avec les noeuds à parcourir pour obtenir le chemin le plus
      *         court.
      */
-    public static List<Noeud> trouverCheminPlusCourt(Noeud debut, Noeud fin) {
-        // Map qui contiendra l'information de la distance entre chaque
+    public static Chemin trouverCheminPlusCourt(Noeud debut, Noeud fin) {
+        // Map qui contiendra l'information de la distance entre chaques
         // noeud et le noeud de départ.
-        Map<Noeud, Double> distances = new HashMap<Noeud, Double>();
+        Map<Noeud, Double> distances = new HashMap<>();
         // Map qui associe le noeud précédent le noeud actuel avec le chemin le plus
         // court pour accéder au noeud actuel(commence à répertorier le chemin le plus
         // court).
-        Map<Noeud, Noeud> predecesseurs = new HashMap<Noeud, Noeud>();
+        Map<Noeud, Noeud> predecesseurs = new HashMap<>();
         // contiendra la liste des noeuds.
-        List<Noeud> noeuds = new ArrayList<Noeud>();
+        List<Noeud> noeuds = new ArrayList<>();
 
         initNoeudList(distances, noeuds, debut);
         distances.put(debut, 0.0);
@@ -51,9 +54,10 @@ public class Dijkstra {
                 // faut pour se déplacer au voisin que l'on est en train de traiter).
                 double distanceTotale = distances.get(noeudActuel) + poids;
                 // Si la distance à parcourir par le chemin actuel est plus petit pour accèder
-                // au voisin traité que tout ceux trouvés avant
+                // au voisin traité que tout ceux trouvés avant.
                 if (distanceTotale <= distances.get(voisin)) {
-                    // on associe à chaque voisin la distance la plus courte pour arriver à ce noeud.
+                    // on associe à chaque voisin la distance la plus courte pour arriver à ce
+                    // noeud.
                     distances.put(voisin, distanceTotale);
                     // on associe à chaque voisin un prédécéceur, le prédécéceur avec le chemin le
                     // plus court pour accéder à ce noeud. (remplace l'ancien)
@@ -78,7 +82,7 @@ public class Dijkstra {
      * @param distances Map qui contient l'information de la distance entre le
      *                  noeud actuel et le noeud de départ.
      * @param noeuds    noeuds déjà traités
-     * @param noeud     noeud que l'on est en train de traiter
+     * @param noeud     noeud que l'on est en train de traiter.
      */
     public static void initNoeudList(Map<Noeud, Double> distances, List<Noeud> noeuds, Noeud noeud) {
         // initialise la distance du noeud actuel par rapport au noeud de départ à une
@@ -97,9 +101,10 @@ public class Dijkstra {
     }
 
     /**
-     * Methode qui permet d'obtenir le noeud avec la distance la plus courte du noeud de départ
+     * Methode qui permet d'obtenir le noeud avec la distance la plus courte du
+     * noeud de départ
      * 
-     * @param noeuds    Liste des noeuds à regarder
+     * @param noeuds    Liste des noeuds à regarder.
      * @param distances Map qui contient l'information de la distance entre le
      *                  noeud actuel et le noeud de départ.
      * @return le noeud avec la distance la plus courte avec le noeud de depart.
@@ -129,22 +134,22 @@ public class Dijkstra {
      * @param fin           noeud de fin
      * @return la liste qui contient le chemin le plus court.
      */
-    private static List<Noeud> reconstruireChemin(Map<Noeud, Noeud> predecesseurs, Noeud debut, Noeud fin) {
+    private static Chemin reconstruireChemin(Map<Noeud, Noeud> predecesseurs, Noeud debut, Noeud fin) {
         // initialise la liste qui contiendra les noeuds à parcourir.
-        List<Noeud> chemin = new ArrayList<Noeud>();
+        Chemin chemin = new Chemin();
         // on démarre le chemin par la fin.
         Noeud noeudActuel = fin;
         // tant qu'on est pas arrivé au noeud de départ.
         while (noeudActuel != debut) {
             // on ajoute le noeud actuel à la liste
-            chemin.add(noeudActuel);
+            chemin.addNoeud(noeudActuel);
             // on ajoute le prédécésseur le moins loin du noeud de départ.
             noeudActuel = predecesseurs.get(noeudActuel);
         }
         // on ajoute le noeud de départ à la fin.
-        chemin.add(noeudActuel);
+        chemin.addNoeud(noeudActuel);
         // on retourne la liste pour l'avoir dans le bonne ordre
-        Collections.reverse(chemin);
+        chemin.reverse();
         return chemin;
     }
 }

@@ -1,7 +1,5 @@
 package model;
 
-import java.util.HashMap;
-
 public class Carrefour extends Noeud {
     // Attributs
 
@@ -18,13 +16,17 @@ public class Carrefour extends Noeud {
      * 
      * @param ascenseur définit si le carrefour est un ascenseur ou non
      */
-    Carrefour(boolean ascenseur) {
-        super.id = super.nbNoeud;
-        super.nbNoeud++;
+    public Carrefour(boolean ascenseur, int etage, Batiment batiment) {
+        super(etage, batiment);
         this.ascenseur = ascenseur;
-        super.voisins = new HashMap<Noeud, Double>();
     }
 
     // Méthodes
-
+    @Override
+    public String toString(){
+        if(ascenseur){
+            return "Ascenseur à l'étage" + etage;
+        }
+        return "Escalier à l'étage " + etage;
+    }
 }

@@ -8,11 +8,11 @@ public class Parseur {
     /**
      * le scanner utilisé pour parcourir le fichier
      */
-    Scanner sc;
+    private Scanner sc;
     /**
      * le batîment que l'on veut remplir
      */
-    Batiment bat;
+    private Batiment bat;
 
     public Parseur(Batiment bat, String path) {
         //on initialise le scanner
@@ -30,7 +30,6 @@ public class Parseur {
 
     /**
      * Permet de lire un fichier .csv contenant les informations des noeuds
-     * @param path le chemin pour accéder au fichier
      */
     public void initNoeuds() {
         

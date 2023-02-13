@@ -22,6 +22,8 @@ public class Batiment{
 
         initEtages();
         createNoeuds();
+        Parseur p = new Parseur(this, "src/main/ressources/halle_aux_farines.csv");
+        p.initNoeuds();
         sortNoeuds();
     }
 
@@ -71,5 +73,22 @@ public class Batiment{
             System.out.println(it.next());
             
         }
+    }
+
+    /**
+     * getter
+     * @return la liste de noeuds du bâtiment
+     */
+    public List<Noeud> getNoeuds() {
+        return this.noeuds;
+    }
+
+    /**
+     * getter
+     * @param i
+     * @return le noeud situé à l'indice i de la liste de noeuds
+     */
+    public Noeud getNoeud(int i) {
+        return this.noeuds.get(i);
     }
 }

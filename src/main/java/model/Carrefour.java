@@ -25,7 +25,7 @@ public class Carrefour extends Noeud {
     @Override
     public String toString(){
         if(ascenseur){
-            return "Ascenseur à l'étage" + etage;
+            return "Ascenseur à l'étage " + etage;
         }
         return "Escalier à l'étage " + etage;
     }

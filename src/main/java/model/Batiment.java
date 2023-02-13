@@ -48,7 +48,7 @@ public class Batiment{
         //TODO : supprimer les noeuds de test
         noeuds.add(new Carrefour(false, 0, this));
         noeuds.add(new Carrefour(true, 1, this));
-        noeuds.add(new Porte("01", 5, this)); 
+        noeuds.add(new Porte("01", 0, this)); 
     }
 
     /*

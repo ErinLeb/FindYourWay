@@ -15,7 +15,7 @@ public class Batiment{
     public final List<Noeud> noeuds = new ArrayList<>();
 
     // Constructeur 
-    public Batiment(int nbEtages, int max, int min){
+    public Batiment(int nbEtages, int min, int max){ //TODO : passer le path pour le parseur en argument
         this.nbEtages = nbEtages;
         this.max = max;
         this.min = min;
@@ -83,7 +83,7 @@ public class Batiment{
     }
 
     public static void main(String[] args) {
-        Batiment haf = new Batiment(6, 5, 0);
+        Batiment haf = new Batiment(6, 0, 5);
 
         Iterator<Noeud> it = haf.noeuds.iterator();
         while(it.hasNext()){

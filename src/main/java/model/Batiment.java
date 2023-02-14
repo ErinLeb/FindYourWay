@@ -52,7 +52,7 @@ public class Batiment{
     }
 
     /*
-     * Répartit les noeuds du batiment dans leurs étages respectifs, les supprime s'ils ne sont pas corrects
+     * Répartit les noeuds du batiment dans leurs étages respectifs
      */
     private void sortNoeuds(){
         for(int i = 0; i<noeuds.size(); i++){

@@ -22,6 +22,8 @@ public class Batiment{
 
         initEtages();
         createNoeuds();
+        Parseur p = new Parseur(this, "src/main/ressources/halle_aux_farines.csv");
+        p.initNoeuds();
         sortNoeuds();
     }
 
@@ -46,11 +48,11 @@ public class Batiment{
         //TODO : supprimer les noeuds de test
         noeuds.add(new Carrefour(false, 0, this));
         noeuds.add(new Carrefour(true, 1, this));
-        noeuds.add(new Porte("01", 5, this)); 
+        noeuds.add(new Porte("01", 0, this)); 
     }
 
     /*
-     * Répartit les noeuds du batiment dans leurs étages respectifs, les supprime s'ils ne sont pas corrects
+     * Répartit les noeuds du batiment dans leurs étages respectifs
      */
     private void sortNoeuds(){
         for(int i = 0; i<noeuds.size(); i++){
@@ -62,6 +64,23 @@ public class Batiment{
             }
         }
     }
+    
+    /**
+     * Retourne la liste de noeuds du bâtiment
+     * @return la liste de noeuds du bâtiment
+     */
+    public List<Noeud> getNoeuds() {
+        return this.noeuds;
+    }
+
+    /**
+     * Retourne le noeud situé à l'indice i de la liste de noeuds
+     * @param i
+     * @return le noeud situé à l'indice i de la liste de noeuds
+     */
+    public Noeud getNoeud(int i) {
+        return this.noeuds.get(i);
+    }
 
     public static void main(String[] args) {
         Batiment haf = new Batiment(6, 5, 0);
@@ -72,4 +91,5 @@ public class Batiment{
             
         }
     }
+
 }

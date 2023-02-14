@@ -77,7 +77,7 @@ public class Etage{
     // Méthodes
     
     /*
-     * Initialise les salles de l'étage
+     * Initialise les salles de l'étage selon son numéro
      */
     private void initSalles(int etage){
         //TODO : ajouter les salles de la haf
@@ -115,10 +115,10 @@ public class Etage{
      * Ajoute un noeud à l'étage. Si c'est une porte, il vérifie qu'elle mène à une salle existante.
     */
     public void addNoeud(Noeud n){
-        if(n instanceof Porte && salleExistante((Porte)n)){ //S'il s'agit d'une porte, on vérifie que la salle à laquelle elle mène est à cet étage
+        if( !(n instanceof Porte) || n instanceof Porte && salleExistante((Porte)n)){ //S'il s'agit d'une porte, on vérifie que la salle à laquelle elle mène est à cet étage
             noeuds.add(n);
         }else{
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("La porte mène à une salle qui n'existe pas à cet étage");
         }
     }
 
@@ -127,7 +127,7 @@ public class Etage{
      */
     private boolean salleExistante(Porte p){
         Salle s = getSalle(p.nomSalle);
-        if(s!= null){
+        if(s != null){
             p.setSalle(s);
             return true;
         }
@@ -138,7 +138,7 @@ public class Etage{
      * Initialise les salles du Rez-de-Chaussée
      */
     private void initRdc(){
-        salles.add(new Salle("01"));
+        addSalle(new Salle("01"));
         //TODO : supprimer la salle test
     }
 

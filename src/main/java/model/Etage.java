@@ -24,7 +24,6 @@ public class Etage{
         salles = new ArrayList<>();
 
         this.nom = nom;
-        initSalles(nom);
     }
 
 
@@ -75,34 +74,6 @@ public class Etage{
 
 
     // Méthodes
-    
-    /*
-     * Initialise les salles de l'étage selon son numéro
-     */
-    private void initSalles(int etage){
-        //TODO : ajouter les salles de la haf
-        switch(etage){
-            case 0 : 
-                initRdc();
-                break;
-            case 1 : 
-                initPremier();
-                break;
-            case 2 : 
-                initDeuxieme();
-                break;
-            case 3 :
-                initTroisieme(); 
-                break;
-            case 4 : 
-                initQuatrieme();
-                break;
-            case 5 : 
-                initCinquieme();
-                break;
-            default : break;
-        }
-    }
 
     /**
      * Ajoute une salle à l'étage
@@ -134,44 +105,4 @@ public class Etage{
         return false;
     }
 
-    /**
-     * Initialise les salles du Rez-de-Chaussée
-     */
-    private void initRdc(){
-        addSalle(new Salle("01"));
-        //TODO : supprimer la salle test
-    }
-
-    /**
-     * Initialise les salles du premier étage
-     */
-    private void initPremier(){
-        //TODO
-    }
-
-    /**
-     * Initialise les salles du deuxième étage
-     */
-    private void initDeuxieme(){
-        //TODO
-    }
-    
-    /**
-     * Initialise les salles du troisième étage
-     */
-    private void initTroisieme(){
-        //TODO
-    }/**
-     * Initialise les salles du quatrième étage
-     */
-    private void initQuatrieme(){
-        //TODO
-    }
-
-    /**
-     * Initialise les salles du cinquième étage
-     */
-    private void initCinquieme(){
-        //TODO
-    }
 }

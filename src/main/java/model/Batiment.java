@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Batiment{
     // Attributs
-    protected final int nbEtages;
     protected final int max;
     protected final int min;
 
@@ -15,55 +14,35 @@ public class Batiment{
     public final List<Noeud> noeuds = new ArrayList<>();
 
     // Constructeur 
-    public Batiment(int nbEtages, int min, int max){ //TODO : passer le path pour le parseur en argument
-        this.nbEtages = nbEtages;
+    /**
+     * 
+     * @param min l'étage le plus bas
+     * @param max l'étage le plus haut
+     * @param path le chemin dans le répertoire du dossier contenant les csv du batiment
+     */
+    public Batiment(int min, int max, String path){ 
+        for(int i = min; i<=max; i++){
+            etages.add(new Etage(i)); 
+        }  
+        
+
         this.max = max;
         this.min = min;
 
-        initEtages();
-        createNoeuds();
-        Parseur p = new Parseur(this, "src/main/ressources/halle_aux_farines.csv");
-        p.initNoeuds();
-        sortNoeuds();
+        Parseur parseur = new Parseur(this, path);
+        
+        //on initialise les étages et leurs salles
+        parseur.initSalles();
+        
+        //on initialise les noeuds
+        parseur.createNoeuds();
+
+        //on initialise les liens entre les noeuds
+        parseur.initVoisins();
     }
 
 
-    // Methodes
-
-    /**
-     * Initialise les étages
-     */
-    private void initEtages(){
-        for(int i = 0; i<nbEtages; i++){
-            etages.add(new Etage(i)); //les salles sont initialisées dans les étages
-        }  
-    }
-
-    /**
-     * Crée tous les noeuds du graphe
-     */
-    private void createNoeuds(){
-        //TODO : initialiser les vrais noeuds
-
-        //TODO : supprimer les noeuds de test
-        noeuds.add(new Carrefour(false, 0, this));
-        noeuds.add(new Carrefour(true, 1, this));
-        noeuds.add(new Porte("01", 0, this)); 
-    }
-
-    /*
-     * Répartit les noeuds du batiment dans leurs étages respectifs
-     */
-    private void sortNoeuds(){
-        for(int i = 0; i<noeuds.size(); i++){
-            Noeud n = noeuds.get(i);
-            if(n.etage >= 0 && n.etage <= 5){
-                etages.get(n.etage).addNoeud(n);
-            }else{
-                throw new IllegalArgumentException("Mauvais numéro d'étage");
-            }
-        }
-    }
+    // Getters & setters
     
     /**
      * Retourne la liste de noeuds du bâtiment
@@ -82,8 +61,37 @@ public class Batiment{
         return this.noeuds.get(i);
     }
 
+    /**
+     * Retourne l'étage {@code i}
+     * @return l'étage {@©ode i}
+     */
+    public Etage getEtage(int i){
+        return this.etages.get(i);
+    }
+
+
+    // Methodes
+
+    /**
+     * Ajoute {@code n} à la liste de noeuds de son étage et à la liste de noeuds du batiment
+     */
+    public void addNoeud(Noeud n){
+        if(n.etage > max || n.etage < min){
+            throw new IllegalArgumentException("L'étage n'existe pas");
+        }
+        etages.get(n.etage).addNoeud(n);
+        noeuds.add(n);
+    }
+
+    public void addEtage(int number){
+        if(number<min || number>max){
+            throw new IllegalArgumentException("Le numéro d'étage n'est pas correct");
+        }
+        etages.add(new Etage(number)); 
+    }
+
     public static void main(String[] args) {
-        Batiment haf = new Batiment(6, 0, 5);
+        Batiment haf = new Batiment(0, 5, "src/main/ressources/test/");
 
         Iterator<Noeud> it = haf.noeuds.iterator();
         while(it.hasNext()){

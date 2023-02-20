@@ -11,10 +11,10 @@ import java.util.Map;
  */
 public class Dijkstra {
 
-    private Dijkstra(){
-        //Jamais instancié car classe utilitaire 
+    private Dijkstra() {
+        // Jamais instancié car classe utilitaire
     }
-    
+
     /**
      * Methode qui trouve le chemin le plus court pour aller d'un noeud de début à
      * un noeud de fin
@@ -40,7 +40,7 @@ public class Dijkstra {
 
         while (!noeuds.isEmpty()) {
             // on récupère le noeud avec la distance la plus courte.
-            Noeud noeudActuel = getNoeudMinimal(noeuds, distances);
+            Noeud noeudActuel = getNoeudMinimal(noeuds);
             // on le supprime de la liste des noeud à traiter.
             noeuds.remove(noeudActuel);
 
@@ -59,6 +59,8 @@ public class Dijkstra {
                     // on associe à chaque voisin la distance la plus courte pour arriver à ce
                     // noeud.
                     distances.put(voisin, distanceTotale);
+                    // trie la liste de noeuds avec la distance actualisé à la ligne précédente.
+                    actualiserNoeudOrdreCroissant(noeuds, distances, voisin);
                     // on associe à chaque voisin un prédécéceur, le prédécéceur avec le chemin le
                     // plus court pour accéder à ce noeud. (remplace l'ancien)
                     predecesseurs.put(voisin, noeudActuel);
@@ -101,28 +103,77 @@ public class Dijkstra {
     }
 
     /**
+     * Compléxité log2(n):
+     * 
+     * Trie la liste de noeuds dans l'ordre du noeud le plus proche au noeud le plus
+     * loin du noeud de depart.
+     * 
+     * @param noeuds    liste a trier
+     * @param distances information de la distance des noeud par rapport au noeud de
+     *                  depart
+     * @param voisin    noeud que l'on doit ranger correctement.
+     * @param debut     début de l'intervalle dans lequel peut-être rangé le noeud
+     *                  voisin
+     * @param fin       fin de l'intervalle dans lequel peut-être rangé le noeud
+     *                  voisin
+     */
+    private static void rangerNoeudOrdreCroissant(List<Noeud> noeuds, Map<Noeud, Double> distances, Noeud voisin,
+            int debut, int fin) {
+        if (debut == fin) {
+            if (distances.get(noeuds.get(debut)) > distances.get(voisin)) {
+                noeuds.add(debut, voisin);
+            } else {
+                noeuds.add(fin + 1, voisin);
+            }
+        } else {
+            if (fin - debut == 1) {
+                if (distances.get(noeuds.get(debut)) > distances.get(voisin)) {
+                    noeuds.add(debut, voisin);
+                } else {
+                    if (distances.get(noeuds.get(debut)) < distances.get(voisin)) {
+                        noeuds.add(fin + 1, voisin);
+                    }
+                    noeuds.add(fin, voisin);
+                }
+            } else {
+                if (distances.get(noeuds.get(debut + ((fin - debut) / 2))) > distances.get(voisin)) {
+                    rangerNoeudOrdreCroissant(noeuds, distances, voisin, debut, debut + ((fin - debut) / 2));
+                } else {
+                    rangerNoeudOrdreCroissant(noeuds, distances, voisin, debut + ((fin - debut) / 2), fin);
+                }
+            }
+        }
+    }
+
+    /**
+     * Trie la liste de noeuds dans l'ordre du noeud le plus proche au noeud le plus
+     * loin du noeud de depart.
+     * 
+     * @param noeuds    liste a trier
+     * @param distances information de la distance des noeud par rapport au noeud de
+     *                  depart
+     * @param voisin    noeud que l'on doit ranger correctement.
+     */
+    private static void actualiserNoeudOrdreCroissant(List<Noeud> noeuds, Map<Noeud, Double> distances, Noeud voisin) {
+        if (noeuds.size() != 0) {
+            rangerNoeudOrdreCroissant(noeuds, distances, voisin, 0, noeuds.size() - 1);
+        } else {
+            noeuds.add(voisin);
+        }
+    }
+
+    /**
      * Methode qui permet d'obtenir le noeud avec la distance la plus courte du
      * noeud de départ
      * 
-     * @param noeuds    Liste des noeuds à regarder.
-     * @param distances Map qui contient l'information de la distance entre le
-     *                  noeud actuel et le noeud de départ.
+     * La liste est déjà trié, donc on récupère le première élément de liste.
+     * 
+     * @param noeuds Liste des noeuds à regarder (déjà trié)
      * @return le noeud avec la distance la plus courte avec le noeud de depart.
      */
 
-    // TODO : utiliser une file de priorité
-
-    private static Noeud getNoeudMinimal(List<Noeud> noeuds, Map<Noeud, Double> distances) {
-        Noeud noeudMinimal = noeuds.get(0);
-        double distanceMinimale = distances.get(noeudMinimal);
-        for (Noeud noeud : noeuds) {
-            double distance = distances.get(noeud);
-            if (distance < distanceMinimale) {
-                noeudMinimal = noeud;
-                distanceMinimale = distance;
-            }
-        }
-        return noeudMinimal;
+    private static Noeud getNoeudMinimal(List<Noeud> noeuds) {
+        return noeuds.get(0);
     }
 
     /**

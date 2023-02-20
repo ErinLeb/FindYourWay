@@ -4,12 +4,17 @@ public class Carrefour extends Noeud {
     // Attributs
 
     /**
-     * attribut définissant si le carrefour est un ascenseur et donc s'il y a besoin
-     * d'une autorisation pour l'emprunter
+     * Numéro d'étage qui servira à l'affichage
+     */
+    protected int etage;
+
+    /**
+     * Attribut définissant si le carrefour est un ascenseur
      */
     public final boolean ascenseur;
 
-    // Constructeurs
+    
+    // Constructeur
 
     /**
      * Crée un Carrefour sans voisin
@@ -17,16 +22,21 @@ public class Carrefour extends Noeud {
      * @param ascenseur définit si le carrefour est un ascenseur ou non
      */
     public Carrefour(boolean ascenseur, int etage, Batiment batiment) {
-        super(etage, batiment);
+        super(batiment);
         this.ascenseur = ascenseur;
+        this.etage = etage;
     }
 
     // Méthodes
+    public int getEtage(){
+        return etage;
+    }
+
     @Override
     public String toString() {
         if (ascenseur) {
             return "Ascenseur à l'étage " + etage;
         }
-        return "Escalier à l'étage " + etage;
+        return "Carrefour à l'étage " + etage;
     }
 }

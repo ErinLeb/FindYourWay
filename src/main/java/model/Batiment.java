@@ -6,38 +6,49 @@ import java.util.List;
 
 public class Batiment{
     // Attributs
-    protected final int max;
+
+    /**
+     * Numéro de l'étage le plus bas
+     */
     protected final int min;
 
+    /**
+     * Numéro de l'étage le plus haut
+     */
+    protected final int max;
 
+    /**
+     * Liste des étages du Batiment
+     */
     public final List<Etage> etages =  new ArrayList<>();
+
+    /**
+     * Liste des noeuds du graphe du Batiment   
+     */
     public final List<Noeud> noeuds = new ArrayList<>();
+
 
     // Constructeur 
     /**
      * 
      * @param min l'étage le plus bas
      * @param max l'étage le plus haut
-     * @param path le chemin dans le répertoire du dossier contenant les csv du batiment
+     * @param path le chemin absolu du répertoire dans le dossier contenant les csv du batiment
      */
     public Batiment(int min, int max, String path){ 
-        for(int i = min; i<=max; i++){
-            etages.add(new Etage(i)); 
-        }  
-        
-
         this.max = max;
         this.min = min;
 
+        for(int i = min; i<=max; i++){
+            etages.add(new Etage(i)); 
+        }  
+
         Parseur parseur = new Parseur(this, path);
         
-        //on initialise les étages et leurs salles
-        parseur.initSalles();
-        
-        //on initialise les noeuds
+        //on crée les noeuds
         parseur.createNoeuds();
 
-        //on initialise les liens entre les noeuds
+        //on crée les liens entre les noeuds
         parseur.initVoisins();
     }
 
@@ -54,7 +65,7 @@ public class Batiment{
 
     /**
      * Retourne le noeud situé à l'indice i de la liste de noeuds
-     * @param i
+     * @param i indice du noeud dans la liste de ceux du batiment
      * @return le noeud situé à l'indice i de la liste de noeuds
      */
     public Noeud getNoeud(int i) {
@@ -63,7 +74,7 @@ public class Batiment{
 
     /**
      * Retourne l'étage {@code i}
-     * @return l'étage {@©ode i}
+     * @return l'étage {@code i}
      */
     public Etage getEtage(int i){
         return this.etages.get(i);
@@ -75,29 +86,11 @@ public class Batiment{
     /**
      * Ajoute {@code n} à la liste de noeuds de son étage et à la liste de noeuds du batiment
      */
-    public void addNoeud(Noeud n){
-        if(n.etage > max || n.etage < min){
-            throw new IllegalArgumentException("L'étage n'existe pas");
+    public void addNoeud(Noeud n){ 
+        if(n instanceof Carrefour){
+            //on ajoute le noeud à l'étage que si on a besoin de savoir qu'il y est (pour l'affichage)
+            getEtage(((Carrefour)n).etage).addNoeud(n);
         }
-        etages.get(n.etage).addNoeud(n);
         noeuds.add(n);
     }
-
-    public void addEtage(int number){
-        if(number<min || number>max){
-            throw new IllegalArgumentException("Le numéro d'étage n'est pas correct");
-        }
-        etages.add(new Etage(number)); 
-    }
-
-    public static void main(String[] args) {
-        Batiment haf = new Batiment(0, 5, "src/main/ressources/test/");
-
-        Iterator<Noeud> it = haf.noeuds.iterator();
-        while(it.hasNext()){
-            System.out.println(it.next());
-            
-        }
-    }
-
 }

@@ -3,7 +3,6 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public abstract class Noeud {
     // Attributs
 
@@ -30,7 +29,6 @@ public abstract class Noeud {
      */
     protected HashMap<Noeud, Double> voisins;
 
-
     // Getters
 
     /**
@@ -51,7 +49,7 @@ public abstract class Noeud {
         return voisins;
     }
 
-    protected Noeud(int etage, Batiment batiment){
+    protected Noeud(int etage, Batiment batiment) {
         this.id = nbNoeud;
         nbNoeud++;
 
@@ -73,11 +71,11 @@ public abstract class Noeud {
         voisins.put(voisin, distance);
     }
 
-    public void setEtage(int etage){
-        if(etage >= batiment.min && etage <= batiment.max){
-            this.etage = etage; 
-        }else{
+    public void setEtage(int etage) {
+        if (etage >= batiment.min && etage <= batiment.max) {
+            this.etage = etage;
+        } else {
             throw new IllegalArgumentException("L'étage doit être compris entre 0 et 5");
-        }    
+        }
     }
 }

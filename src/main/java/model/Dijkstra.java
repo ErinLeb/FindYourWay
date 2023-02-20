@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Classe qui permet de touver le chemin le plus court dans un arbre pour aller
- * d'un noeud 1 à un noeud 2.
+ * Classe qui permet de trouver le chemin le plus court dans un arbre pour aller
+ * d'un noeud de départ à un noeud d'arrivée.
  */
 public class Dijkstra {
 
@@ -25,7 +25,7 @@ public class Dijkstra {
      *         court.
      */
     public static Chemin trouverCheminPlusCourt(Noeud debut, Noeud fin) {
-        // Map qui contiendra l'information de la distance entre chaques
+        // Map qui contiendra l'information de la distance entre chaque
         // noeud et le noeud de départ.
         Map<Noeud, Double> distances = new HashMap<>();
         // Map qui associe le noeud précédent le noeud actuel avec le chemin le plus
@@ -53,15 +53,15 @@ public class Dijkstra {
                 // déplacer du noeud actuel jusqu'au noeud de départ, plus la distance qu'il
                 // faut pour se déplacer au voisin que l'on est en train de traiter).
                 double distanceTotale = distances.get(noeudActuel) + poids;
-                // Si la distance à parcourir par le chemin actuel est plus petit pour accèder
-                // au voisin traité que tout ceux trouvés avant.
+                // Si la distance à parcourir par le chemin actuel est plus petite pour accéder
+                // au voisin traité que tous ceux trouvés avant.
                 if (distanceTotale <= distances.get(voisin)) {
                     // on associe à chaque voisin la distance la plus courte pour arriver à ce
                     // noeud.
                     distances.put(voisin, distanceTotale);
-                    // trie la liste de noeuds avec la distance actualisé à la ligne précédente.
+                    // trie la liste de noeuds avec la distance actualisée à la ligne précédente.
                     actualiserNoeudOrdreCroissant(noeuds, distances, voisin);
-                    // on associe à chaque voisin un prédécéceur, le prédécéceur avec le chemin le
+                    // on associe à chaque voisin un prédécesseur, le prédécesseur avec le chemin le
                     // plus court pour accéder à ce noeud. (remplace l'ancien)
                     predecesseurs.put(voisin, noeudActuel);
                 }
@@ -78,7 +78,7 @@ public class Dijkstra {
     }
 
     /**
-     * initialise tous les noeuds à une distance théorique infinie (MAX_VALUE) du
+     * Initialise tous les noeuds à une distance théorique infinie (MAX_VALUE) du
      * noeud de départ.
      * 
      * @param distances Map qui contient l'information de la distance entre le
@@ -96,25 +96,25 @@ public class Dijkstra {
         for (Noeud n : noeud.voisins.keySet()) {
             // si le noeud n'a pas encore été traité
             if (!noeuds.contains(n)) {
-                // j'initialise le noeud.
+                // initialise le noeud.
                 initNoeudList(distances, noeuds, n);
             }
         }
     }
 
     /**
-     * Compléxité log2(n):
+     * Complexité log2(n):
      * 
      * Trie la liste de noeuds dans l'ordre du noeud le plus proche au noeud le plus
      * loin du noeud de depart.
      * 
-     * @param noeuds    liste a trier
-     * @param distances information de la distance des noeud par rapport au noeud de
+     * @param noeuds    liste à trier
+     * @param distances information de la distance des noeuds par rapport au noeud de
      *                  depart
      * @param voisin    noeud que l'on doit ranger correctement.
-     * @param debut     début de l'intervalle dans lequel peut-être rangé le noeud
+     * @param debut     début de l'intervalle dans lequel peut être rangé le noeud
      *                  voisin
-     * @param fin       fin de l'intervalle dans lequel peut-être rangé le noeud
+     * @param fin       fin de l'intervalle dans lequel peut être rangé le noeud
      *                  voisin
      */
     private static void rangerNoeudOrdreCroissant(List<Noeud> noeuds, Map<Noeud, Double> distances, Noeud voisin,
@@ -155,7 +155,7 @@ public class Dijkstra {
      * @param voisin    noeud que l'on doit ranger correctement.
      */
     private static void actualiserNoeudOrdreCroissant(List<Noeud> noeuds, Map<Noeud, Double> distances, Noeud voisin) {
-        if (noeuds.size() != 0) {
+        if (!(noeuds.isEmpty())) {
             rangerNoeudOrdreCroissant(noeuds, distances, voisin, 0, noeuds.size() - 1);
         } else {
             noeuds.add(voisin);
@@ -166,9 +166,9 @@ public class Dijkstra {
      * Methode qui permet d'obtenir le noeud avec la distance la plus courte du
      * noeud de départ
      * 
-     * La liste est déjà trié, donc on récupère le première élément de liste.
+     * La liste est déjà triée, donc on récupère le premier élément de liste.
      * 
-     * @param noeuds Liste des noeuds à regarder (déjà trié)
+     * @param noeuds Liste des noeuds à regarder (déjà triés)
      * @return le noeud avec la distance la plus courte avec le noeud de depart.
      */
 
@@ -194,12 +194,12 @@ public class Dijkstra {
         while (noeudActuel != debut) {
             // on ajoute le noeud actuel à la liste
             chemin.addNoeud(noeudActuel);
-            // on ajoute le prédécésseur le moins loin du noeud de départ.
+            // on ajoute le prédécesseur le moins loin du noeud de départ.
             noeudActuel = predecesseurs.get(noeudActuel);
         }
         // on ajoute le noeud de départ à la fin.
         chemin.addNoeud(noeudActuel);
-        // on retourne la liste pour l'avoir dans le bonne ordre
+        // on retourne la liste pour l'avoir dans le bon ordre
         chemin.reverse();
         return chemin;
     }

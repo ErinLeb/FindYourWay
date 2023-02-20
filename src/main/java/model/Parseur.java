@@ -29,37 +29,11 @@ public class Parseur {
     // Méthodes
 
     /**
-     * Permet d'ajouter des salles à {@code batiment} en lisant un fichier .csv contenant les informations des salles
-     */
-    public void initSalles(){
-        Scanner sc = null;
-        try {
-            sc = new Scanner(new File(path + "salles.csv"));
-        } catch (IOException e) {
-            System.out.print("Erreur lors de l'ouverture du fichier salles.csv");
-            e.printStackTrace();
-            System.exit(1);
-        }
-
-        //on parcourt le fichier par ligne
-        Etage current = null;
-
-        while(sc.hasNext()){
-            String[] line = sc.nextLine().split(";");
-            if (line[0].equals("")) { //si on a un nouvel étage
-                int number = Integer.parseInt(line[1]); //le numéro d'étage du batiment
-                current = bat.getEtage(number);
-            } else { //si on parcourt un étage
-                current.addSalle(new Salle(line[0]));
-            }
-        }
-        sc.close();
-    }
-
-    /**
      * Permet d'ajouter à {@code batiment} des noeuds en lisant un fichier .csv contenant les informations des noeuds
      */
     public void createNoeuds(){
+
+        // on initialise le scanner
         Scanner sc = null;
         try {
             sc = new Scanner(new File(path + "noeuds.csv"));
@@ -70,20 +44,29 @@ public class Parseur {
         }
 
         Noeud current = null; //le noeud dont on lit les informations
-        int etage = 0;
+        int etage = bat.min;
+
+        //on parcourt le fichier par ligne
         while (sc.hasNext()) {
             String[] line = sc.nextLine().split(";");
             if (line[0].equals("")) { //si on a un nouvel étage
                 etage = Integer.parseInt(line[1]); // etage du noeud
-            }else{
-                boolean porte = line[0].equals("true");
-                if(porte){ //c'est une porte
-                    current = new Porte(line[1], etage, bat);
 
-                }else{ //c'est un carrefour
-                    boolean ascenseur = !line[1].equals("false");
-                    current = new Carrefour(ascenseur, etage, bat);
+            }else{
+                if(line[0].equals("salle")){ //si c'est une salle
+                    current = new Salle(line[1], bat);
+
+                }else if(line[0].equals("carrefour")){ //si c'est un carrefour
+                    if(line.length > 1 && line[1].equals("ascenseur")){
+                        current = new Carrefour(true, etage, bat);
+                    }else{
+                        current = new Carrefour(false, etage, bat);
+                    }
+
+                }else{ //sinon ce n'est pas valide, on passe au noeud suivant
+                    continue;
                 }
+
                 //on ajoute le noeud
                 bat.addNoeud(current);            
             }
@@ -95,6 +78,8 @@ public class Parseur {
      * Permet de lier les noeuds de {@code batiment} entre eux en lisant un fichier .csv contenant les informations des voisins
      */
     public void initVoisins() {
+
+        // on initialise le scanner
         Scanner sc = null;
         try {
             sc = new Scanner(new File(path + "voisins.csv"));
@@ -104,21 +89,23 @@ public class Parseur {
             System.exit(1);
         }
 
-        //on parcourt le fichier par ligne
         Noeud current = null; //le noeud dont on lit les informations
         
+        //on parcourt le fichier par ligne
         while (sc.hasNext()) {
             String[] line = sc.nextLine().split(";");
 
             if (line[0].equals("")) { //si on a un nouveau noeud
-                int number = Integer.parseInt(line[1]); //la place du noeud dans la liste du batiment
+                int number = Integer.parseInt(line[1]); //l'identifiant du noeud dans la liste de noeuds du batiment
                 current = bat.getNoeud(number);
+
             } else { //si on parcourt les voisins d'un noeud
                 Noeud voisin = bat.getNoeud(Integer.parseInt(line[0])); //l'un des voisins du noeud current
                 Double distance = Double.parseDouble(line[1]); // la distance du voisin avec current
                 current.addVoisin(voisin, distance);
             }
         }
+
         sc.close();
     }
 

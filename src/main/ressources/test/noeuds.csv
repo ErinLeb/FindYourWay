@@ -1,9 +1,13 @@
 ;0
-false;false;
-true;01;
+carrefour;
+salle;01;
 ;1
-false;true;
+carrefour;ascenseur;
 ;2
+salle;205
 ;3
+salle;308
 ;4
 ;5
+carrefour;ascenseur;
+carrefour; 

@@ -1,6 +1,12 @@
+import view.Home;
+import java.awt.GraphicsEnvironment;
+
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Main ok");
+        if (!GraphicsEnvironment.isHeadless()) {
+            Home accueil = new Home();
+            accueil.setVisible(true);
+        }
     }
 }

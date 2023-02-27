@@ -28,6 +28,11 @@ public class Chemin {
         noeuds.add(depart);
     }
 
+    public Chemin(List<Noeud> noeuds, double distance) {
+        this.noeuds = noeuds;
+        this.distance = distance;
+    }
+
     public void addNoeud(Noeud n) {
         if (!noeuds.isEmpty()) {
             distance += n.getVoisins().get(noeuds.get(noeuds.size() - 1));
@@ -61,6 +66,10 @@ public class Chemin {
 
     public void reverse() {
         Collections.reverse(noeuds);
+    }
+
+    public boolean equals(Chemin c) {
+        return this.noeuds.equals(c.noeuds) && this.distance == c.distance;
     }
 
 }

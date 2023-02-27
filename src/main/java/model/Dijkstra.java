@@ -55,7 +55,7 @@ public class Dijkstra {
                 double distanceTotale = distances.get(noeudActuel) + poids;
                 // Si la distance à parcourir par le chemin actuel est plus petite pour accéder
                 // au voisin traité que tous ceux trouvés avant.
-                if (distanceTotale <= distances.get(voisin)) {
+                if (distanceTotale < distances.get(voisin)) {
                     // on associe à chaque voisin la distance la plus courte pour arriver à ce
                     // noeud.
                     distances.put(voisin, distanceTotale);
@@ -109,7 +109,8 @@ public class Dijkstra {
      * loin du noeud de depart.
      * 
      * @param noeuds    liste à trier
-     * @param distances information de la distance des noeuds par rapport au noeud de
+     * @param distances information de la distance des noeuds par rapport au noeud
+     *                  de
      *                  depart
      * @param voisin    noeud que l'on doit ranger correctement.
      * @param debut     début de l'intervalle dans lequel peut être rangé le noeud

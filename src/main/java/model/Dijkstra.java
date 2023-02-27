@@ -24,7 +24,7 @@ public class Dijkstra {
      * @return une liste avec les noeuds à parcourir pour obtenir le chemin le plus
      *         court.
      */
-    public static Chemin trouverCheminPlusCourt(Noeud debut, Noeud fin) {
+    public static Chemin trouverCheminPlusCourt(Noeud debut, Noeud fin, boolean permsAscenseur) {
         // Map qui contiendra l'information de la distance entre chaque
         // noeud et le noeud de départ.
         Map<Noeud, Double> distances = new HashMap<>();
@@ -55,7 +55,18 @@ public class Dijkstra {
                 double distanceTotale = distances.get(noeudActuel) + poids;
                 // Si la distance à parcourir par le chemin actuel est plus petite pour accéder
                 // au voisin traité que tous ceux trouvés avant.
-                if (distanceTotale < distances.get(voisin)) {
+                if (distanceTotale <= distances.get(voisin)
+                        && (!(voisin instanceof Salle) || voisin == debut || voisin == fin)
+                        // si le noeud est une salle, pour qu'il puisse être inséré dans le
+                        // chemin, il faut que ce soit le noeud de fin ou celui de depart.
+                        // Les seuls salles sont le noeud de début et celui de fin. Personne ne
+                        // peut traverser une salle.
+                        && ((voisin instanceof Carrefour && (!((Carrefour) voisin).isAscenseur || permsAscenseur))
+                                || !(voisin instanceof Carrefour))
+                // si le noeud est un carrefour, pour qu'il puisse être inséré dans le chemin,
+                // il faut que ne soit pas un ascenseur, ou si c'est un ascenseur, il faut que
+                // la personne ai la permission de l'utiliser.
+                ) {
                     // on associe à chaque voisin la distance la plus courte pour arriver à ce
                     // noeud.
                     distances.put(voisin, distanceTotale);
@@ -110,8 +121,7 @@ public class Dijkstra {
      * 
      * @param noeuds    liste à trier
      * @param distances information de la distance des noeuds par rapport au noeud
-     *                  de
-     *                  depart
+     *                  de depart
      * @param voisin    noeud que l'on doit ranger correctement.
      * @param debut     début de l'intervalle dans lequel peut être rangé le noeud
      *                  voisin

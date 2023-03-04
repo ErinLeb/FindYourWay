@@ -95,4 +95,20 @@ public class Batiment {
         }
         noeuds.add(n);
     }
+
+    /**
+     * renvoie l'étage max du bâtiment
+     * @return l'étage max du bâtiment
+     */
+    public int getMax() {
+        return this.max;
+    }
+
+    /**
+     * renvoie l'étage min du bâtiment
+     * @return l'étage min du bâtiment
+     */
+    public int getMin() {
+        return this.min;
+    }
 }

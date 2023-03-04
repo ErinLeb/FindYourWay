@@ -1,12 +1,14 @@
-import view.Home;
 import java.awt.GraphicsEnvironment;
+
+import controller.Controleur;
+import model.Batiment;
 
 public class Main {
 
     public static void main(String[] args) {
         if (!GraphicsEnvironment.isHeadless()) {
-            Home accueil = new Home();
-            accueil.setVisible(true);
+            Batiment haf = new Batiment(0, 5, "src/main/ressources/haf/");
+            Controleur control = new Controleur(haf); 
         }
     }
 }

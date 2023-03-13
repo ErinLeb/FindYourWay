@@ -28,6 +28,6 @@ public class Salle extends Noeud{
 
     @Override
     public String toString(){
-        return "Salle " + nom;
+        return id + " Salle " + nom;
     }
 }

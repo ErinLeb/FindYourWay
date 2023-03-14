@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         if (!GraphicsEnvironment.isHeadless()) {
-            Batiment haf = new Batiment(0, 5, "src/main/ressources/haf/");
+            Batiment haf = new Batiment(0, 5, "src/main/ressources/csv/haf/");
             Controleur control = new Controleur(haf); 
         }
     }

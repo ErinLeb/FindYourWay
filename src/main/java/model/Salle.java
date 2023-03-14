@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Salle extends Noeud{
     // Attributs
 
@@ -29,5 +31,26 @@ public class Salle extends Noeud{
     @Override
     public String toString(){
         return id + " Salle " + nom;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(!super.equals(o)){
+            return false;
+        }
+
+        if(o instanceof Salle){
+            Salle comp = (Salle)o;
+            if(nom.equals(comp.nom)){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(super.hashCode(), nom);
     }
 }

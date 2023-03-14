@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Carrefour extends Noeud {
     // Attributs
 
@@ -26,9 +28,40 @@ public class Carrefour extends Noeud {
         this.etage = etage;
     }
 
-    // Méthodes
-    public int getEtage() {
+
+    // Getters & setters
+
+    public int getEtage(){
         return etage;
+    }
+
+
+    // Méthodes
+    @Override
+    public boolean equals(Object o){
+        if(!(super.equals(o))){
+            return false;
+        }
+
+        if(o instanceof Carrefour){
+            Carrefour comp = (Carrefour)o;
+
+            if(etage != comp.etage){
+                return false;
+            }
+
+            if(isAscenseur != comp.isAscenseur){
+                return false;
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(super.hashCode(), etage, isAscenseur);
     }
 
     @Override

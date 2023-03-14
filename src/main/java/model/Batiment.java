@@ -83,6 +83,28 @@ public class Batiment {
 
     // Methodes
 
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Batiment){
+            Batiment comp = (Batiment)o;
+            
+            if(min != comp.min || max != comp.max){
+                return false;
+            }
+
+            if(!(noeuds.equals(comp.noeuds))){
+                return false;
+            }
+
+            if(!(etages.equals(comp.etages))){
+                return false;
+            }
+
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Ajoute {@code n} à la liste de noeuds de son étage et à la liste de noeuds du
      * batiment

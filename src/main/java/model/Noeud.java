@@ -2,6 +2,7 @@ package model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public abstract class Noeud {
     // Attributs
@@ -62,6 +63,23 @@ public abstract class Noeud {
 
     
     // Méthodes
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Noeud){
+            Noeud comp = (Noeud)o;
+            if(!(batiment.equals(comp.batiment))){
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(batiment);
+    }
 
     /**
      * Ajoute un voisin au noeud

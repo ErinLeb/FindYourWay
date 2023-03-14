@@ -30,7 +30,7 @@ public class TestDijkstra {
         // cas 0-->4
         int start = 0;
         int end = 4;
-        Chemin res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        Chemin res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         ArrayList<Noeud> chemin = new ArrayList<Noeud>();
         chemin.add(arbre[0]);
@@ -46,7 +46,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -61,7 +61,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -75,7 +75,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 1;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -91,7 +91,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 4;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -105,7 +105,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -119,7 +119,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -134,7 +134,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 0;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -148,7 +148,7 @@ public class TestDijkstra {
 
         start = 2;
         end = 4;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[2]);
@@ -164,7 +164,7 @@ public class TestDijkstra {
 
         start = 2;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[2]);
@@ -178,7 +178,7 @@ public class TestDijkstra {
 
         start = 2;
         end = 1;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[2]);
@@ -193,7 +193,7 @@ public class TestDijkstra {
 
         start = 3;
         end = 4;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[3]);
@@ -208,7 +208,7 @@ public class TestDijkstra {
 
         start = 3;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[3]);
@@ -224,7 +224,7 @@ public class TestDijkstra {
 
         start = 3;
         end = 1;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[3]);
@@ -239,7 +239,7 @@ public class TestDijkstra {
         start = 4;
         for (int i = 0; i < 4; ++i) {
             end = i;
-            res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+            res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
             assertTrue(res == null);
         }
@@ -264,7 +264,7 @@ public class TestDijkstra {
         // cas 0-->1 :
         int start = 0;
         int end = 1;
-        Chemin res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        Chemin res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
         ArrayList<Noeud> chemin = new ArrayList<Noeud>();
 
         chemin.add(arbre[0]);
@@ -278,7 +278,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -293,7 +293,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -305,7 +305,7 @@ public class TestDijkstra {
         // cas 1-->0 :
         start = 1;
         end = 0;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -319,7 +319,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -333,7 +333,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -346,7 +346,7 @@ public class TestDijkstra {
         // cas 2-->0 :
         start = 2;
         end = 0;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[2]);
@@ -361,7 +361,7 @@ public class TestDijkstra {
 
         start = 2;
         end = 1;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[2]);
@@ -375,7 +375,7 @@ public class TestDijkstra {
 
         start = 2;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[2]);
@@ -387,7 +387,7 @@ public class TestDijkstra {
         // cas 3-->0 :
         start = 3;
         end = 0;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[3]);
@@ -401,7 +401,7 @@ public class TestDijkstra {
 
         start = 3;
         end = 1;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[3]);
@@ -416,7 +416,7 @@ public class TestDijkstra {
 
         start = 3;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[3]);
@@ -429,7 +429,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 0;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         assertTrue(res == null);
 
@@ -437,7 +437,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 1;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         assertTrue(res == null);
 
@@ -445,7 +445,7 @@ public class TestDijkstra {
 
         start = 2;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         assertTrue(res == null);
 
@@ -453,7 +453,7 @@ public class TestDijkstra {
 
         start = 3;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         assertTrue(res == null);
     }
@@ -488,7 +488,7 @@ public class TestDijkstra {
         // cas 0-->1 :
         int start = 0;
         int end = 1;
-        Chemin res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        Chemin res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
         ArrayList<Noeud> chemin = new ArrayList<Noeud>();
 
         chemin.add(arbre[0]);
@@ -502,7 +502,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -516,7 +516,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -531,7 +531,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 4;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -547,7 +547,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 5;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -562,7 +562,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 6;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -577,7 +577,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 7;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -593,7 +593,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 8;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -609,7 +609,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 9;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -626,7 +626,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 10;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -643,7 +643,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 0;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -658,7 +658,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -672,7 +672,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -686,7 +686,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 4;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -701,7 +701,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 5;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -717,7 +717,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 6;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -732,7 +732,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 7;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -747,7 +747,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 8;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -762,7 +762,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 9;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -778,7 +778,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 10;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -794,7 +794,7 @@ public class TestDijkstra {
 
         start = 2;
         end = 0;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[2]);
@@ -808,7 +808,7 @@ public class TestDijkstra {
 
         start = 2;
         end = 1;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[2]);
@@ -823,7 +823,7 @@ public class TestDijkstra {
 
         start = 2;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[2]);
@@ -839,7 +839,7 @@ public class TestDijkstra {
 
         start = 2;
         end = 4;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[2]);
@@ -854,7 +854,7 @@ public class TestDijkstra {
 
         start = 2;
         end = 5;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[2]);
@@ -868,7 +868,7 @@ public class TestDijkstra {
 
         start = 2;
         end = 6;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[2]);
@@ -882,7 +882,7 @@ public class TestDijkstra {
 
         start = 2;
         end = 7;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[2]);
@@ -899,7 +899,7 @@ public class TestDijkstra {
 
         start = 2;
         end = 9;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[2]);
@@ -915,7 +915,7 @@ public class TestDijkstra {
 
         start = 2;
         end = 10;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[2]);
@@ -931,7 +931,7 @@ public class TestDijkstra {
 
         start = 3;
         end = 0;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[3]);
@@ -947,7 +947,7 @@ public class TestDijkstra {
 
         start = 3;
         end = 1;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[3]);
@@ -961,7 +961,7 @@ public class TestDijkstra {
 
         start = 3;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[3]);
@@ -976,7 +976,7 @@ public class TestDijkstra {
 
         start = 3;
         end = 4;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[3]);
@@ -990,7 +990,7 @@ public class TestDijkstra {
 
         start = 3;
         end = 5;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[3]);
@@ -1005,7 +1005,7 @@ public class TestDijkstra {
 
         start = 3;
         end = 6;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[3]);
@@ -1021,7 +1021,7 @@ public class TestDijkstra {
 
         start = 3;
         end = 7;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[3]);
@@ -1035,7 +1035,7 @@ public class TestDijkstra {
 
         start = 3;
         end = 8;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[3]);
@@ -1049,7 +1049,7 @@ public class TestDijkstra {
 
         start = 3;
         end = 9;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[3]);
@@ -1064,7 +1064,7 @@ public class TestDijkstra {
 
         start = 3;
         end = 10;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[3]);
@@ -1079,7 +1079,7 @@ public class TestDijkstra {
 
         start = 4;
         end = 0;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[4]);
@@ -1098,7 +1098,7 @@ public class TestDijkstra {
 
         start = 4;
         end = 1;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[4]);
@@ -1115,7 +1115,7 @@ public class TestDijkstra {
 
         start = 4;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[4]);
@@ -1133,7 +1133,7 @@ public class TestDijkstra {
 
         start = 4;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[4]);
@@ -1149,7 +1149,7 @@ public class TestDijkstra {
 
         start = 4;
         end = 5;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[4]);
@@ -1163,7 +1163,7 @@ public class TestDijkstra {
 
         start = 4;
         end = 6;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[4]);
@@ -1182,7 +1182,7 @@ public class TestDijkstra {
 
         start = 4;
         end = 7;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[4]);
@@ -1199,7 +1199,7 @@ public class TestDijkstra {
 
         start = 4;
         end = 8;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[4]);
@@ -1214,7 +1214,7 @@ public class TestDijkstra {
 
         start = 4;
         end = 9;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[4]);
@@ -1228,7 +1228,7 @@ public class TestDijkstra {
 
         start = 4;
         end = 10;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[4]);
@@ -1242,7 +1242,7 @@ public class TestDijkstra {
 
         start = 5;
         end = 0;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[5]);
@@ -1262,7 +1262,7 @@ public class TestDijkstra {
 
         start = 5;
         end = 1;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[5]);
@@ -1280,7 +1280,7 @@ public class TestDijkstra {
 
         start = 5;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[5]);
@@ -1299,7 +1299,7 @@ public class TestDijkstra {
 
         start = 5;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[5]);
@@ -1316,7 +1316,7 @@ public class TestDijkstra {
 
         start = 5;
         end = 4;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[5]);
@@ -1330,7 +1330,7 @@ public class TestDijkstra {
 
         start = 5;
         end = 6;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[5]);
@@ -1350,7 +1350,7 @@ public class TestDijkstra {
 
         start = 5;
         end = 7;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[5]);
@@ -1368,7 +1368,7 @@ public class TestDijkstra {
 
         start = 5;
         end = 8;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[5]);
@@ -1384,7 +1384,7 @@ public class TestDijkstra {
 
         start = 5;
         end = 9;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[5]);
@@ -1399,7 +1399,7 @@ public class TestDijkstra {
 
         start = 5;
         end = 10;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[5]);
@@ -1414,7 +1414,7 @@ public class TestDijkstra {
         start = 6;
         for (int i = 0; i <= 10; ++i) {
             end = i;
-            res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+            res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
             assertTrue(res == null);
         }
 
@@ -1422,7 +1422,7 @@ public class TestDijkstra {
         start = 7;
         for (int i = 0; i <= 10; ++i) {
             end = i;
-            res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+            res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
             assertTrue(res == null);
         }
 
@@ -1430,7 +1430,7 @@ public class TestDijkstra {
 
         start = 8;
         end = 0;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[8]);
@@ -1447,7 +1447,7 @@ public class TestDijkstra {
 
         start = 8;
         end = 1;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[8]);
@@ -1462,7 +1462,7 @@ public class TestDijkstra {
 
         start = 8;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[8]);
@@ -1478,7 +1478,7 @@ public class TestDijkstra {
 
         start = 8;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[8]);
@@ -1492,7 +1492,7 @@ public class TestDijkstra {
 
         start = 8;
         end = 4;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[8]);
@@ -1507,7 +1507,7 @@ public class TestDijkstra {
 
         start = 8;
         end = 5;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[8]);
@@ -1523,7 +1523,7 @@ public class TestDijkstra {
 
         start = 8;
         end = 6;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[8]);
@@ -1540,7 +1540,7 @@ public class TestDijkstra {
 
         start = 8;
         end = 7;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[8]);
@@ -1555,7 +1555,7 @@ public class TestDijkstra {
 
         start = 8;
         end = 9;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[8]);
@@ -1571,7 +1571,7 @@ public class TestDijkstra {
 
         start = 8;
         end = 10;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[8]);
@@ -1587,7 +1587,7 @@ public class TestDijkstra {
 
         start = 9;
         end = 0;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[9]);
@@ -1605,7 +1605,7 @@ public class TestDijkstra {
 
         start = 9;
         end = 1;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[9]);
@@ -1621,7 +1621,7 @@ public class TestDijkstra {
 
         start = 9;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[9]);
@@ -1638,7 +1638,7 @@ public class TestDijkstra {
 
         start = 9;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[9]);
@@ -1653,7 +1653,7 @@ public class TestDijkstra {
 
         start = 9;
         end = 4;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[9]);
@@ -1669,7 +1669,7 @@ public class TestDijkstra {
 
         start = 9;
         end = 5;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[9]);
@@ -1686,7 +1686,7 @@ public class TestDijkstra {
 
         start = 9;
         end = 6;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[9]);
@@ -1704,7 +1704,7 @@ public class TestDijkstra {
 
         start = 9;
         end = 7;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[9]);
@@ -1720,7 +1720,7 @@ public class TestDijkstra {
 
         start = 9;
         end = 8;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[9]);
@@ -1734,7 +1734,7 @@ public class TestDijkstra {
 
         start = 9;
         end = 10;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[9]);
@@ -1751,14 +1751,14 @@ public class TestDijkstra {
         start = 10;
         for (int i = 0; i <= 10; ++i) {
             end = i;
-            res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+            res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
             assertTrue(res == null);
         }
     }
 
     @Test
     public void testTrouverCheminPlusCourt3() {
-        int n = 11;
+        int n = 6;
         Noeud[] arbre = new Noeud[n];
         for (int i = 0; i < n; ++i) {
             arbre[i] = new Carrefour(false, 1, null);
@@ -1776,7 +1776,7 @@ public class TestDijkstra {
 
         int start = 0;
         int end = 1;
-        Chemin res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        Chemin res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         ArrayList<Noeud> chemin = new ArrayList<Noeud>();
         chemin.add(arbre[0]);
@@ -1790,7 +1790,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -1805,7 +1805,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -1821,7 +1821,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 4;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -1836,7 +1836,7 @@ public class TestDijkstra {
 
         start = 0;
         end = 5;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[0]);
@@ -1851,7 +1851,7 @@ public class TestDijkstra {
         end = 0;
         for (int i = 0; i <= 5; ++i) {
             start = i;
-            res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+            res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
             assertTrue(res == null);
         }
@@ -1860,7 +1860,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -1874,7 +1874,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -1890,7 +1890,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 4;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -1905,7 +1905,7 @@ public class TestDijkstra {
 
         start = 1;
         end = 5;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[1]);
@@ -1919,7 +1919,7 @@ public class TestDijkstra {
 
         start = 2;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[2]);
@@ -1935,7 +1935,7 @@ public class TestDijkstra {
                 ++i;
             }
             end = i;
-            res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+            res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
             assertTrue(res == null);
         }
@@ -1945,7 +1945,7 @@ public class TestDijkstra {
         start = 3;
         for (int i = 0; i <= 5; ++i) {
             end = i;
-            res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+            res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
             assertTrue(res == null);
         }
@@ -1954,7 +1954,7 @@ public class TestDijkstra {
 
         start = 4;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[4]);
@@ -1966,7 +1966,7 @@ public class TestDijkstra {
 
         start = 4;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[4]);
@@ -1982,7 +1982,7 @@ public class TestDijkstra {
                 i += 2;
             }
             end = i;
-            res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+            res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
             assertTrue(res == null);
         }
@@ -1991,7 +1991,7 @@ public class TestDijkstra {
 
         start = 5;
         end = 1;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         assertTrue(res == null);
 
@@ -1999,7 +1999,7 @@ public class TestDijkstra {
 
         start = 5;
         end = 2;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[5]);
@@ -2014,7 +2014,7 @@ public class TestDijkstra {
 
         start = 5;
         end = 3;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[5]);
@@ -2029,13 +2029,234 @@ public class TestDijkstra {
 
         start = 5;
         end = 4;
-        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end]);
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
 
         chemin.clear();
         chemin.add(arbre[5]);
         chemin.add(arbre[4]);
 
         valide = new Chemin(chemin, 1.0);
+
+        assertTrue(res.equals(valide));
+    }
+
+    @Test
+    /**
+     * Tests ascenseurs
+     */
+    public void testTrouverCheminPlusCourt4() {
+        int n = 4;
+        Noeud[] arbre = new Noeud[n];
+        for (int i = 0; i < 2; ++i) {
+            arbre[i] = new Carrefour(true, 1, null);
+        }
+        for (int i = 2; i < n; ++i) {
+            arbre[i] = new Carrefour(false, 1, null);
+        }
+        arbre[0].addVoisin(arbre[1], 1.0);
+        arbre[0].addVoisin(arbre[3], 2.0);
+        arbre[1].addVoisin(arbre[0], 1.0);
+        arbre[1].addVoisin(arbre[2], 2.0);
+        arbre[2].addVoisin(arbre[1], 2.0);
+        arbre[2].addVoisin(arbre[3], 2.0);
+        arbre[3].addVoisin(arbre[0], 2.0);
+        arbre[3].addVoisin(arbre[2], 2.0);
+
+        // cas 0-->1 ascenseur : true :
+        int start = 0;
+        int end = 1;
+        Chemin res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], true);
+        ArrayList<Noeud> chemin = new ArrayList<Noeud>();
+
+        chemin.add(arbre[0]);
+        chemin.add(arbre[1]);
+
+        Chemin valide = new Chemin(chemin, 1.0);
+
+        assertTrue(res.equals(valide));
+
+        // cas 0-->2 ascenseur : false :
+
+        start = 0;
+        end = 2;
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
+
+        chemin.clear();
+        chemin.add(arbre[0]);
+        chemin.add(arbre[3]);
+        chemin.add(arbre[2]);
+
+        valide = new Chemin(chemin, 4.0);
+
+        assertTrue(res.equals(valide));
+
+        // cas 0-->2 ascenseur : true :
+
+        start = 0;
+        end = 2;
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], true);
+
+        chemin.clear();
+        chemin.add(arbre[0]);
+        chemin.add(arbre[1]);
+        chemin.add(arbre[2]);
+
+        valide = new Chemin(chemin, 3.0);
+
+        assertTrue(res.equals(valide));
+
+        // cas 3-->1 ascenseur : false :
+
+        start = 3;
+        end = 1;
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
+
+        assertTrue(res == null);
+
+        // cas 3-->1 ascenseur : true :
+
+        start = 3;
+        end = 1;
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], true);
+
+        chemin.clear();
+        chemin.add(arbre[3]);
+        chemin.add(arbre[0]);
+        chemin.add(arbre[1]);
+
+        valide = new Chemin(chemin, 3.0);
+
+        assertTrue(res.equals(valide));
+
+        // cas 1-->3 ascenseur : false :
+
+        start = 1;
+        end = 3;
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
+
+        chemin.clear();
+        chemin.add(arbre[1]);
+        chemin.add(arbre[2]);
+        chemin.add(arbre[3]);
+
+        valide = new Chemin(chemin, 4.0);
+
+        assertTrue(res.equals(valide));
+
+        // cas 3-->1 ascenseur : true :
+
+        start = 1;
+        end = 3;
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], true);
+
+        chemin.clear();
+        chemin.add(arbre[1]);
+        chemin.add(arbre[0]);
+        chemin.add(arbre[3]);
+
+        valide = new Chemin(chemin, 3.0);
+
+        assertTrue(res.equals(valide));
+    }
+
+    @Test
+    /**
+     * Tests salles
+     */
+    public void testTrouverCheminPlusCourt5() {
+        int n = 3;
+        Noeud[] arbre = new Noeud[n];
+        arbre[0] = new Salle("A", null);
+        for (int i = 1; i < n; ++i) {
+            arbre[i] = new Carrefour(false, 1, null);
+        }
+        arbre[0].addVoisin(arbre[1], 1.0);
+        arbre[0].addVoisin(arbre[2], 1.0);
+        arbre[1].addVoisin(arbre[0], 1.0);
+        arbre[1].addVoisin(arbre[2], 3.0);
+        arbre[2].addVoisin(arbre[1], 3.0);
+        arbre[2].addVoisin(arbre[0], 1.0);
+
+        // cas 0-->1 :
+        int start = 0;
+        int end = 1;
+        Chemin res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
+        ArrayList<Noeud> chemin = new ArrayList<Noeud>();
+
+        chemin.add(arbre[0]);
+        chemin.add(arbre[1]);
+
+        Chemin valide = new Chemin(chemin, 1.0);
+
+        assertTrue(res.equals(valide));
+
+        // cas 0-->2 :
+
+        start = 0;
+        end = 2;
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
+
+        chemin.clear();
+        chemin.add(arbre[0]);
+        chemin.add(arbre[2]);
+
+        valide = new Chemin(chemin, 1.0);
+
+        assertTrue(res.equals(valide));
+
+        // cas 1-->0 :
+
+        start = 1;
+        end = 0;
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
+
+        chemin.clear();
+        chemin.add(arbre[1]);
+        chemin.add(arbre[0]);
+
+        valide = new Chemin(chemin, 1.0);
+
+        assertTrue(res.equals(valide));
+
+        // cas 1-->2 :
+
+        start = 1;
+        end = 2;
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
+
+        chemin.clear();
+        chemin.add(arbre[1]);
+        chemin.add(arbre[2]);
+
+        valide = new Chemin(chemin, 3.0);
+
+        assertTrue(res.equals(valide));
+
+        // cas 2-->0 :
+
+        start = 2;
+        end = 0;
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
+
+        chemin.clear();
+        chemin.add(arbre[2]);
+        chemin.add(arbre[0]);
+
+        valide = new Chemin(chemin, 1.0);
+
+        assertTrue(res.equals(valide));
+
+        // cas 2-->1 :
+
+        start = 2;
+        end = 1;
+        res = Dijkstra.trouverCheminPlusCourt(arbre[start], arbre[end], false);
+
+        chemin.clear();
+        chemin.add(arbre[2]);
+        chemin.add(arbre[1]);
+
+        valide = new Chemin(chemin, 3.0);
 
         assertTrue(res.equals(valide));
     }

@@ -15,7 +15,9 @@ public class Etage{
      */
     private List<Noeud> noeuds;
 
-    // Constructeurs
+
+    // Constructeur
+    
     public Etage(int nom){
         noeuds = new ArrayList<>();
 
@@ -45,9 +47,36 @@ public class Etage{
         }
         return null;
     }
+    
+    /**
+     * Retourne le noeud à l'indice i de la liste
+     * @param i indice
+     * @return le noeud à l'indice i de la liste
+     */
+    public Noeud getIndNoeud(int i){
+        return noeuds.get(i);
+    }
 
 
     // Méthodes
+
+    @Override
+    public boolean equals(Object o){
+        if(o instanceof Etage){
+            Etage comp = (Etage)o;
+
+            if(nom != comp.nom){
+                return false;
+            }
+
+            if(!(noeuds.equals(comp.noeuds))){
+                return false;
+            }
+
+            return true;
+        }
+        return false;
+    }
 
     /** 
      * Ajoute un noeud à l'étage.

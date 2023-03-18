@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Objects;
-
 public class Salle extends Noeud{
     // Attributs
 
@@ -47,10 +45,5 @@ public class Salle extends Noeud{
         }
         
         return false;
-    }
-
-    @Override
-    public int hashCode(){
-        return Objects.hash(super.hashCode(), nom);
     }
 }

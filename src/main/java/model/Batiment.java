@@ -6,7 +6,8 @@ import java.util.List;
 public class Batiment {
     // Attributs
 
-    /**
+    /** 
+
      * Numéro de l'étage le plus bas
      */
     protected final int min;
@@ -25,6 +26,11 @@ public class Batiment {
      * Liste des noeuds du graphe du Batiment
      */
     public final List<Noeud> noeuds = new ArrayList<>();
+
+    /**
+     * Nombre de noeuds dans le batiment, incrémenté à chaque ajout de noeud au batiment
+     */
+    private int nbNoeuds = 0; 
 
     // Constructeur
     /**
@@ -54,12 +60,19 @@ public class Batiment {
     // Getters & setters
 
     /**
-     * Retourne la liste de noeuds du bâtiment
-     * 
-     * @return la liste de noeuds du bâtiment
+     * renvoie l'étage max du bâtiment
+     * @return l'étage max du bâtiment
      */
-    public List<Noeud> getNoeuds() {
-        return this.noeuds;
+    public int getMax() {
+        return this.max;
+    }
+
+    /**
+     * renvoie l'étage min du bâtiment
+     * @return l'étage min du bâtiment
+     */
+    public int getMin() {
+        return this.min;
     }
 
     /**
@@ -79,6 +92,14 @@ public class Batiment {
      */
     public Etage getEtage(int i) {
         return this.etages.get(i);
+    }
+
+    /**
+     * Change le nombre de Noeuds de la classe par {@code n}
+     * @param n
+     */
+    public void setNbNoeuds(int n){
+        nbNoeuds = n;
     }
 
     // Methodes
@@ -116,21 +137,7 @@ public class Batiment {
             getEtage(((Carrefour) n).etage).addNoeud(n);
         }
         noeuds.add(n);
-    }
 
-    /**
-     * renvoie l'étage max du bâtiment
-     * @return l'étage max du bâtiment
-     */
-    public int getMax() {
-        return this.max;
-    }
-
-    /**
-     * renvoie l'étage min du bâtiment
-     * @return l'étage min du bâtiment
-     */
-    public int getMin() {
-        return this.min;
+        n.setId(nbNoeuds++);
     }
 }

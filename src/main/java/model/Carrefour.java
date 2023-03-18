@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Objects;
-
 public class Carrefour extends Noeud {
     // Attributs
 
@@ -39,7 +37,7 @@ public class Carrefour extends Noeud {
     // Méthodes
     @Override
     public boolean equals(Object o){
-        if(!(super.equals(o))){
+        if(!super.equals(o)){
             return false;
         }
 
@@ -60,15 +58,10 @@ public class Carrefour extends Noeud {
     }
 
     @Override
-    public int hashCode(){
-        return Objects.hash(super.hashCode(), etage, isAscenseur);
-    }
-
-    @Override
     public String toString() {
         if (isAscenseur) {
-            return "Ascenseur à l'étage " + etage;
+            return id + " Ascenseur à l'étage " + etage;
         }
-        return "Carrefour à l'étage " + etage;
+        return id + " Carrefour à l'étage " + etage;
     }
 }

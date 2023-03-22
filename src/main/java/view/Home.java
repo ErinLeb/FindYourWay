@@ -18,7 +18,7 @@ import controller.Controleur;
 /**
  * Le menu d'accueil de l'application
  */
-public class Home extends JPanel {
+public class Home extends Fenetre {
     
 
     /**
@@ -26,20 +26,6 @@ public class Home extends JPanel {
      */
     private JLabel logoLabel;
 
-    /**
-     * Le panel avec lequel on peut interagir
-     */
-    private JPanel controlPanel;
-    
-    /**
-     * la fenêtre de l'app
-     */
-    private Vue view;
-
-    /**
-     * Le controller de l'app
-     */
-    private Controleur control;
     
     /**
      * Construit le menu d'accueil
@@ -78,8 +64,8 @@ public class Home extends JPanel {
     private void initControlPanel() {
         //Création des deux champs de saisie de texte
         JPanel inputPanel = new JPanel(new GridLayout(1, 2, 5, 5));
-        TextFieldBox start = new TextFieldBox("Départ", 10, view);
-        TextFieldBox finish = new TextFieldBox("Arrivée", 10, view);
+        start = new TextFieldBox("Départ", 10, view);
+        finish = new TextFieldBox("Arrivée", 10, view);
         inputPanel.add(start);
         inputPanel.add(finish);
 
@@ -89,7 +75,7 @@ public class Home extends JPanel {
         buttonPanel.add(mainButton);
         
         //Création de la case à cocher
-        JCheckBox ascenseur = new JCheckBox("Ascenseurs");
+        ascenseur = new JCheckBox("Ascenseurs");
         ascenseur.setHorizontalAlignment(SwingConstants.CENTER);
 
         //Ajout des éléments au panel
@@ -99,4 +85,5 @@ public class Home extends JPanel {
         controlPanel.add(ascenseur, BorderLayout.CENTER);
 
     }
+
 }

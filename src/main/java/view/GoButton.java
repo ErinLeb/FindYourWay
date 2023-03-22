@@ -23,9 +23,13 @@ public class GoButton extends JButton {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                view.setContentPane(view.getApp());
-                view.repaint();
-                view.setVisible(true);
+                if(view.getControl().verifGoButton()){ // on vérifie que les textes des TextFieldBox sont corrects et si oui, on met à jour la vue
+                    view.getControl().majApp();
+                    view.setContentPane(view.getApp());
+                    view.repaint();
+                    view.setVisible(true);
+                }
+                
             }
             
         });
@@ -40,9 +44,12 @@ public class GoButton extends JButton {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    view.setContentPane(view.getApp());
-                    view.repaint();
-                    view.setVisible(true);
+                    if(view.getControl().verifGoButton()){ // on vérifie que les textes des TextFieldBox sont corrects et si oui, on met à jour la vue
+                        view.getControl().majApp();
+                        view.setContentPane(view.getApp());
+                        view.repaint();
+                        view.setVisible(true);
+                    }
                 }
             }
 

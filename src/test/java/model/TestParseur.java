@@ -16,21 +16,15 @@ public class TestParseur {
     @Test
     public void testCreateNoeuds(){
         Batiment bat = new Batiment(0, 5, "src/main/ressources/csv/test/");
-        //le problème est que le parseur est appelé directement dans le constructeur du batiment 
-        //les tests equals sur les noeuds fail parce que les liens existent et ils  n'ont pas été reproduits artificiellement
-
-        //soit créer un bat et supprimer tous ses noeuds puis appeler un parseur et la fonction createNoeuds seulement
-        //soit rajouter manuellement les voisins de chaque noeud de test
-
+        
         bat.noeuds.clear();
         for(int i = bat.getMin(); i<= bat.getMax(); i++){
             bat.getEtage(i).getNoeuds().clear();
         }
         bat.setNbNoeuds(0);
-        System.out.println("CLEARED");
         Parseur p = new Parseur(bat, "src/main/ressources/csv/test/");
         p.createNoeuds();
-
+        
         // On crée les éléments de comparaison
         List<Noeud> batiment = new ArrayList<>();
 

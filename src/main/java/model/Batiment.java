@@ -102,6 +102,20 @@ public class Batiment {
         nbNoeuds = n;
     }
 
+    /**
+     * renvoie la salle dont on a donné le nom en paramètre
+     * @param salle nom de la salle à trouver
+     * @return renvoie la salle de nom donné en paramètre
+     */
+    public Noeud getSalle(String salle){
+        for(int i=0;i<noeuds.size();i++){
+            if(noeuds.get(i) instanceof Salle && (((Salle) (noeuds.get(i))).getNom().equalsIgnoreCase(salle))){
+                return noeuds.get(i);
+            }
+        }
+        return null;
+    }
+
     // Methodes
 
     @Override
@@ -140,4 +154,21 @@ public class Batiment {
 
         n.setId(nbNoeuds++);
     }
+
+
+
+    /**
+     * renvoie si une salle au nom donné en paramètre se trouve dans le batiment
+     * @param nom nom de la salle recherchée
+     * @return renvoie true si la salle se trouve dans le batiment et faux sinon
+     */
+    public boolean findSalle(String nom){
+        for(int i = 0;i < noeuds.size();i++){
+            if((noeuds.get(i) instanceof Salle) && ((Salle) noeuds.get(i)).getNom().equalsIgnoreCase(nom)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

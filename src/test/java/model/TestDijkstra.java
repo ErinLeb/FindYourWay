@@ -2260,4 +2260,6 @@ public class TestDijkstra {
 
         assertTrue(res.equals(valide));
     }
+
 }
+

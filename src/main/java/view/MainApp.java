@@ -19,16 +19,15 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import controller.Controleur;
+import model.Chemin;
+import model.Dijkstra;
+import model.Noeud;
 
 /**
  * L'écran principal de l'application, 
  * sur lequel on voit les plans et itinéraires
  */
-public class MainApp extends JPanel {
-    /**
-     * le panel avec lequel on va interagir pour l'itinéraire
-     */
-    private JPanel controlPanel;
+public class MainApp extends Fenetre {
 
     /**
      * le panel permettant de changer d'étages
@@ -40,22 +39,16 @@ public class MainApp extends JPanel {
      */
     private PlanPanel planPanel;
 
-    /**
-     * le controller de l'app
-     */
-    private Controleur control;
-
-    /**
-     * la fenêtre de l'app
-     */
-    private Vue view;
 
     /**
      * Construit l'écran principal
      * @param view la vue associée au menu principal
      * @param control le controleur de l'app
+     * @param startStr nom de l'éventuelle salle de départ
+     * @param finishStr nom de l'éventuelle salle d'arrivée
+     * @param ascenseurBool état de la case cochable (true si cochée, false sinon)
      */
-    public MainApp(Vue view, Controleur control) {
+    public MainApp(Vue view, Controleur control,String startStr, String finishStr, boolean ascenseurBool) {
         this.control = control;
         this.view = view;
 
@@ -63,7 +56,7 @@ public class MainApp extends JPanel {
         this.setLayout(new BorderLayout());
         this.setBackground(Color.WHITE);
 
-        this.initControlPanel();
+        this.initControlPanel(startStr,finishStr,ascenseurBool);
 
         //Création de l'image du plan
         Image planImage = new ImageIcon("src/main/ressources/graphics/plans/etage0.jpg").getImage();
@@ -77,10 +70,37 @@ public class MainApp extends JPanel {
         this.add(etagesPanel, BorderLayout.EAST);
     }
 
+    // getters
+
+    /**
+     * récupère l'étage affiché actuellement grâce au label d'étage
+     * @param etage le label indiquant l'étage actuel
+     * @return l'étage actuel
+     */
+    private static int getEtageActuel(JLabel etagelabel) {
+        String texte = etagelabel.getText();
+        String s = "";
+        int i = 0;
+        while (Character.getNumericValue(texte.charAt(i)) < 10 && (Character.getNumericValue(texte.charAt(i)) >= 0)) {
+            s += texte.charAt(i);
+            i++;
+        }
+        int etage = 0;
+        if (!s.equals("")) {
+            etage = Integer.valueOf(s);
+        }
+        return estEtagePositif(etagelabel)? etage:-etage;
+    }
+
+    // méthodes
+
     /**
      * initialise le controlPanel
+     * @param startStr nom de l'éventuelle salle de départ
+     * @param finishStr nom de l'éventuelle salle d'arrivée 
+     * @param ascenseurBool état de la case cochable (true si cochée, false sinon)
      */
-    private void initControlPanel() {
+    private void initControlPanel(String startStr,String finishStr, boolean ascenseurBool) {
         //Création du Panel de contrôle
         this.controlPanel = new JPanel(new GridBagLayout());
         this.controlPanel.setBackground(Color.LIGHT_GRAY);
@@ -89,10 +109,11 @@ public class MainApp extends JPanel {
         ImageIcon logo = new ImageIcon("src/main/ressources/graphics/logos/placeholdermini.png");
         JLabel logoLabel = new JLabel(logo);
         //Boîtes de saisie de texte
-        TextFieldBox start = new TextFieldBox("Départ", 10, view);
-        TextFieldBox finish = new TextFieldBox("Arrivée", 10, view);
+        start = new TextFieldBox(startStr, 10, view);
+        finish = new TextFieldBox(finishStr, 10, view);
         //Case à cocher
-        JCheckBox ascenseur = new JCheckBox("Ascenseurs");
+        ascenseur = new JCheckBox("Ascenseurs");
+        ascenseur.setSelected(ascenseurBool);
         ascenseur.setHorizontalAlignment(SwingConstants.CENTER);
         //Bouton de recherche de chemin
         GoButton mainButton = new GoButton(view);
@@ -210,33 +231,32 @@ public class MainApp extends JPanel {
     }
 
     /**
-     * récupère l'étage affiché actuellement grâce au label d'étage
-     * @param etage le label indiquant l'étage actuel
-     * @return l'étage actuel
-     */
-    private static int getEtageActuel(JLabel etagelabel) {
-        String texte = etagelabel.getText();
-        String s = "";
-        int i = 0;
-        while (Character.getNumericValue(texte.charAt(i)) < 10 && (Character.getNumericValue(texte.charAt(i)) >= 0)) {
-            s += texte.charAt(i);
-            i++;
-        }
-        int etage = 0;
-        if (!s.equals("")) {
-            etage = Integer.valueOf(s);
-        }
-        return estEtagePositif(etagelabel)? etage:-etage;
-    }
-
-    /**
      * vérifie si etageLabel représente un numéro d'étage positif
      * @param etageLabel le label dont on veut vérifier le signe de l'étage qu'il représente
-     * @return true si lu numéro d'étage est positif, false sinon
+     * @return true si le numéro d'étage est positif, false sinon
      */
     private static boolean estEtagePositif(JLabel etageLabel) {
         String texte = etageLabel.getText();
         return texte.charAt((texte.length() - 1)) == 'e'; //Si le texte finit par e, c'est qu'il finit par étage et pas par sous-sol
+    }
+
+    /**
+     * affiche le chemin entre la salle de départ et la salle d'arrivée
+     * @param depart salle de départ
+     * @param arrivée salle d'arrivée
+     * @param ascenseur permission d'utiliser les ascenseurs
+     */
+    public void afficherChemin(Noeud depart, Noeud arrivee, boolean ascenseur){
+        Chemin chemin = Dijkstra.trouverCheminPlusCourt(depart, arrivee, ascenseur);
+        // TODO : finir de définir la fonction
+    }
+
+    /**
+     * affiche la ou les portes de la salle
+     * @param salle salle dont on veut afficher la ou les portes
+     */
+    public void afficherPortes(Noeud salle){
+        // TODO : définir la fonction
     }
 
 }

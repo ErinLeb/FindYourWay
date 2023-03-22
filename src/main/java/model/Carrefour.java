@@ -57,6 +57,8 @@ public class Carrefour extends Noeud {
         return false;
     }
 
+
+
     @Override
     public String toString() {
         if (isAscenseur) {
@@ -64,4 +66,5 @@ public class Carrefour extends Noeud {
         }
         return id + " Carrefour à l'étage " + etage;
     }
+
 }

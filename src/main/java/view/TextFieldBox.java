@@ -16,6 +16,11 @@ import javax.swing.JTextField;
 public class TextFieldBox extends JTextField {
 
     /**
+     * vue associée à cette TextFieldBox
+     */
+    private Vue view;
+
+    /**
      * Construit une zone de saisie de texte
      * @param text le texte de fond de la boîte
      * @param columns la longueur de la boîte
@@ -23,6 +28,7 @@ public class TextFieldBox extends JTextField {
      */
     public TextFieldBox(String text, int columns, Vue view) {
         super(text, columns);
+        this.view = view;
         setForeground(Color.LIGHT_GRAY);
         //Si on clique sur une zone de texte, le texte par défaut s'efface, si on en sort sans rien écrire, il revient
         addFocusListener(new FocusListener() {
@@ -54,9 +60,12 @@ public class TextFieldBox extends JTextField {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    view.setContentPane(view.getApp());
-                    view.repaint();
-                    view.setVisible(true);
+                    if(view.getControl().verifGoButton()){ // on vérifie que les textes des TextFieldBox sont corrects et si oui, on met à jour la vue
+                        view.getControl().majApp();
+                        view.setContentPane(view.getApp());
+                        view.repaint();
+                        view.setVisible(true);
+                    }
                 }
             }
 
@@ -65,5 +74,13 @@ public class TextFieldBox extends JTextField {
                 //Méthode non utilisée
             }
         });
+    }
+
+    /**
+     * détermine si le texte contenu dans la TextFieldBox correspond à une salle du batiment
+     * @return renvoie vrai si la salle existe dans le batiment et faux sinon
+     */
+    public boolean estSalle(){
+        return this.view.getControl().estSalle(this.getText());
     }
 }

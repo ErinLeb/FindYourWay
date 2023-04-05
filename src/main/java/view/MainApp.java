@@ -2,13 +2,14 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.Dimension;
 
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
@@ -30,6 +31,11 @@ import model.Noeud;
 public class MainApp extends Fenetre {
 
     /**
+     * La liste contenant les images du bâtiment actuel
+     */
+    private ArrayList<BufferedImage> listImages;
+
+    /**
      * le panel permettant de changer d'étages
      */
     private JPanel etagesPanel;
@@ -47,8 +53,9 @@ public class MainApp extends Fenetre {
      * @param startStr nom de l'éventuelle salle de départ
      * @param finishStr nom de l'éventuelle salle d'arrivée
      * @param ascenseurBool état de la case cochable (true si cochée, false sinon)
+     * @param lImages la liste des BufferedImage des plans du bâtiment actuel
      */
-    public MainApp(Vue view, Controleur control,String startStr, String finishStr, boolean ascenseurBool) {
+    public MainApp(Vue view, Controleur control,String startStr, String finishStr, boolean ascenseurBool, ArrayList<BufferedImage> lImages) {
         this.control = control;
         this.view = view;
 
@@ -59,8 +66,8 @@ public class MainApp extends Fenetre {
         this.initControlPanel(startStr,finishStr,ascenseurBool);
 
         //Création de l'image du plan
-        Image planImage = new ImageIcon("src/main/ressources/graphics/plans/etage0.jpg").getImage();
-        planPanel = new PlanPanel(planImage);
+        this.listImages = lImages;
+        planPanel = new PlanPanel(listImages.get(0), this);
         
         this.initEtagesPanel();
 
@@ -179,31 +186,43 @@ public class MainApp extends Fenetre {
         up.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Change d'étage
-                int nouvelEtage = getEtageActuel(etageActuel) + 1;
-                planPanel.setImage(new ImageIcon("src/main/ressources/graphics/plans/etage"+nouvelEtage+".jpg").getImage());
-                //Modifie le label
-                modifEtageLabel(etageActuel, nouvelEtage);
-                //Modifie les permissions de cliquer sur les boutons si besoin
-                if (nouvelEtage == control.getEtageMaxActuel()) {
-                    up.setEnabled(false);
+                try {
+                    //Change d'étage
+                    int nouvelEtage = getEtageActuel(etageActuel) + 1;
+                    planPanel.setImage(listImages.get(nouvelEtage));
+                    //Dessine les points et les liens
+                    planPanel.drawPointsLinks(nouvelEtage);
+                    //Modifie le label
+                    modifEtageLabel(etageActuel, nouvelEtage);
+                    //Modifie les permissions de cliquer sur les boutons si besoin
+                    if (nouvelEtage == control.getEtageMaxActuel()) {
+                        up.setEnabled(false);
+                    }
+                    down.setEnabled(true);
+                } catch (Exception exc) {
+                    exc.printStackTrace();
                 }
-                down.setEnabled(true);
             }
         });
         down.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Change d'étage
-                int nouvelEtage = getEtageActuel(etageActuel) - 1;
-                planPanel.setImage(new ImageIcon("src/main/ressources/graphics/plans/etage"+nouvelEtage+".jpg").getImage());
-                //Modifie le label
-                modifEtageLabel(etageActuel, nouvelEtage);
-                //Modifie les permissions de cliquer sur les boutons si besoin
-                if (nouvelEtage == control.getEtageMinActuel()) {
-                    down.setEnabled(false);
+                try {
+                    //Change d'étage
+                    int nouvelEtage = getEtageActuel(etageActuel) - 1;
+                    planPanel.setImage(listImages.get(nouvelEtage));
+                    //Dessine les points et les liens
+                    planPanel.drawPointsLinks(nouvelEtage);
+                    //Modifie le label
+                    modifEtageLabel(etageActuel, nouvelEtage);
+                    //Modifie les permissions de cliquer sur les boutons si besoin
+                    if (nouvelEtage == control.getEtageMinActuel()) {
+                        down.setEnabled(false);
+                    }
+                    up.setEnabled(true);
+                } catch (Exception exc) {
+                    exc.printStackTrace();
                 }
-                up.setEnabled(true);
             }
         });
     }

@@ -1,14 +1,16 @@
 package view;
 
-import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.BasicStroke;
 import java.awt.Color;
 
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelListener;
+import java.awt.image.BufferedImage;
+import java.util.List;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.ComponentAdapter;
@@ -16,14 +18,22 @@ import java.awt.event.ComponentEvent;
 
 import javax.swing.JPanel;
 
+import model.Carrefour;
+import model.Noeud;
+
 /**
  * Un JPanel contenant l'image du plan actuel
  */
 public class PlanPanel extends JPanel implements MouseListener, MouseMotionListener, MouseWheelListener {
     /**
+     * L'écran de l'appli
+     */
+    private MainApp app;
+
+    /**
      * l'image de l'étage à afficher
      */
-    private Image planActuel;
+    private BufferedImage planActuel;
 
     /**
      * coordonnée de notre vision de l'image
@@ -43,8 +53,11 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
     /**
      * Construit le panel avec la première image
      * @param plan le premier plan par défaut
+     * @param app la MainApp à laquelle ce panel est relié
      */
-    public PlanPanel(Image plan) {
+    public PlanPanel(BufferedImage plan, MainApp app) {
+        this.app = app;
+
         setBackground(Color.WHITE);
         planActuel = plan;
         viewX = 0;
@@ -58,12 +71,16 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
         
         //Quand la taille du panel change, l'échelle de l'image change aussi
         addComponentListener(new ComponentAdapter() {
+            @Override
             public void componentResized(ComponentEvent e) {
                 maxScale = Math.min(getWidth() / (double) planActuel.getWidth(null), getHeight() / (double) planActuel.getHeight(null));
                 scale = maxScale;
                 repaint();
             }
         });
+
+        //Dessine les points et liens de l'étage 0
+        drawPointsLinks(0);
     }
 
     /**
@@ -156,10 +173,51 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
      * change l'image affichée
      * @param newImage la nouvelle image
      */
-    public void setImage(Image newImage) {
+    public void setImage(BufferedImage newImage) {
         planActuel = newImage;
         
         repaint();
     }
-    
+
+    /**
+     * Dessine les points représentant les noeuds et les liens qui les relient
+     * @param etage le numéro de l'étage dont on dessine les noeuds et les liens
+     */
+    public void drawPointsLinks(int etage) {
+        //Le facteur multiplicateur de l'emplacement des points
+        double scale = 8.23;
+        //On récupère le Graphics du plan actuel pour pouvoir dessiner dessus
+        Graphics g = planActuel.getGraphics();
+        Graphics2D g2d = (Graphics2D) g;
+
+        //On définit la couleur des points
+        g2d.setColor(Color.RED);
+        //On définit le style des liens
+        g2d.setStroke(new BasicStroke(3.0f));
+
+        //On récupère la liste des points de l'étage actuel
+        List<Noeud> noeuds = app.getControl().getNoeudsEtage(etage);
+        //On parcourt les noeuds
+        for (Noeud n1 : noeuds) {
+            if (n1 instanceof Carrefour) {
+                g2d.setColor(Color.RED);
+                Carrefour carr1 = (Carrefour) n1;
+                //On dessine le point correspondant
+                g2d.fillOval((int) Math.round(carr1.getX()*scale), (int) Math.round(carr1.getY()*scale), 15, 15);
+                g2d.setColor(Color.BLUE);
+                //On parcourt les voisins
+                for (Noeud n2 : carr1.getVoisins().keySet()) {
+                    if (n2 instanceof Carrefour) {
+                        Carrefour carr2 = (Carrefour) n2;
+                        if (noeuds.contains(carr2)) {
+                            //S'il fait partie du bon étage on relie les deux points
+                            g2d.drawLine((int) Math.round(carr1.getX()*scale), (int) Math.round(carr1.getY()*scale), (int) Math.round(carr2.getX()*scale), (int) Math.round(carr2.getY()*scale));
+                        }
+                        
+                    }
+                    
+                }
+            }
+        }
+    }
 }

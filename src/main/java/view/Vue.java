@@ -1,5 +1,10 @@
 package view;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import controller.Controleur;
@@ -15,6 +20,11 @@ public class Vue extends JFrame {
     private MainApp app;
 
     private Controleur control;
+
+    /**
+     * la liste contenant les images représentant les plans
+     */
+    private ArrayList<BufferedImage> listImages;
 
     /**
      * la largeur de la fenêtre 
@@ -40,11 +50,27 @@ public class Vue extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         accueil = new Home(this, control);
+
+        this.initListImages();
         
 
         this.setContentPane(accueil);
         this.setVisible(true);
 
+    }
+
+    /**
+     * initialise la liste des images des plans
+     */
+    private void initListImages() {
+        try {
+            listImages = new ArrayList<BufferedImage>();
+            for (int i = control.getEtageMinActuel(); i <= control.getEtageMaxActuel(); i++) {
+                listImages.add(ImageIO.read(new File("src/main/ressources/graphics/plans/etage"+i+".jpg")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -82,10 +108,10 @@ public class Vue extends JFrame {
      */
     public void majApp(Noeud depart, Noeud arrivee, boolean ascenseur){
         if(this.app==null){
-            this.app = new MainApp(this, control,accueil.getStart().getText(),accueil.getFinish().getText(),accueil.getAscenseur().isSelected());
+            this.app = new MainApp(this, control,accueil.getStart().getText(),accueil.getFinish().getText(),accueil.getAscenseur().isSelected(), listImages);
         }
         else{
-            this.app = new MainApp(this, control,app.getStart().getText(),app.getFinish().getText(),app.getAscenseur().isSelected());
+            this.app = new MainApp(this, control,app.getStart().getText(),app.getFinish().getText(),app.getAscenseur().isSelected(), listImages);
         }
         if(depart != null && arrivee == null){
             this.app.afficherPortes(depart);

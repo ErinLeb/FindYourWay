@@ -13,15 +13,31 @@ public class Carrefour extends Noeud {
      */
     public final boolean isAscenseur;
 
+    /**
+     * Abscisse du noeud
+     */
+    public Double x;
+
+    /**
+     * Ordonnée du noeud
+     */
+    public Double y;
+
     // Constructeur
 
     /**
      * Crée un Carrefour sans voisin
      * 
      * @param isAscenseur définit si le carrefour est un ascenseur ou non
+     * @param etage l'étage auquel se trouve le carrefour
+     * @param batiment le batiment dans lequel se trouve le carrefour
+     * @param x la coordonnée d'abscisse sur le plan du carefour
+     * @param y la coordonnée d'ordonnée sur le plan du carefour
      */
-    public Carrefour(boolean isAscenseur, int etage, Batiment batiment) {
+    public Carrefour(boolean isAscenseur, int etage, Batiment batiment, Double x, Double y) {
         super(batiment);
+        this.x = x;
+        this.y = y;
         this.isAscenseur = isAscenseur;
         this.etage = etage;
     }
@@ -65,6 +81,22 @@ public class Carrefour extends Noeud {
             return id + " Ascenseur à l'étage " + etage;
         }
         return id + " Carrefour à l'étage " + etage;
+    }
+
+    /**
+     * renvoie la coordonnée x du carrefour
+     * @return la coordonnée x du carrefour
+     */
+    public Double getX() {
+        return this.x;
+    }
+
+    /**
+     * renvoie la coordonnée y du carrefour
+     * @return la coordonnée y du carrefour
+     */
+    public Double getY() {
+        return this.y;
     }
 
 }

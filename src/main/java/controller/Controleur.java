@@ -1,6 +1,9 @@
 package controller;
 
+import java.util.List;
+
 import model.Batiment;
+import model.Etage;
 import model.Noeud;
 import view.Vue;
 
@@ -112,5 +115,17 @@ public class Controleur {
     public Vue getVue(){
         return vue;
     }
+
+    /**
+     * renvoie la liste des noeuds à afficher de l'étage numéro numEtage
+     * @param numEtage le numéro de l'étage
+     * @return la liste de ses points
+     */
+    public List<Noeud> getNoeudsEtage(int numEtage) {
+        Etage etage = batActuel.getEtage(numEtage);
+
+        return etage.getNoeuds();
+    }
+
     
 }

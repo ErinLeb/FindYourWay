@@ -16,12 +16,12 @@ public class Carrefour extends Noeud {
     /**
      * Abscisse du noeud
      */
-    public Double x;
+    private Double x;
 
     /**
      * Ordonnée du noeud
      */
-    public Double y;
+    private Double y;
 
     // Constructeur
 

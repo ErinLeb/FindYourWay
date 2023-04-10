@@ -267,7 +267,11 @@ public class MainApp extends Fenetre {
      */
     public void afficherChemin(Noeud depart, Noeud arrivee, boolean ascenseur){
         Chemin chemin = Dijkstra.trouverCheminPlusCourt(depart, arrivee, ascenseur);
-        planPanel.drawPath(chemin);
+        if (chemin == null) {
+            System.out.println("Chemin null");
+        } else {
+            planPanel.drawPath(chemin);
+        }
     }
 
     /**

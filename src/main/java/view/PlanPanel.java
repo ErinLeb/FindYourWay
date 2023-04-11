@@ -10,9 +10,6 @@ import java.awt.Color;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelListener;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.ComponentAdapter;
@@ -23,7 +20,6 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import model.Carrefour;
-import model.Chemin;
 import model.Noeud;
 
 /**
@@ -228,40 +224,12 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
                             //S'il fait partie du bon étage on relie les deux points
                             g2d.drawLine((int) Math.round(carr1.getX()*scale), (int) Math.round(carr1.getY()*scale), (int) Math.round(carr2.getX()*scale), (int) Math.round(carr2.getY()*scale));
                         }
+                        
                     }
+                    
                 }
             }
         }
     }
 
-    /**
-     * Dessine le chemin donné par l'algorithme de Dijkstra
-     * @param path
-     */
-    public void drawPath(Chemin path) {
-        //Le facteur multiplicateur de l'emplacement des points
-        double scale = 8.23;
-        //On récupère le Graphics du plan actuel pour pouvoir dessiner dessus
-        Graphics g = planActuel.getGraphics();
-        Graphics2D g2d = (Graphics2D) g;
-
-        //On définit la couleur du chemin
-        g2d.setColor(Color.GREEN);
-        //On définit le style du chemin
-        g2d.setStroke(new BasicStroke(5.0f));
-
-        List<Noeud> noeuds = path.getNoeuds();
-
-        for (int i = 0; i < noeuds.size() - 1; i++) {
-            if (noeuds.get(i) instanceof Carrefour depart && noeuds.get(i+1) instanceof Carrefour arrivee) {
-                int xA = (int) Math.round(depart.getX()*scale);
-                int yA = (int) Math.round(depart.getY()*scale);
-                int xB = (int) Math.round(depart.getX()*scale);
-                int yB = (int) Math.round(depart.getY()*scale);
-
-                g2d.drawLine(xA, yA, xB, yB);
-            }
-        }
-
-    }
 }

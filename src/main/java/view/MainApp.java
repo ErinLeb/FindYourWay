@@ -343,8 +343,16 @@ public class MainApp extends Fenetre {
         droitPanel.repaint();
         droitPanel.revalidate(); 
         this.add(droitPanel, BorderLayout.EAST);
+        
+        Chemin chemin = Dijkstra.trouverCheminPlusCourt(depart, arrivee, ascenseur);
+        if (chemin == null) {
+            System.out.println("Chemin null");
+        } else {
+            planPanel.drawPath(chemin);
+        }
 
         // TODO : finir la fonction
+
     }
 
     /**

@@ -47,5 +47,4 @@ public class Salle extends Noeud{
         return false;
     }
 
-
 }

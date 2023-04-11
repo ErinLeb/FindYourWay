@@ -32,6 +32,12 @@ public class Batiment {
      */
     private int nbNoeuds = 0; 
 
+    /*
+     * Facteur multiplicatif entre le plan et la réalité
+     */
+    private double echelle = 0.3333;
+
+
     // Constructeur
     /**
      * 
@@ -56,6 +62,7 @@ public class Batiment {
         // on crée les liens entre les noeuds
         parseur.initVoisins();
     }
+
 
     // Getters & setters
 
@@ -95,14 +102,6 @@ public class Batiment {
     }
 
     /**
-     * Change le nombre de Noeuds de la classe par {@code n}
-     * @param n
-     */
-    public void setNbNoeuds(int n){
-        nbNoeuds = n;
-    }
-
-    /**
      * renvoie la salle dont on a donné le nom en paramètre
      * @param salle nom de la salle à trouver
      * @return renvoie la salle de nom donné en paramètre
@@ -116,6 +115,32 @@ public class Batiment {
         return null;
     }
 
+    
+    /**
+     * Retourne le facteur multiplicatif entre le plan du batiment et la réalité
+     * @return le facteur multiplicatif entre le plan du batiment et la réalité
+     */
+    public double getEchelle(){
+        return echelle;
+    }
+
+    /**
+     * Change le nombre de Noeuds de la classe par {@code n}
+     * @param n
+     */
+    public void setNbNoeuds(int n){
+        nbNoeuds = n;
+    }
+
+    /**
+     * Change l'échelle du plan
+     * @param echelle
+     */
+    public void setEchelle(double echelle){
+        this.echelle = echelle;
+    }
+
+    
     // Methodes
 
     @Override
@@ -154,8 +179,6 @@ public class Batiment {
 
         n.setId(nbNoeuds++);
     }
-
-
 
     /**
      * renvoie si une salle au nom donné en paramètre se trouve dans le batiment

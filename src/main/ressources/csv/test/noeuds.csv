@@ -1,13 +1,13 @@
 ;0
-carrefour;
+carrefour;;0;0
 salle;01;
 ;1
-carrefour;ascenseur;
+carrefour;ascenseur;0;0;
 ;2
 salle;205
 ;3
 salle;308
 ;4
 ;5
-carrefour;ascenseur;
-carrefour;
+carrefour;ascenseur;0;0;
+carrefour;;0;0

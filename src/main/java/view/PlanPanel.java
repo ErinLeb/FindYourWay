@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -9,12 +10,12 @@ import java.awt.Color;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelListener;
-import java.awt.image.BufferedImage;
-import java.util.List;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.image.BufferedImage;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -25,6 +26,8 @@ import model.Noeud;
  * Un JPanel contenant l'image du plan actuel
  */
 public class PlanPanel extends JPanel implements MouseListener, MouseMotionListener, MouseWheelListener {
+    //Attributs
+
     /**
      * L'écran de l'appli
      */
@@ -34,6 +37,7 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
      * l'image de l'étage à afficher
      */
     private BufferedImage planActuel;
+
 
     /**
      * coordonnée de notre vision de l'image
@@ -49,6 +53,9 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
      * le niveau maximal du dézoom
      */
     private double maxScale;
+
+
+    //Constructeur
 
     /**
      * Construit le panel avec la première image
@@ -79,9 +86,25 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
             }
         });
 
-        //Dessine les points et liens de l'étage 0
-        drawPointsLinks(0);
+         //Dessine les points et liens de l'étage 0
+         drawPointsLinks(0);
     }
+
+
+    //Setters
+    
+    /**
+     * change l'image affichée
+     * @param newImage la nouvelle image
+     */
+    public void setImage(BufferedImage newImage) {
+        planActuel = newImage;
+        
+        repaint();
+    }
+
+    
+    //Méthodes
 
     /**
      * appelée à chaque <code>repaint()</code>, permet de redessiner le plan sur le Panel
@@ -97,8 +120,6 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
         int y = Math.min(viewY, getHeight() - (int) (planActuel.getHeight(null) * scale));
         g2d.drawImage(planActuel, x, y, null);
     }
-
-    
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
@@ -168,17 +189,7 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
     public void mouseExited(MouseEvent e) {
         //Méthode non utilisée
     }
-
-    /**
-     * change l'image affichée
-     * @param newImage la nouvelle image
-     */
-    public void setImage(BufferedImage newImage) {
-        planActuel = newImage;
-        
-        repaint();
-    }
-
+    
     /**
      * Dessine les points représentant les noeuds et les liens qui les relient
      * @param etage le numéro de l'étage dont on dessine les noeuds et les liens
@@ -220,4 +231,5 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
             }
         }
     }
+
 }

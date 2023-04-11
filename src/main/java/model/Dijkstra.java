@@ -11,9 +11,31 @@ import java.util.Map;
  */
 public class Dijkstra {
 
+    //Constructeur
+
     private Dijkstra() {
         // Jamais instancié car classe utilitaire
     }
+
+
+    //Getters & setters
+
+    /**
+     * Methode qui permet d'obtenir le noeud avec la distance la plus courte du
+     * noeud de départ
+     * 
+     * La liste est déjà triée, donc on récupère le premier élément de liste.
+     * 
+     * @param noeuds Liste des noeuds à regarder (déjà triés)
+     * @return le noeud avec la distance la plus courte avec le noeud de depart.
+     */
+
+    private static Noeud getNoeudMinimal(List<Noeud> noeuds) {
+        return noeuds.get(0);
+    }
+
+
+    //Méthodes
 
     /**
      * Methode qui trouve le chemin le plus court pour aller d'un noeud de début à
@@ -174,20 +196,6 @@ public class Dijkstra {
     }
 
     /**
-     * Methode qui permet d'obtenir le noeud avec la distance la plus courte du
-     * noeud de départ
-     * 
-     * La liste est déjà triée, donc on récupère le premier élément de liste.
-     * 
-     * @param noeuds Liste des noeuds à regarder (déjà triés)
-     * @return le noeud avec la distance la plus courte avec le noeud de depart.
-     */
-
-    private static Noeud getNoeudMinimal(List<Noeud> noeuds) {
-        return noeuds.get(0);
-    }
-
-    /**
      * Méthode qui reconstruit le chemin le plus court
      * 
      * @param predecesseurs Map qui associe le noeud précédant le noeud actuel avec
@@ -212,6 +220,8 @@ public class Dijkstra {
         chemin.addNoeud(noeudActuel);
         // on retourne la liste pour l'avoir dans le bon ordre
         chemin.reverse();
+        chemin.updateIndications();
+        chemin.setBat(chemin.getNoeuds().get(0).batiment);
         return chemin;
     }
 }

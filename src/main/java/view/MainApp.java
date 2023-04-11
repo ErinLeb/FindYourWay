@@ -6,10 +6,9 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.Dimension;
-
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
@@ -17,7 +16,10 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import java.util.ArrayList;
 
 import controller.Controleur;
 import model.Chemin;
@@ -29,11 +31,17 @@ import model.Noeud;
  * sur lequel on voit les plans et itinéraires
  */
 public class MainApp extends Fenetre {
+    //Attributs 
 
     /**
      * La liste contenant les images du bâtiment actuel
      */
     private ArrayList<BufferedImage> listImages;
+
+    /*
+     * Le chemin actuel si les entrées utilisateurs sont correctes, null sinon
+     */
+    private Chemin cheminActuel;
 
     /**
      * le panel permettant de changer d'étages
@@ -41,10 +49,22 @@ public class MainApp extends Fenetre {
     private JPanel etagesPanel;
 
     /**
+     * le panel indiquant les instructions de direction selon le chemin à l'écran
+     */
+    private JScrollPane indicationsPanel;
+
+    /**
+     * le panel réunissant les indications et le changement d'étages
+     */
+    private JPanel droitPanel;
+
+    /**
      * le panel du plan affiché actuellement
      */
     private PlanPanel planPanel;
 
+
+    //Constructeur
 
     /**
      * Construit l'écran principal
@@ -68,19 +88,20 @@ public class MainApp extends Fenetre {
         //Création de l'image du plan
         this.listImages = lImages;
         planPanel = new PlanPanel(listImages.get(0), this);
-        
-        this.initEtagesPanel();
+
+        this.initPanelDroit();
 
         //on ajoute les différents panels à la pane principale
         this.add(controlPanel, BorderLayout.NORTH);
         this.add(planPanel, BorderLayout.CENTER);
-        this.add(etagesPanel, BorderLayout.EAST);
+        this.add(droitPanel, BorderLayout.EAST);
     }
 
-    // getters
+
+    //Getters 
 
     /**
-     * récupère l'étage affiché actuellement grâce au label d'étage
+     * Récupère l'étage affiché actuellement grâce au label d'étage
      * @param etage le label indiquant l'étage actuel
      * @return l'étage actuel
      */
@@ -99,10 +120,23 @@ public class MainApp extends Fenetre {
         return estEtagePositif(etagelabel)? etage:-etage;
     }
 
-    // méthodes
+    public Chemin getChemin(){
+        return cheminActuel;
+    }
+
+    public void setChemin(Noeud depart, Noeud arrivee, boolean ascenseur){
+        if(depart == null || arrivee == null){
+            cheminActuel = null;
+        }else{
+            cheminActuel = Dijkstra.trouverCheminPlusCourt(depart, arrivee, ascenseur);
+        }
+    }
+
+
+    //Méthodes
 
     /**
-     * initialise le controlPanel
+     * Initialise le controlPanel
      * @param startStr nom de l'éventuelle salle de départ
      * @param finishStr nom de l'éventuelle salle d'arrivée 
      * @param ascenseurBool état de la case cochable (true si cochée, false sinon)
@@ -147,13 +181,12 @@ public class MainApp extends Fenetre {
     }
 
     /**
-     * initialise le panel de changement d'étages
+     * Initialise le panel de changement d'étages
      */
     private void initEtagesPanel() {
         //Boutons haut et bas + Label indiquant l'étage
         this.etagesPanel = new JPanel(new GridLayout(3, 1));
         this.etagesPanel.setBackground(Color.LIGHT_GRAY);
-        this.etagesPanel.setPreferredSize(new Dimension(300, etagesPanel.getHeight()));
 
         JLabel nbEtage = new JLabel("Rez-de-chaussée");
         nbEtage.setHorizontalAlignment(SwingConstants.CENTER);
@@ -177,7 +210,43 @@ public class MainApp extends Fenetre {
     }
 
     /**
-     * gère les clics sur les JButton up et down et modifie le JLabel etageActuel en conséquence
+     * Initialise le panel de droite
+     */
+    private void initPanelDroit(){
+        droitPanel = new JPanel(new GridLayout(2, 1));
+        this.droitPanel.setPreferredSize(new Dimension(300, droitPanel.getHeight()));
+
+        this.initEtagesPanel();
+        this.initIndicationsPanel();
+
+        droitPanel.add(etagesPanel);
+        droitPanel.add(indicationsPanel);
+    }
+
+    /**
+     * Initialise le panel des indications
+     */
+    private void initIndicationsPanel(){
+        String indic;
+
+        if(cheminActuel == null){
+            indic = "Rentrez deux salles pour voir l'itinéraire le plus court.";
+        }else{
+            indic = cheminActuel.getIndications();
+        }
+        JTextArea indications = new JTextArea(indic);
+
+        Font font = new Font("Century Schoolbook", Font.PLAIN, 17);
+        indications.setFont(font);
+        indications.setLineWrap(true);
+
+        indicationsPanel = new JScrollPane(indications);
+
+        indicationsPanel.revalidate();
+    }
+
+    /**
+     * Gère les clics sur les JButton up et down et modifie le JLabel etageActuel en conséquence
      * @param up le bouton qui va à l'étage supérieur
      * @param down le bouton qui va à l'étage inférieur
      * @param etageActuel le label indiquant l'étage actuel
@@ -202,6 +271,7 @@ public class MainApp extends Fenetre {
                 } catch (Exception exc) {
                     exc.printStackTrace();
                 }
+
             }
         });
         down.addActionListener(new ActionListener() {
@@ -223,12 +293,13 @@ public class MainApp extends Fenetre {
                 } catch (Exception exc) {
                     exc.printStackTrace();
                 }
+
             }
         });
     }
 
     /**
-     * modifie le label en fonction du nouvel étage
+     * Modifie le label en fonction du nouvel étage
      * @param etageLabel le label à modifier
      * @param nouvelEtage le numéro du nouvel étage
      */
@@ -250,7 +321,7 @@ public class MainApp extends Fenetre {
     }
 
     /**
-     * vérifie si etageLabel représente un numéro d'étage positif
+     * Vérifie si etageLabel représente un numéro d'étage positif
      * @param etageLabel le label dont on veut vérifier le signe de l'étage qu'il représente
      * @return true si le numéro d'étage est positif, false sinon
      */
@@ -260,22 +331,33 @@ public class MainApp extends Fenetre {
     }
 
     /**
-     * affiche le chemin entre la salle de départ et la salle d'arrivée
+     * Affiche le chemin entre la salle de départ et la salle d'arrivée
      * @param depart salle de départ
      * @param arrivée salle d'arrivée
      * @param ascenseur permission d'utiliser les ascenseurs
      */
-    public void afficherChemin(Noeud depart, Noeud arrivee, boolean ascenseur){
-        Chemin chemin = Dijkstra.trouverCheminPlusCourt(depart, arrivee, ascenseur);
-        // TODO : finir de définir la fonction
+    public void afficherChemin(Noeud depart, Noeud arrivee, boolean ascenseur){        
+        //mise à jour des indications
+        droitPanel.removeAll();
+        initPanelDroit(); 
+        droitPanel.repaint();
+        droitPanel.revalidate(); 
+        this.add(droitPanel, BorderLayout.EAST);
+
+        // TODO : finir la fonction
     }
 
     /**
-     * affiche la ou les portes de la salle
+     * Affiche la ou les portes de la salle 
      * @param salle salle dont on veut afficher la ou les portes
      */
     public void afficherPortes(Noeud salle){
-        // TODO : définir la fonction
-    }
+        droitPanel.removeAll();
+        initPanelDroit(); 
+        droitPanel.repaint();
+        droitPanel.revalidate(); 
+        this.add(droitPanel, BorderLayout.EAST);
 
+        // TODO : finir la fonction
+    }
 }

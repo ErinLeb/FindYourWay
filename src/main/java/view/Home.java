@@ -19,7 +19,7 @@ import controller.Controleur;
  * Le menu d'accueil de l'application
  */
 public class Home extends Fenetre {
-    
+    //Attributs
 
     /**
      * Le JLabel contenant le logo
@@ -27,6 +27,9 @@ public class Home extends Fenetre {
     private JLabel logoLabel;
 
     
+
+    //Constructeur 
+
     /**
      * Construit le menu d'accueil
      * @param view la vue associée au menu Home
@@ -57,6 +60,9 @@ public class Home extends Fenetre {
         constraints.gridy = 1;
         add(controlPanel,constraints);
     }
+    
+
+    //Méthodes
 
     /**
      * initialise le controlPanel

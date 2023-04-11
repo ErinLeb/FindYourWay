@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Etage{
     // Attributs
+    
     /**
      * Numéro de l'étage
      */

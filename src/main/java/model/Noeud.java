@@ -40,7 +40,7 @@ public abstract class Noeud {
     }
 
 
-    // Getters
+    // Getters & setters
 
     /**
      * Renvoie l'identifiant du noeud

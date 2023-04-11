@@ -14,17 +14,13 @@ import model.Noeud;
  * L'interface graphique de l'application
  */
 public class Vue extends JFrame {
+    //Attributs
 
     private Home accueil;
 
     private MainApp app;
 
     private Controleur control;
-
-    /**
-     * la liste contenant les images représentant les plans
-     */
-    private ArrayList<BufferedImage> listImages;
 
     /**
      * la largeur de la fenêtre 
@@ -34,6 +30,14 @@ public class Vue extends JFrame {
      * la hauteur de la fenêtre 
      */
     private final static int HEIGHT = 1080;
+
+    /**
+     * la liste contenant les images représentant les plans
+     */
+    private ArrayList<BufferedImage> listImages;
+
+
+    //Constructeur
 
     /**
      * initialise la vue de l'app
@@ -50,28 +54,17 @@ public class Vue extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         accueil = new Home(this, control);
+        
 
         this.initListImages();
-        
 
         this.setContentPane(accueil);
         this.setVisible(true);
 
     }
 
-    /**
-     * initialise la liste des images des plans
-     */
-    private void initListImages() {
-        try {
-            listImages = new ArrayList<BufferedImage>();
-            for (int i = control.getEtageMinActuel(); i <= control.getEtageMaxActuel(); i++) {
-                listImages.add(ImageIO.read(new File("src/main/ressources/graphics/plans/etage"+i+".jpg")));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
+    //Getters
 
     /**
      * renvoie la fenêtre d'accueil de l'application
@@ -100,6 +93,23 @@ public class Vue extends JFrame {
         return control;
     }
 
+
+    //Méthodes
+    
+    /**
+     * initialise la liste des images des plans
+     */
+    private void initListImages() {
+        try {
+            listImages = new ArrayList<BufferedImage>();
+            for (int i = control.getEtageMinActuel(); i <= control.getEtageMaxActuel(); i++) {
+                listImages.add(ImageIO.read(new File("src/main/ressources/graphics/plans/etage"+i+".jpg")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * met à jour l'application et effectue une tache en fonction des entrées utilisateur
      * @param depart noeud de départ du chemin
@@ -113,6 +123,9 @@ public class Vue extends JFrame {
         else{
             this.app = new MainApp(this, control,app.getStart().getText(),app.getFinish().getText(),app.getAscenseur().isSelected(), listImages);
         }
+
+        app.setChemin(depart, arrivee, ascenseur);
+
         if(depart != null && arrivee == null){
             this.app.afficherPortes(depart);
         }

@@ -26,6 +26,10 @@ public class Carrefour extends Noeud {
      * Crée un Carrefour sans voisin
      * 
      * @param isAscenseur définit si le carrefour est un ascenseur ou non
+     * @param etage       l'étage auquel se trouve le carrefour
+     * @param batiment    le batiment dans lequel se trouve le carrefour
+     * @param x           la coordonnée d'abscisse sur le plan du carefour
+     * @param y           la coordonnée d'ordonnée sur le plan du carefour
      */
     public Carrefour(boolean isAscenseur, int etage, Batiment batiment, double x, double y) {
         super(batiment);
@@ -35,14 +39,19 @@ public class Carrefour extends Noeud {
         this.y = y;
     }
 
-    public Carrefour(boolean isAscenseur, int etage, Batiment batiment){
+    /**
+     * Crée un Carrefour sans voisin
+     * @param isAscenseur définit si le carrefour est un ascenseur ou non
+     * @param etage étage du carrefour
+     * @param batiment bâtiment du carrefour
+     */
+    public Carrefour(boolean isAscenseur, int etage, Batiment batiment) {
         this(isAscenseur, etage, batiment, 0, 0);
     }
 
-
     // Getters & setters
 
-    public int getEtage(){
+    public int getEtage() {
         return etage;
     }
 
@@ -73,19 +82,19 @@ public class Carrefour extends Noeud {
 
     // Méthodes
     @Override
-    public boolean equals(Object o){
-        if(!super.equals(o)){
+    public boolean equals(Object o) {
+        if (!super.equals(o)) {
             return false;
         }
 
-        if(o instanceof Carrefour){
-            Carrefour comp = (Carrefour)o;
+        if (o instanceof Carrefour) {
+            Carrefour comp = (Carrefour) o;
 
-            if(etage != comp.etage){
+            if (etage != comp.etage) {
                 return false;
             }
 
-            if(isAscenseur != comp.isAscenseur){
+            if (isAscenseur != comp.isAscenseur) {
                 return false;
             }
 

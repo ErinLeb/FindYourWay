@@ -37,8 +37,8 @@ public class Etage{
     }
     
     /**
-     * Retourne le noeud correspondant à {@code id}
-     * @return le noeud correspondant à {@code id}
+     * Retourne le noeud ayant un id correspondant à {@code id}
+     * @return le noeud ayant un id correspondant à {@code id}
      */    
     public Noeud getNoeud(int id){
         for(Noeud n : noeuds){

@@ -90,7 +90,6 @@ public class Controleur {
         return etage.getNoeuds();
     }
 
-
     //Méthodes
 
     /**

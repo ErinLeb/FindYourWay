@@ -239,6 +239,7 @@ public class MainApp extends Fenetre {
         Font font = new Font("Century Schoolbook", Font.PLAIN, 17);
         indications.setFont(font);
         indications.setLineWrap(true);
+        indications.setEditable(false);
 
         indicationsPanel = new JScrollPane(indications);
 

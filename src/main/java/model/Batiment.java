@@ -66,6 +66,7 @@ public class Batiment {
 
     // Getters & setters
 
+
     /**
      * renvoie l'étage max du bâtiment
      * @return l'étage max du bâtiment

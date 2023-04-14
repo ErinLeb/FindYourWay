@@ -10,7 +10,7 @@ public class Parseur {
     /**
      * le chemin vers le dossier de csv
      */
-    private String path;
+    private String path; 
 
     /**
      * le batîment que l'on veut remplir

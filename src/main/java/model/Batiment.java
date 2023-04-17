@@ -188,7 +188,8 @@ public class Batiment {
      */
     public boolean findSalle(String nom){
         for(int i = 0;i < noeuds.size();i++){
-            if((noeuds.get(i) instanceof Salle) && ((Salle) noeuds.get(i)).getNom().equalsIgnoreCase(nom)){
+            // on permet à l'utilisateur d'écrire "café" sans accents
+            if((noeuds.get(i) instanceof Salle) && ((((Salle) noeuds.get(i)).getNom().equalsIgnoreCase(nom)) || (nom.equalsIgnoreCase("cafe") && ((Salle) noeuds.get(i)).getNom().equalsIgnoreCase("café")))){
                 return true;
             }
         }

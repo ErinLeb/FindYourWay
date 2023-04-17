@@ -55,32 +55,32 @@ public class Controleur {
     }
 
     /**
-     * renvoie le batiment actuel
-     * @return renvoie le batiment actuel
+     * Renvoie le batiment actuel
+     * @return le batiment actuel
      */
     public Batiment getBatiment(){
         return batActuel;
     }
 
-      /**
-     * renvoie la salle dont on a donné le nom en paramètre
+    /**
+     * Renvoie la salle qui a pour nom {@code nom}
      * @param salle nom de la salle à trouver
-     * @return renvoie le noeud de la salle dont on a donné le nom en paramètre
+     * @return le noeud de la salle qui a pour nom {@code nom}
      */
     private Noeud getSalle(String salle){
         return batActuel.getSalle(salle);
     }
 
     /**
-     * renvoie la vue du controleur
-     * @return renvoie la vue du controleur
+     * Renvoie la vue du controleur
+     * @return la vue du controleur
      */
     public Vue getVue(){
         return vue;
     }
 
     /**
-     * renvoie la liste des noeuds à afficher de l'étage numéro numEtage
+     * Renvoie la liste des noeuds à afficher de l'étage numéro {@code numEtage}
      * @param numEtage le numéro de l'étage
      * @return la liste de ses points
      */
@@ -90,11 +90,12 @@ public class Controleur {
         return etage.getNoeuds();
     }
 
+
     //Méthodes
 
     /**
-     * Vérifie que les textes contenus dans les TextFieldBox sont soit des noms de salles, soit "Départ" et "Arrivée"
-     * @return renvoie vrai si les textes dans les TextFieldBox sont soit des noms de salles, soit "Départ" et "Arrivée" et renvoie faux sinon
+     * Vérifie que les textes contenus dans les TextFieldBox sont soit des noms de salles, soit "Départ", soit "Arrivée"
+     * @return vrai si les textes dans les TextFieldBox sont soit des noms de salles, soit "Départ", soit "Arrivée", faux sinon
      */
     public boolean verifGoButton(){
         String start = vue.getApp().getStart().getText();
@@ -106,32 +107,32 @@ public class Controleur {
     }
 
     /**
-     * vérifie si le nom donné en paramètre est celui d'une salle du batiment
+     * Vérifie si le nom {@code salle} est celui d'une salle du batiment
      * @param salle nom de la salle
-     * @return renvoie vrai si le nom correspond à celui d'une salle du batiment et faux sinon
+     * @return vrai si le nom correspond à celui d'une salle du batiment, faux sinon
      */
     public boolean estSalle(String salle){
         return batActuel.findSalle(salle);
     }
 
     /**
-     * met à jour l'application en fonction des entrées utilisateur
+     * Met à jour l'application en fonction des entrées utilisateur
      */
     public void majApp(){
         if(this.vue.getApp().getStart().getText().equals("Départ") && this.vue.getApp().getFinish().getText().equals("Arrivée")){
-            // cas où on veut juste afficher les plans
+            //on affiche seulement les plans
             this.vue.majApp(null, null, vue.getApp().getAscenseur().isSelected());
         }
         else if(this.vue.getApp().getStart().estSalle() && this.vue.getApp().getFinish().estSalle()){
-            // cas où on veut afficher le chemin le plus court entre deux salles
+            //on affiche le chemin le plus court entre deux salles
             this.vue.majApp(getSalle(vue.getApp().getStart().getText()), getSalle(vue.getApp().getFinish().getText()), vue.getApp().getAscenseur().isSelected());
         }
         else if((this.vue.getApp().getStart().getText().equals("Départ") && this.vue.getApp().getFinish().estSalle())){
-            // cas où on souhaite afficher les portes de la salle d'arrivée
+            //on affiche les portes de la salle d'arrivée
             this.vue.majApp(null, getSalle(this.vue.getApp().getFinish().getText()), vue.getApp().getAscenseur().isSelected());
         }
         else if((this.vue.getApp().getStart().estSalle() && this.vue.getApp().getFinish().getText().equals("Arrivée"))){
-            // cas où on veut afficher les portes de la salle de départ
+            //on affiche les portes de la salle de départ
             this.vue.majApp(getSalle(this.vue.getApp().getStart().getText()), null, this.vue.getApp().getAscenseur().isSelected());
         }
     }

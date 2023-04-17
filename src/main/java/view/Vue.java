@@ -1,11 +1,10 @@
 package view;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import java.io.File;
+import javax.imageio.ImageIO;
+import java.util.ArrayList;
 
 import controller.Controleur;
 import model.Noeud;
@@ -40,11 +39,10 @@ public class Vue extends JFrame {
     //Constructeur
 
     /**
-     * initialise la vue de l'app
+     * Initialise la vue de l'app
      * @param control le controleur de l'app
      */
     public Vue(Controleur control) {
-        //Création du nouveau controller
         this.control = control;
 
         //Configuration de la fenêtre
@@ -54,29 +52,27 @@ public class Vue extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         accueil = new Home(this, control);
-        
 
         this.initListImages();
 
         this.setContentPane(accueil);
         this.setVisible(true);
-
     }
 
 
     //Getters
 
     /**
-     * renvoie la fenêtre d'accueil de l'application
-     * @return renvoie la fenêtre d'accueil de l'application
+     * Renvoie la fenêtre d'accueil de l'application
+     * @return la fenêtre d'accueil de l'application
      */
     public Fenetre getAccueil(){
         return this.accueil;
     }
 
     /**
-     * renvoie la fenêtre actuelle
-     * @return renvoie la fenêtre actuelle
+     * Renvoie la fenêtre actuelle
+     * @return la fenêtre actuelle
      */
     public Fenetre getApp() {
         if(app == null){
@@ -86,8 +82,8 @@ public class Vue extends JFrame {
     }
 
     /**
-     * renvoie le controleur de la vue
-     * @return renvoie le controleur de la vue
+     * Renvoie le controleur de la vue
+     * @return le controleur de la vue
      */
     public Controleur getControl(){
         return control;
@@ -97,7 +93,7 @@ public class Vue extends JFrame {
     //Méthodes
     
     /**
-     * initialise la liste des images des plans
+     * Initialise la liste des images des plans
      */
     private void initListImages() {
         try {
@@ -111,7 +107,7 @@ public class Vue extends JFrame {
     }
 
     /**
-     * met à jour l'application et effectue une tache en fonction des entrées utilisateur
+     * Met à jour l'application et effectue une tache en fonction des entrées utilisateur
      * @param depart noeud de départ du chemin
      * @param arrivee noeud d'arrivée du chemin
      * @param ascenseur permission d'utiliser les ascenseurs 

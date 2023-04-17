@@ -75,11 +75,11 @@ public class MainApp extends Fenetre {
      * @param ascenseurBool état de la case cochable (true si cochée, false sinon)
      * @param lImages la liste des BufferedImage des plans du bâtiment actuel
      */
-    public MainApp(Vue view, Controleur control,String startStr, String finishStr, boolean ascenseurBool, ArrayList<BufferedImage> lImages) {
+    public MainApp(Vue view, Controleur control, String startStr, String finishStr, boolean ascenseurBool, ArrayList<BufferedImage> lImages) {
         this.control = control;
         this.view = view;
 
-        //Création  et configuration d'un panel contenant les éléments de l'application
+        //Création et configuration d'un panel contenant les éléments de l'application
         this.setLayout(new BorderLayout());
         this.setBackground(Color.WHITE);
 
@@ -120,10 +120,20 @@ public class MainApp extends Fenetre {
         return estEtagePositif(etagelabel)? etage:-etage;
     }
 
+    /**
+     * Renvoie le chemin actuel déterminé par les noeuds de départ et d'arrivée s'ils sont valides, null sinon
+     * @return le chemin actuel déterminé par les noeuds de départ et d'arrivée s'ils sont valides, null sinon
+     */
     public Chemin getChemin(){
         return cheminActuel;
     }
 
+    /**
+     * Change le chemin actuel par le chemin le plus court entre {@code depart} et {@code arrivee}
+     * @param depart
+     * @param arrivee
+     * @param ascenseur
+     */
     public void setChemin(Noeud depart, Noeud arrivee, boolean ascenseur){
         if(depart == null || arrivee == null){
             cheminActuel = null;
@@ -145,17 +155,20 @@ public class MainApp extends Fenetre {
         //Création du Panel de contrôle
         this.controlPanel = new JPanel(new GridBagLayout());
         this.controlPanel.setBackground(Color.LIGHT_GRAY);
-        
+
         //Logo
         ImageIcon logo = new ImageIcon("src/main/ressources/graphics/logos/placeholdermini.png");
         JLabel logoLabel = new JLabel(logo);
+
         //Boîtes de saisie de texte
         start = new TextFieldBox(startStr, 10, view);
         finish = new TextFieldBox(finishStr, 10, view);
+
         //Case à cocher
         ascenseur = new JCheckBox("Ascenseurs");
         ascenseur.setSelected(ascenseurBool);
         ascenseur.setHorizontalAlignment(SwingConstants.CENTER);
+
         //Bouton de recherche de chemin
         GoButton mainButton = new GoButton(view);
 
@@ -198,11 +211,9 @@ public class MainApp extends Fenetre {
         if (control.getEtageMinActuel() == 0) {
             downButton.setEnabled(false);
         }
-
         if (control.getEtageMaxActuel() == 0) {
             upButton.setEnabled(false);
         }
-        
 
         this.etagesPanel.add(upButton);
         this.etagesPanel.add(nbEtage);
@@ -242,7 +253,6 @@ public class MainApp extends Fenetre {
         indications.setEditable(false);
 
         indicationsPanel = new JScrollPane(indications);
-
         indicationsPanel.revalidate();
     }
 
@@ -272,9 +282,9 @@ public class MainApp extends Fenetre {
                 } catch (Exception exc) {
                     exc.printStackTrace();
                 }
-
             }
         });
+
         down.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -294,7 +304,6 @@ public class MainApp extends Fenetre {
                 } catch (Exception exc) {
                     exc.printStackTrace();
                 }
-
             }
         });
     }
@@ -328,7 +337,7 @@ public class MainApp extends Fenetre {
      */
     private static boolean estEtagePositif(JLabel etageLabel) {
         String texte = etageLabel.getText();
-        return texte.charAt((texte.length() - 1)) == 'e'; //Si le texte finit par e, c'est qu'il finit par étage et pas par sous-sol
+        return texte.charAt((texte.length() - 1)) == 'e'; //Si le texte finit par e, c'est qu'il finit par étage et non par sous-sol
     }
 
     /**

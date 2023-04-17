@@ -4,10 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
-import model.Noeud;
-import model.Carrefour;
-import model.Chemin;
-
 import org.junit.Test;
 
 public class TestDijkstra {
@@ -2262,4 +2258,3 @@ public class TestDijkstra {
     }
 
 }
-

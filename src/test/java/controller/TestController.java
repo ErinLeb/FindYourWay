@@ -11,9 +11,11 @@ import java.awt.GraphicsEnvironment;
 import org.junit.Test;
 
 public class TestController {
-
+    /**
+     * Test de la fenêtre d'accueil avec deux noms de salles invalides
+     */
     @Test
-    public void testAccueil1(){ // test de la fenêtre d'accueil avec deux noms de salles invalides
+    public void testAccueil1(){ 
         if(!GraphicsEnvironment.isHeadless()){
             Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
             Controleur control = new Controleur(batTest);
@@ -26,8 +28,11 @@ public class TestController {
         }
     }
 
+    /**
+     * Test de la fenêtre d'accueil avec un nom de salle invalide
+     */
     @Test
-    public void testAccueil2(){ // test de la fenêtre d'accueil avec un nom de salle invalide
+    public void testAccueil2(){ 
         if(!GraphicsEnvironment.isHeadless()){
             Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
             Controleur control = new Controleur(batTest);
@@ -40,8 +45,11 @@ public class TestController {
         }
     }
 
+    /**
+     *  Test de la fenêtre d'accueil avec un nom de salle invalide 
+     */
     @Test
-    public void testAccueil3(){ // test de la fenêtre d'accueil avec un nom de salle invalide
+    public void testAccueil3(){ 
         if(!GraphicsEnvironment.isHeadless()){
             Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
             Controleur control = new Controleur(batTest);
@@ -54,8 +62,11 @@ public class TestController {
         }
     }
 
+    /**
+     * Test de la fenêtre d'accueil avec deux noms de salles vides et pas de permission pour les ascenseurs
+     */
     @Test
-    public void testAccueil4(){ // test de la fenêtre d'accueil deux noms de salles vides et pas de permission pour les ascenseurs
+    public void testAccueil4(){ 
         if(!GraphicsEnvironment.isHeadless()){
             Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
             Controleur control = new Controleur(batTest);
@@ -69,8 +80,11 @@ public class TestController {
         }
     }
 
+    /**
+     *  Test de la fenêtre d'accueil avec deux noms de salles vides et la permission pour les ascenseurs
+     */
     @Test
-    public void testAccueil5(){ // test de la fenêtre d'accueil deux noms de salles vides et la permission pour les ascenseurs
+    public void testAccueil5(){ 
         if(!GraphicsEnvironment.isHeadless()){
             Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
             Controleur control = new Controleur(batTest);
@@ -85,8 +99,11 @@ public class TestController {
         }
     }
 
+    /**
+     * test de la fenêtre d'accueil avec un nom de salle valide et un nom de salle vide et la permission pour les ascenseurs
+     */
     @Test
-    public void testAccueil6(){ // test de la fenêtre d'accueil un nom de salle valide et un nom de salle vide et la permission pour les ascenseurs
+    public void testAccueil6(){ 
         if(!GraphicsEnvironment.isHeadless()){
             Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
             Controleur control = new Controleur(batTest);
@@ -102,8 +119,11 @@ public class TestController {
         }
     }
 
+    /**
+     * Test de la fenêtre d'accueil avec un nom de salle valide et un nom de salle vide et sans permission pour les ascenseurs
+     */
     @Test
-    public void testAccueil7(){ // test de la fenêtre d'accueil un nom de salle valide et un nom de salle vide et sans permission pour les ascenseurs
+    public void testAccueil7(){ 
         if(!GraphicsEnvironment.isHeadless()){
             Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
             Controleur control = new Controleur(batTest);
@@ -119,8 +139,11 @@ public class TestController {
         }
     }
 
+    /**
+     * Test de la fenêtre d'accueil avec deux noms de salles valides et la permission pour les ascenseurs
+     */
     @Test
-    public void testAccueil8(){ // test de la fenêtre d'accueil deux noms de salles valides et la permission pour les ascenseurs
+    public void testAccueil8(){ 
         if(!GraphicsEnvironment.isHeadless()){
             Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
             Controleur control = new Controleur(batTest);
@@ -137,8 +160,11 @@ public class TestController {
         }
     }
 
+    /**
+     * Test de l'application principale avec deux noms de salles invalides
+     */
     @Test
-    public void testMainApp1(){ // test de l'application principale avec deux noms de salles invalides
+    public void testMainApp1(){ 
         if(!GraphicsEnvironment.isHeadless()){
             Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
             Controleur control = new Controleur(batTest);
@@ -155,8 +181,11 @@ public class TestController {
         }
     }
 
+    /**
+     *  Test de l'application principale avec un nom de salle invalide
+     */
     @Test
-    public void testMainApp2(){ // test de l'application principale avec un nom de salle invalide
+    public void testMainApp2(){ 
         if(!GraphicsEnvironment.isHeadless()){
             Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
             Controleur control = new Controleur(batTest);
@@ -172,8 +201,11 @@ public class TestController {
         }
     }
 
+    /**
+     * Test de l'application principale avec un nom de salle invalide
+     */
     @Test
-    public void testMainApp3(){ // test de l'application principale avec un nom de salle invalide
+    public void testMainApp3(){ 
         if(!GraphicsEnvironment.isHeadless()){
             Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
             Controleur control = new Controleur(batTest);
@@ -189,8 +221,11 @@ public class TestController {
         }
     }
 
+    /**
+     * Test de l'application principale avec deux noms de salles vides et sans permissions pour les ascenseurs
+     */
     @Test
-    public void testMainApp4(){ // test de l'application principale avec deux noms de salles vides et sans permissions pour les ascenseurs
+    public void testMainApp4(){ 
         if(!GraphicsEnvironment.isHeadless()){
             Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
             Controleur control = new Controleur(batTest);
@@ -208,8 +243,11 @@ public class TestController {
         }
     }
 
+    /**
+     * Test de l'application principale avec un nom de salle valide et un vide et avec permission pour les ascenseurs
+     */
     @Test
-    public void testMainApp5(){ // test de l'application principale avec un nom de salle valide et un vide et avec permission pour les ascenseurs
+    public void testMainApp5(){ 
         if(!GraphicsEnvironment.isHeadless()){
             Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
             Controleur control = new Controleur(batTest);
@@ -229,8 +267,11 @@ public class TestController {
         }
     }
 
+    /**
+     * Test de l'application principale avec un nom de salle valide et un vide et avec permission pour les ascenseurs
+     */
     @Test
-    public void testMainApp6(){ // test de l'application principale avec un nom de salle valide et un vide et avec permission pour les ascenseurs
+    public void testMainApp6(){ 
         if(!GraphicsEnvironment.isHeadless()){
             Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
             Controleur control = new Controleur(batTest);
@@ -250,8 +291,11 @@ public class TestController {
         }
     }
 
+    /**
+     * Test de l'application principale avec deux noms de salles valides et sans permission pour les ascenseurs
+     */
     @Test
-    public void testMainApp7(){ // test de l'application principale avec deux noms de salles valides et sans permission pour les ascenseurs
+    public void testMainApp7(){ 
         if(!GraphicsEnvironment.isHeadless()){
             Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
             Controleur control = new Controleur(batTest);

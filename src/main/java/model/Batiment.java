@@ -7,7 +7,6 @@ public class Batiment {
     // Attributs
 
     /** 
-
      * Numéro de l'étage le plus bas
      */
     protected final int min;
@@ -66,9 +65,8 @@ public class Batiment {
 
     // Getters & setters
 
-
     /**
-     * renvoie l'étage max du bâtiment
+     * Renvoie l'étage max du bâtiment
      * @return l'étage max du bâtiment
      */
     public int getMax() {
@@ -76,7 +74,7 @@ public class Batiment {
     }
 
     /**
-     * renvoie l'étage min du bâtiment
+     * Renvoie l'étage min du bâtiment
      * @return l'étage min du bâtiment
      */
     public int getMin() {
@@ -103,9 +101,9 @@ public class Batiment {
     }
 
     /**
-     * renvoie la salle dont on a donné le nom en paramètre
+     * Renvoie la salle dont on a donné le nom en paramètre
      * @param salle nom de la salle à trouver
-     * @return renvoie la salle de nom donné en paramètre
+     * @return la salle de nom donné en paramètre
      */
     public Noeud getSalle(String salle){
         for(int i=0;i<noeuds.size();i++){
@@ -116,7 +114,6 @@ public class Batiment {
         return null;
     }
 
-    
     /**
      * Retourne le facteur multiplicatif entre le plan du batiment et la réalité
      * @return le facteur multiplicatif entre le plan du batiment et la réalité
@@ -148,19 +145,16 @@ public class Batiment {
     public boolean equals(Object o){
         if(o instanceof Batiment){
             Batiment comp = (Batiment)o;
-            
+
             if(min != comp.min || max != comp.max){
                 return false;
             }
-
             if(!(noeuds.equals(comp.noeuds))){
                 return false;
             }
-
             if(!(etages.equals(comp.etages))){
                 return false;
             }
-
             return true;
         }
         return false;
@@ -182,9 +176,9 @@ public class Batiment {
     }
 
     /**
-     * renvoie si une salle au nom donné en paramètre se trouve dans le batiment
+     * Renvoie si une salle de nom {@code nom} se trouve dans le batiment
      * @param nom nom de la salle recherchée
-     * @return renvoie true si la salle se trouve dans le batiment et faux sinon
+     * @return true si la salle se trouve dans le batiment et faux sinon
      */
     public boolean findSalle(String nom){
         for(int i = 0;i < noeuds.size();i++){

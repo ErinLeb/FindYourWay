@@ -12,9 +12,8 @@ import java.util.Map;
 public class Dijkstra {
 
     //Constructeur
-
     private Dijkstra() {
-        // Jamais instancié car classe utilitaire
+        // Jamais instanciée car classe utilitaire
     }
 
 
@@ -87,7 +86,7 @@ public class Dijkstra {
                                 || !(voisin instanceof Carrefour))
                 // si le noeud est un carrefour, pour qu'il puisse être inséré dans le chemin,
                 // il faut que ne soit pas un ascenseur, ou si c'est un ascenseur, il faut que
-                // la personne ai la permission de l'utiliser.
+                // la personne ait la permission de l'utiliser.
                 ) {
                     // on associe à chaque voisin la distance la plus courte pour arriver à ce
                     // noeud.
@@ -183,9 +182,9 @@ public class Dijkstra {
      * loin du noeud de depart.
      * 
      * @param noeuds    liste a trier
-     * @param distances information de la distance des noeud par rapport au noeud de
+     * @param distances information de la distance des noeuds par rapport au noeud de
      *                  depart
-     * @param voisin    noeud que l'on doit ranger correctement.
+     * @param voisin    noeud que l'on doit ranger correctement
      */
     private static void actualiserNoeudOrdreCroissant(List<Noeud> noeuds, Map<Noeud, Double> distances, Noeud voisin) {
         if (!(noeuds.isEmpty())) {
@@ -205,18 +204,18 @@ public class Dijkstra {
      * @return la liste qui contient le chemin le plus court.
      */
     private static Chemin reconstruireChemin(Map<Noeud, Noeud> predecesseurs, Noeud debut, Noeud fin) {
-        // initialise la liste qui contiendra les noeuds à parcourir.
+        // initialise la liste qui contiendra les noeuds à parcourir
         Chemin chemin = new Chemin();
-        // on démarre le chemin par la fin.
+        // on démarre le chemin par la fin
         Noeud noeudActuel = fin;
-        // tant qu'on est pas arrivé au noeud de départ.
+        // tant qu'on est pas arrivé au noeud de départ
         while (noeudActuel != debut) {
             // on ajoute le noeud actuel à la liste
             chemin.addNoeud(noeudActuel);
-            // on ajoute le prédécesseur le moins loin du noeud de départ.
+            // on ajoute le prédécesseur le moins loin du noeud de départ
             noeudActuel = predecesseurs.get(noeudActuel);
         }
-        // on ajoute le noeud de départ à la fin.
+        // on ajoute le noeud de départ à la fin
         chemin.addNoeud(noeudActuel);
         // on retourne la liste pour l'avoir dans le bon ordre
         chemin.reverse();

@@ -67,7 +67,7 @@ public class TestParseur {
         batiment.add(c4);
 
         
-        //on compare les éléments créés et les évènements attendus
+        //on compare les éléments créés aux évènements attendus
 
         //on compare les listes de noeuds des étages un à un
         checkListeNoeuds(etage0, bat.getEtage(0).getNoeuds());
@@ -136,7 +136,7 @@ public class TestParseur {
         p.createNoeuds(); //déjà testée
         p.initVoisins(); //fonction que l'on teste
         
-        //on compare les éléments créés et les évènements attendus
+        //on compare les éléments créés aux évènements attendus
         for(int i = 0; i<batiment.size(); i++){
             Noeud reel = bat.getNoeud(i);
             Noeud attendu = batiment.get(i);

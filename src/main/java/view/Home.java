@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 
 import controller.Controleur;
 
+
 /**
  * Le menu d'accueil de l'application
  */
@@ -25,7 +26,6 @@ public class Home extends Fenetre {
      * Le JLabel contenant le logo
      */
     private JLabel logoLabel;
-
     
 
     //Constructeur 
@@ -65,7 +65,7 @@ public class Home extends Fenetre {
     //Méthodes
 
     /**
-     * initialise le controlPanel
+     * Initialise le controlPanel
      */
     private void initControlPanel() {
         //Création des deux champs de saisie de texte
@@ -89,7 +89,5 @@ public class Home extends Fenetre {
         controlPanel.add(inputPanel, BorderLayout.NORTH);
         controlPanel.add(buttonPanel, BorderLayout.SOUTH);
         controlPanel.add(ascenseur, BorderLayout.CENTER);
-
     }
-
 }

@@ -14,10 +14,9 @@ public class Carrefour extends Noeud {
     public final boolean isAscenseur;
 
      /**
-     * Coordonées ou sera affiché le noeud dans la vue.
+     * Coordonées où sera affiché le noeud dans la vue
      */
-    private double x;
-    private double y;
+    private double x, y;
     
 
     // Constructeur
@@ -49,23 +48,28 @@ public class Carrefour extends Noeud {
         this(isAscenseur, etage, batiment, 0, 0);
     }
 
+
     // Getters & setters
 
+    /**
+     * Renvoie l'étage du carrefour
+     * @return l'étage du carrefour
+     */
     public int getEtage() {
         return etage;
     }
 
     /**
-     * renvoie la coordonnée en x du carrefour pour l'affichage
-     * @return renvoie la coordonnée en x du carrefour pour l'affichage
+     * Renvoie la coordonnée en x du carrefour pour l'affichage
+     * @return la coordonnée en x du carrefour pour l'affichage
      */
     public double getX(){
         return x;
     }
 
     /**
-     * renvoie la coordonnée en y du carrefour pour l'affichage
-     * @return renvoie la coordonnée en y du carrefour pour l'affichage
+     * Renvoie la coordonnée en y du carrefour pour l'affichage
+     * @return la coordonnée en y du carrefour pour l'affichage
      */
     public double getY(){
         return y;
@@ -89,11 +93,9 @@ public class Carrefour extends Noeud {
 
         if (o instanceof Carrefour) {
             Carrefour comp = (Carrefour) o;
-
             if (etage != comp.etage) {
                 return false;
             }
-
             if (isAscenseur != comp.isAscenseur) {
                 return false;
             }
@@ -110,5 +112,4 @@ public class Carrefour extends Noeud {
         }
         return id + " Carrefour à l'étage " + etage + ", x : " + x + ", y = " + y;
     }
-
 }

@@ -8,18 +8,19 @@ public class Salle extends Noeud {
      */
     public final String nom;
 
-    // Constructeurs
 
+    // Constructeurs
     public Salle(String nom, Batiment bat) {
         super(bat);
         this.nom = nom;
     }
 
-    // Getters & setters
 
+    // Getters & setters
     public String getNom() {
         return nom;
     }
+
 
     // Méthodes
 
@@ -43,5 +44,4 @@ public class Salle extends Noeud {
 
         return false;
     }
-
 }

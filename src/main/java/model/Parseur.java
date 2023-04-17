@@ -13,13 +13,12 @@ public class Parseur {
     private String path; 
 
     /**
-     * le batîment que l'on veut remplir
+     * le batiment que l'on veut remplir
      */
     private Batiment bat;
 
 
     // Constructeur
-
     public Parseur(Batiment bat, String path) { 
         this.bat = bat;
         this.path = path;
@@ -32,7 +31,6 @@ public class Parseur {
      * Permet d'ajouter à {@code batiment} des noeuds en lisant un fichier .csv contenant les informations des noeuds
      */
     public void createNoeuds(){
-
         // on initialise le scanner
         Scanner sc = null;
         try {
@@ -50,13 +48,13 @@ public class Parseur {
         while (sc.hasNext()) {
             String[] line = sc.nextLine().split(";");
             if (line[0].equals("")) { //si on a un nouvel étage
-                etage = Integer.parseInt(line[1]); // etage du noeud
-
+                etage = Integer.parseInt(line[1]); 
+            
             }else{
-                if(line[0].equals("salle")){ //si c'est une salle
+                if(line[0].equals("salle")){
                     current = new Salle(line[1], bat);
 
-                }else if (line[0].equals("carrefour")) { // si c'est un carrefour
+                }else if (line[0].equals("carrefour")) { 
                     Double x = 0.0;
                     Double y = 0.0;
                     if (line.length > 2 && line[2].length() != 0) {
@@ -71,11 +69,10 @@ public class Parseur {
                         current = new Carrefour(false, etage, bat, x, y);
                     }
 
-                }else{ //sinon ce n'est pas valide, on passe au noeud suivant
+                }else{ //noeud pas valide, on passe au noeud suivant
                     continue;
                 }
 
-                //on ajoute le noeud
                 bat.addNoeud(current);            
             }
         }
@@ -86,7 +83,6 @@ public class Parseur {
      * Permet de lier les noeuds de {@code batiment} entre eux en lisant un fichier .csv contenant les informations des voisins
      */
     public void initVoisins() {
-
         // on initialise le scanner
         Scanner sc = null;
         try {
@@ -116,5 +112,4 @@ public class Parseur {
 
         sc.close();
     }
-
 }

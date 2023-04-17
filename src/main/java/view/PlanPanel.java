@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.BasicStroke;
 import java.awt.Color;
-
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelListener;
@@ -14,9 +13,8 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
-import java.util.List;
-
 import javax.swing.JPanel;
+import java.util.List;
 
 import model.Carrefour;
 import model.Noeud;
@@ -37,19 +35,18 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
      */
     private BufferedImage planActuel;
 
-
     /**
-     * coordonnée de notre vision de l'image
+     * Coordonnées de notre vision de l'image
      */
     private int viewX, viewY;
 
     /**
-     * échelle du zoom de l'image
+     * Echelle du zoom de l'image
      */
     private double scale;
 
     /**
-     * le niveau maximal du dézoom
+     * Niveau maximal du dézoom
      */
     private double maxScale;
 
@@ -59,7 +56,7 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
     /**
      * Construit le panel avec la première image
      * @param plan le premier plan par défaut
-     * @param app la MainApp à laquelle ce panel est relié
+     * @param app le MainApp auquel ce panel est relié
      */
     public PlanPanel(BufferedImage plan, MainApp app) {
         this.app = app;
@@ -93,7 +90,7 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
     //Setters
     
     /**
-     * change l'image affichée
+     * Change l'image affichée
      * @param newImage la nouvelle image
      */
     public void setImage(BufferedImage newImage) {
@@ -106,7 +103,7 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
     //Méthodes
 
     /**
-     * appelée à chaque <code>repaint()</code>, permet de redessiner le plan sur le Panel
+     * Appelée à chaque <code>repaint()</code>, permet de redessiner le plan sur le Panel
      */
     @Override
     protected void paintComponent(Graphics g) {
@@ -223,9 +220,7 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
                             //S'il fait partie du bon étage on relie les deux points
                             g2d.drawLine((int) Math.round(carr1.getX()*scale), (int) Math.round(carr1.getY()*scale), (int) Math.round(carr2.getX()*scale), (int) Math.round(carr2.getY()*scale));
                         }
-                        
                     }
-                    
                 }
             }
         }

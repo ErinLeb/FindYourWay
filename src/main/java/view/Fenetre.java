@@ -4,17 +4,20 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import controller.Controleur;
 
+
 /**
- * classe abstraite correspondant à une fenêtre de l'interface graphique (menu d'accueil ou application)
+ * Classe abstraite correspondant à une fenêtre de l'interface graphique (menu d'accueil ou application)
  */
 public abstract class Fenetre extends JPanel{
+    //Attributs
+
     /**
      * Le panel avec lequel on peut interagir
      */
     protected JPanel controlPanel;
     
     /**
-     * la fenêtre de l'app
+     * La fenêtre de l'app
      */
     protected Vue view;
 
@@ -24,47 +27,50 @@ public abstract class Fenetre extends JPanel{
     protected Controleur control;
 
     /**
-     * champ de saisie de la salle de départ
+     * Champ de saisie de la salle de départ
      */
     protected TextFieldBox start;
 
     /**
-     * champ de saisie de la salle d'arrivée
+     * Champ de saisie de la salle d'arrivée
      */
     protected TextFieldBox finish;
 
     /**
-     * case cochable indiquant si on souhaite utiliser les ascenseurs ou      
+     * Case cochable indiquant si on souhaite utiliser les ascenseurs ou non   
      */
     protected JCheckBox ascenseur;
 
+
+    //Getters 
+
     /**
-     * renvoie le controleur
-     * @return renvoie le controleur
+     * Renvoie le controleur
+     * @return le controleur
      */
     public Controleur getControl(){
         return control;
     }
 
     /**
-     * renvoie le champ de saisie de la salle de départ
-     * @return renvoie le champ de saisie de la salle de départ
+     * Renvoie le champ de saisie de la salle de départ
+     * @return le champ de saisie de la salle de départ
      */
     public TextFieldBox getStart(){
         return start;
     }
 
     /**
-     * renvoie le champ de saisie de la salle d'arrivée
-     * @return renvoie le champ de saisie de la salle d'arrivée
+     * Renvoie le champ de saisie de la salle d'arrivée
+     * @return le champ de saisie de la salle d'arrivée
      */
     public TextFieldBox getFinish(){
         return finish;
     }
 
     /**
-     * renvoie la case cochable pour les ascenseurs
-     * @return renvoie la case cochable pour les ascenseurs
+     * Renvoie la case cochable pour les ascenseurs
+     * @return la case cochable pour les ascenseurs
      */
     public JCheckBox getAscenseur(){
         return ascenseur;

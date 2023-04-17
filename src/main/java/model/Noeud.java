@@ -27,8 +27,8 @@ public abstract class Noeud {
      */
     protected HashMap<Noeud, Double> voisins;
 
-    // Constructeur
 
+    // Constructeur
     protected Noeud(Batiment batiment) {
         this.id = nbNoeud;
         nbNoeud++;
@@ -44,7 +44,7 @@ public abstract class Noeud {
     /**
      * Renvoie l'identifiant du noeud
      * 
-     * @return renvoie l'identifiant du noeud
+     * @return l'identifiant du noeud
      */
     public int getId() {
         return id;
@@ -62,7 +62,7 @@ public abstract class Noeud {
     /**
      * Renvoie le dictionnaire des voisins du noeud avec leur distance
      * 
-     * @return renvoie le dictionnaire des voisins du noeud avec leur distance
+     * @return le dictionnaire des voisins du noeud avec leur distance
      */
     public Map<Noeud, Double> getVoisins() {
         return voisins;
@@ -78,15 +78,14 @@ public abstract class Noeud {
     public Noeud getVoisin(int id) {
         // on parcourt la map
         for (Map.Entry mapentry : voisins.entrySet()) {
-
             Noeud current = (Noeud) (mapentry.getKey());
-
             if (current.id == id) {
                 return current;
             }
         }
         return null;
     }
+
 
     // Méthodes
 
@@ -114,7 +113,6 @@ public abstract class Noeud {
      * @return
      */
     public boolean compareVoisins(Noeud n) {
-        // si les noeuds n'ont pas le même nombre de voisins
         if (voisins.size() != n.voisins.size()) {
             return false;
         }
@@ -124,8 +122,8 @@ public abstract class Noeud {
 
             Noeud noeudCourant = (Noeud) mapentry.getKey();
             Double distCourante = (Double) mapentry.getValue();
-            // pour chaque voisin, on regarde s'il y est dans la map de n
 
+            // pour chaque voisin, on regarde s'il est dans la map de n
             boolean there = false;
             for (Map.Entry mapentryBis : n.voisins.entrySet()) {
                 Noeud noeudComp = (Noeud) mapentryBis.getKey();

@@ -18,7 +18,6 @@ public class Etage{
 
 
     // Constructeur
-    
     public Etage(int nom){
         noeuds = new ArrayList<>();
 

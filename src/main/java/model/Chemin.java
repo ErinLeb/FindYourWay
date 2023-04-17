@@ -83,18 +83,23 @@ public class Chemin {
     }
 
 
-    /*Représente le segment d'un carrefour à un autre
+    //Classe interne statique
+
+    /*
+     * Représente le segment d'un carrefour à un autre
      */
     static class Segment{
+        //Attributs
         /*Noeuds du segment */
         protected Carrefour n1, n2;
         /*Indique la direction du segment */
         protected boolean horizontal;
         /*Indique le nombre d'étages qui séparent les noeuds */
         protected int diffEtage;
-        /*Distance signée entre n1 et n2 selon sa direction */
+        /*Distance entre n1 et n2 selon sa direction */
         protected double distance;
 
+        //Constructeur
         public Segment(Carrefour n1, Carrefour n2){
             this.n1 = n1;
             this.n2 = n2;
@@ -102,6 +107,9 @@ public class Chemin {
             initDirection();
             initDistance();
         }
+
+        //Méthodes
+
         /*Détermine si le segment est horizontal ou vertical */
         private void initDirection(){
             if(Math.abs(n2.getX()-n1.getX()) >= Math.abs(n2.getY()-n1.getY())){
@@ -110,6 +118,7 @@ public class Chemin {
                 horizontal = false;
             }
         }
+
         /*Calcule la distance entre les deux noeuds selon la direction du segment */
         private void initDistance(){
             double abs = Math.pow(n2.getX()-n1.getX(), 2);
@@ -120,6 +129,15 @@ public class Chemin {
 
 
     // Méthodes
+
+    @Override
+    public boolean equals(Object o) {
+        if(!(o instanceof Chemin)){
+            return false;
+        }
+        Chemin c = (Chemin)o;
+        return this.noeuds.equals(c.noeuds) && this.distance == c.distance;
+    }
 
     /**
      * Met à jour les indications correspondant au chemin
@@ -155,7 +173,9 @@ public class Chemin {
                 s2 = new Segment(s1.n2, (Carrefour)noeuds.get(i));    
             }
 
-            //On va changer d'étage
+            //Liste des cas de figure :
+
+            //on va changer d'étage
             if(s1.diffEtage == 0 && s2.diffEtage != 0){
                 comptDist += s1.distance;
                 if(comptDist >= minDist){
@@ -186,6 +206,7 @@ public class Chemin {
                 }
                 comptEtage = 0;
             }
+
             //si on reste sur le même étage
 
             //si on est sur une ligne droite
@@ -199,6 +220,7 @@ public class Chemin {
                     }
                 }
             }
+
             //si on tourne
             else{
                 comptDist += Math.abs(s1.distance);
@@ -210,6 +232,7 @@ public class Chemin {
                 comptDist = 0;
                 
                 //on gère les différents cas
+
                 //on est à l'horizontal sur le plan
                 if(s1.horizontal){
                     if(s1.n1.getX()<s1.n2.getX()){ // --->
@@ -248,6 +271,10 @@ public class Chemin {
         indications += "Vous êtes arrivé !\n";
     }
 
+    /**
+     * Ajoute le noeud {@code n} au chemin et met à jour les indications
+     * @param n
+     */
     public void addNoeud(Noeud n) {
         if (!noeuds.isEmpty()) {
             distance += n.getVoisins().get(noeuds.get(noeuds.size() - 1));
@@ -260,33 +287,27 @@ public class Chemin {
         updateIndications();
     }
 
+    /**
+     * Renverse le chemin
+     */
     public void reverse() {
         Collections.reverse(noeuds);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if(!(o instanceof Chemin)){
-            return false;
-        }
-        Chemin c = (Chemin)o;
-        return this.noeuds.equals(c.noeuds) && this.distance == c.distance;
-    }
-
     /**
-     * Retourne la distance en mètres correspondant à la distance sur le plan
+     * Retourne la distance en mètres correspondant à la distance sur le plan, selon l'échelle du batiment
      * @param dist
-     * @return
+     * @return la distance en mètres correspondant à la distance sur le plan, selon l'échelle du batiment
      */
     private String conversionMetres(double dist){
         return conversionMetres(dist, bat.getEchelle());
     }
 
     /**
-     * Retourne la distance en mètres correspondant à l'échelle
+     * Retourne la distance en mètres correspondant {@code echelle}
      * @param dist
      * @param echelle
-     * @return
+     * @return la distance en mètres correspondant à l'échelle
      */
     protected static String conversionMetres(double dist, double echelle){
         String res = "";

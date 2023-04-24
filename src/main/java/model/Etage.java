@@ -11,6 +11,8 @@ public class Etage{
      */
     public final int nom;
 
+    private final Batiment bat;
+
     /**
      * Liste des noeuds de l'étage
      */
@@ -18,10 +20,12 @@ public class Etage{
 
 
     // Constructeur
-    public Etage(int nom){
+    
+    public Etage(int nom, Batiment bat){
         noeuds = new ArrayList<>();
 
         this.nom = nom;
+        this.bat = bat;
     }
 
 

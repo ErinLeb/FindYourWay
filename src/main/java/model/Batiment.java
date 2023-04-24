@@ -9,6 +9,11 @@ public class Batiment {
     // Attributs
 
     /**
+     * Nom du batiment
+     */
+    protected String nom;
+
+    /** 
      * Numéro de l'étage le plus bas
      */
     protected final int min;
@@ -17,6 +22,16 @@ public class Batiment {
      * Numéro de l'étage le plus haut
      */
     protected final int max;
+
+    /**
+     * Path des csv des noeuds du batiment
+     */
+    protected final String pathNoeuds;
+
+     /**
+     * Path des plans du batiment
+     */
+    protected final String pathPlans;
 
     /**
      * Liste des étages du Batiment
@@ -47,21 +62,25 @@ public class Batiment {
 
     // Constructeur
     /**
-     * 
+     * @param nom  nom du batiment 
      * @param min  l'étage le plus bas
      * @param max  l'étage le plus haut
      * @param path le chemin absolu du répertoire dans le dossier contenant les csv
      *             du batiment
      */
-    public Batiment(int min, int max, String path) {
+    public Batiment(String nom, int min, int max, String pathNoeuds, String pathPlans) {
+        this.nom = nom;
         this.max = max;
         this.min = min;
+        this.pathNoeuds = pathNoeuds;
+        this.pathPlans = pathPlans;
+
 
         for (int i = min; i <= max; i++) {
-            etages.add(new Etage(i));
+            etages.add(new Etage(i, this));
         }
 
-        Parseur parseur = new Parseur(this, path);
+        Parseur parseur = new Parseur(this, pathNoeuds);
 
         // on crée les noeuds
         parseur.createNoeuds();
@@ -73,7 +92,26 @@ public class Batiment {
         this.viewFavoris = new FavorisView();
     }
 
+    /**
+     * @param min  l'étage le plus bas
+     * @param max  l'étage le plus haut
+     * @param path le chemin absolu du répertoire dans le dossier contenant les csv
+     *             du batiment
+     */
+    public Batiment(int min, int max, String pathNoeuds){
+        this("", min, max, pathNoeuds, ""); 
+    }
+
+
     // Getters & setters
+
+    /**
+     * Renvoie le nom du batiment
+     * @return le nom du batiment
+     */
+    public String getNom(){
+        return nom;
+    }
 
     /**
      * Renvoie l'étage max du bâtiment
@@ -91,6 +129,22 @@ public class Batiment {
      */
     public int getMin() {
         return this.min;
+    }
+
+    /**
+     * Renvoie le path des csv des noeuds du batiment
+     * @return le path des csv des noeuds du batiment
+     */
+    public String getPathNoeuds(){
+        return this.pathNoeuds;
+    }
+
+    /**
+     * Renvoie le path des plans du batiment
+     * @return le path des plans du batiment
+     */
+    public String getPathPlans(){
+        return this.pathPlans;
     }
 
     /**
@@ -180,7 +234,10 @@ public class Batiment {
         if (o instanceof Batiment) {
             Batiment comp = (Batiment) o;
 
-            if (min != comp.min || max != comp.max) {
+            if(!nom.equals(comp.nom)){
+                return false;
+            }
+            if(min != comp.min || max != comp.max){
                 return false;
             }
             if (!(noeuds.equals(comp.noeuds))) {
@@ -226,4 +283,8 @@ public class Batiment {
         return false;
     }
 
+    @Override
+    public String toString(){
+        return nom;
+    }
 }

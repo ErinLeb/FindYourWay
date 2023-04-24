@@ -91,15 +91,26 @@ public class Vue extends JFrame {
 
 
     //Méthodes
+
+    /**
+     * Met app à null et retourne sur la fenêtre d'accueil
+     */
+    public void resetApp(){
+        this.app = null;
+        this.setContentPane(accueil);
+        repaint();
+        setVisible(true);
+    }
     
     /**
      * Initialise la liste des images des plans
      */
-    private void initListImages() {
+    public void initListImages() {
         try {
             listImages = new ArrayList<BufferedImage>();
             for (int i = control.getEtageMinActuel(); i <= control.getEtageMaxActuel(); i++) {
-                listImages.add(ImageIO.read(new File("src/main/ressources/graphics/plans/etage"+i+".jpg")));
+                String pathBatplan = control.getBatiment().getPathPlans();
+                listImages.add(ImageIO.read(new File(pathBatplan + "/etage"+i+".jpg"))); 
             }
         } catch (Exception e) {
             e.printStackTrace();

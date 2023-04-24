@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import view.Fenetre;
-import model.Batiment;
 
 import java.awt.GraphicsEnvironment;
 
@@ -17,8 +16,7 @@ public class TestController {
     @Test
     public void testAccueil1(){ 
         if(!GraphicsEnvironment.isHeadless()){
-            Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
-            Controleur control = new Controleur(batTest);
+            Controleur control = new Controleur();
             control.getVue().setVisible(false);
             control.getVue().getApp().getStart().setText("Salle Invalide");
             control.getVue().getApp().getFinish().setText("Salle Invalide");
@@ -34,8 +32,7 @@ public class TestController {
     @Test
     public void testAccueil2(){ 
         if(!GraphicsEnvironment.isHeadless()){
-            Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
-            Controleur control = new Controleur(batTest);
+            Controleur control = new Controleur();
             control.getVue().setVisible(false);
             control.getVue().getApp().getStart().setText("308");
             control.getVue().getApp().getFinish().setText("Salle Invalide");
@@ -51,8 +48,7 @@ public class TestController {
     @Test
     public void testAccueil3(){ 
         if(!GraphicsEnvironment.isHeadless()){
-            Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
-            Controleur control = new Controleur(batTest);
+            Controleur control = new Controleur();
             control.getVue().setVisible(false);
             control.getVue().getApp().getStart().setText("Salle invalide");
             control.getVue().getApp().getFinish().setText("308");
@@ -68,8 +64,7 @@ public class TestController {
     @Test
     public void testAccueil4(){ 
         if(!GraphicsEnvironment.isHeadless()){
-            Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
-            Controleur control = new Controleur(batTest);
+            Controleur control = new Controleur();
             control.getVue().setVisible(false);
             control.majApp();
             control.getVue().setVisible(false);
@@ -86,8 +81,7 @@ public class TestController {
     @Test
     public void testAccueil5(){ 
         if(!GraphicsEnvironment.isHeadless()){
-            Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
-            Controleur control = new Controleur(batTest);
+            Controleur control = new Controleur();
             control.getVue().setVisible(false);
             control.getVue().getApp().getAscenseur().setSelected(true);
             control.majApp();
@@ -105,15 +99,14 @@ public class TestController {
     @Test
     public void testAccueil6(){ 
         if(!GraphicsEnvironment.isHeadless()){
-            Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
-            Controleur control = new Controleur(batTest);
+            Controleur control = new Controleur();
             control.getVue().setVisible(false);
             control.getVue().getApp().getAscenseur().setSelected(true);
-            control.getVue().getApp().getStart().setText("308");
+            control.getVue().getApp().getStart().setText("2A");
             control.majApp();
             control.getVue().setVisible(false);
-            assertTrue(control.getVue().getAccueil()!=control.getVue().getApp());
-            assertTrue(control.getVue().getApp().getStart().getText().equals("308"));
+            assertTrue(control.getVue().getAccueil() != control.getVue().getApp());
+            assertTrue(control.getVue().getApp().getStart().getText().equals("2A"));
             assertTrue(control.getVue().getApp().getFinish().getText().equals("Arrivée"));
             assertTrue(control.getVue().getApp().getAscenseur().isSelected());
         }
@@ -125,16 +118,15 @@ public class TestController {
     @Test
     public void testAccueil7(){ 
         if(!GraphicsEnvironment.isHeadless()){
-            Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
-            Controleur control = new Controleur(batTest);
+            Controleur control = new Controleur();
             control.getVue().setVisible(false);
             control.getVue().getApp().getAscenseur().setSelected(false);
-            control.getVue().getApp().getFinish().setText("308");
+            control.getVue().getApp().getFinish().setText("2A");
             control.majApp();
             control.getVue().setVisible(false);
             assertTrue(control.getVue().getAccueil()!=control.getVue().getApp());
             assertTrue(control.getVue().getApp().getStart().getText().equals("Départ"));
-            assertTrue(control.getVue().getApp().getFinish().getText().equals("308"));
+            assertTrue(control.getVue().getApp().getFinish().getText().equals("2A"));
             assertTrue(!control.getVue().getApp().getAscenseur().isSelected());
         }
     }
@@ -145,17 +137,16 @@ public class TestController {
     @Test
     public void testAccueil8(){ 
         if(!GraphicsEnvironment.isHeadless()){
-            Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
-            Controleur control = new Controleur(batTest);
+            Controleur control = new Controleur();
             control.getVue().setVisible(false);
             control.getVue().getApp().getAscenseur().setSelected(true);
-            control.getVue().getApp().getStart().setText("308");
-            control.getVue().getApp().getFinish().setText("205");
+            control.getVue().getApp().getStart().setText("2A");
+            control.getVue().getApp().getFinish().setText("5C");
             control.majApp();
             control.getVue().setVisible(false);
             assertTrue(control.getVue().getAccueil()!=control.getVue().getApp());
-            assertTrue(control.getVue().getApp().getStart().getText().equals("308"));
-            assertTrue(control.getVue().getApp().getFinish().getText().equals("205"));
+            assertTrue(control.getVue().getApp().getStart().getText().equals("2A"));
+            assertTrue(control.getVue().getApp().getFinish().getText().equals("5C"));
             assertTrue(control.getVue().getApp().getAscenseur().isSelected());
         }
     }
@@ -166,8 +157,7 @@ public class TestController {
     @Test
     public void testMainApp1(){ 
         if(!GraphicsEnvironment.isHeadless()){
-            Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
-            Controleur control = new Controleur(batTest);
+            Controleur control = new Controleur();
             control.getVue().setVisible(false);
             control.majApp();
             control.getVue().setVisible(false);
@@ -187,8 +177,7 @@ public class TestController {
     @Test
     public void testMainApp2(){ 
         if(!GraphicsEnvironment.isHeadless()){
-            Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
-            Controleur control = new Controleur(batTest);
+            Controleur control = new Controleur();
             control.getVue().setVisible(false);
             control.majApp();
             control.getVue().setVisible(false);
@@ -207,8 +196,7 @@ public class TestController {
     @Test
     public void testMainApp3(){ 
         if(!GraphicsEnvironment.isHeadless()){
-            Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
-            Controleur control = new Controleur(batTest);
+            Controleur control = new Controleur();
             control.getVue().setVisible(false);
             control.majApp();
             control.getVue().setVisible(false);
@@ -227,8 +215,7 @@ public class TestController {
     @Test
     public void testMainApp4(){ 
         if(!GraphicsEnvironment.isHeadless()){
-            Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
-            Controleur control = new Controleur(batTest);
+            Controleur control = new Controleur();
             control.getVue().setVisible(false);
             control.majApp();
             control.getVue().setVisible(false);
@@ -249,19 +236,18 @@ public class TestController {
     @Test
     public void testMainApp5(){ 
         if(!GraphicsEnvironment.isHeadless()){
-            Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
-            Controleur control = new Controleur(batTest);
+            Controleur control = new Controleur();
             control.getVue().setVisible(false);
             control.majApp();
             control.getVue().setVisible(false);
             Fenetre oldApp = control.getVue().getApp();
-            control.getVue().getApp().getStart().setText("308");
+            control.getVue().getApp().getStart().setText("2A");
             control.getVue().getApp().getAscenseur().setSelected(true);
             control.majApp();
             control.getVue().setVisible(false);
             assertTrue(control.getVue().getApp()!=control.getVue().getAccueil());
             assertTrue(control.getVue().getApp()!=oldApp);
-            assertTrue(control.getVue().getApp().getStart().getText().equals("308"));
+            assertTrue(control.getVue().getApp().getStart().getText().equals("2A"));
             assertTrue(control.getVue().getApp().getFinish().getText().equals("Arrivée"));
             assertTrue(control.getVue().getApp().getAscenseur().isSelected());
         }
@@ -273,20 +259,19 @@ public class TestController {
     @Test
     public void testMainApp6(){ 
         if(!GraphicsEnvironment.isHeadless()){
-            Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
-            Controleur control = new Controleur(batTest);
+            Controleur control = new Controleur();
             control.getVue().setVisible(false);
             control.majApp();
             control.getVue().setVisible(false);
             Fenetre oldApp = control.getVue().getApp();
-            control.getVue().getApp().getFinish().setText("308");
+            control.getVue().getApp().getFinish().setText("2A");
             control.getVue().getApp().getAscenseur().setSelected(true);
             control.majApp();
             control.getVue().setVisible(false);
             assertTrue(control.getVue().getApp()!=control.getVue().getAccueil());
             assertTrue(control.getVue().getApp()!=oldApp);
             assertTrue(control.getVue().getApp().getStart().getText().equals("Départ"));
-            assertTrue(control.getVue().getApp().getFinish().getText().equals("308"));
+            assertTrue(control.getVue().getApp().getFinish().getText().equals("2A"));
             assertTrue(control.getVue().getApp().getAscenseur().isSelected());
         }
     }
@@ -297,20 +282,19 @@ public class TestController {
     @Test
     public void testMainApp7(){ 
         if(!GraphicsEnvironment.isHeadless()){
-            Batiment batTest = new Batiment(0, 5, "src/main/ressources/csv/test/");
-            Controleur control = new Controleur(batTest);
+            Controleur control = new Controleur();
             control.getVue().setVisible(false);
             control.majApp();
             control.getVue().setVisible(false);
             Fenetre oldApp = control.getVue().getApp();
-            control.getVue().getApp().getStart().setText("205");
-            control.getVue().getApp().getFinish().setText("308");
+            control.getVue().getApp().getStart().setText("2A");
+            control.getVue().getApp().getFinish().setText("5C");
             control.majApp();
             control.getVue().setVisible(false);
             assertTrue(control.getVue().getApp()!=control.getVue().getAccueil());
             assertTrue(control.getVue().getApp()!=oldApp);
-            assertTrue(control.getVue().getApp().getStart().getText().equals("205"));
-            assertTrue(control.getVue().getApp().getFinish().getText().equals("308"));
+            assertTrue(control.getVue().getApp().getStart().getText().equals("2A"));
+            assertTrue(control.getVue().getApp().getFinish().getText().equals("5C"));
             assertTrue(!control.getVue().getApp().getAscenseur().isSelected());
         }
     }

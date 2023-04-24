@@ -116,9 +116,12 @@ public class Chemin {
             initDistance();
         }
 
+
         //Méthodes
 
-        /*Détermine si le segment est horizontal ou vertical */
+        /**
+         * Détermine si le segment est horizontal ou vertical 
+         */
         private void initDirection(){
             if(Math.abs(n2.getX()-n1.getX()) >= Math.abs(n2.getY()-n1.getY())){
                 horizontal = true;
@@ -127,7 +130,9 @@ public class Chemin {
             }
         }
 
-        /*Calcule la distance entre les deux noeuds selon la direction du segment */
+        /**
+         *Calcule la distance entre les deux noeuds selon la direction du segment 
+         */
         private void initDistance(){
             double abs = Math.pow(n2.getX()-n1.getX(), 2);
             double ord = Math.pow(n2.getY()-n1.getY(), 2);

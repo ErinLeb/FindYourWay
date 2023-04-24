@@ -14,12 +14,11 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JPanel;
-import java.util.List;
 
+import java.util.ArrayList;
+import java.util.List;
 import model.Carrefour;
 import model.Noeud;
 

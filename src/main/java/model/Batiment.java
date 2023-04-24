@@ -3,10 +3,12 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import view.FavorisView;
+
 public class Batiment {
     // Attributs
 
-    /** 
+    /**
      * Numéro de l'étage le plus bas
      */
     protected final int min;
@@ -27,15 +29,21 @@ public class Batiment {
     public final List<Noeud> noeuds = new ArrayList<>();
 
     /**
-     * Nombre de noeuds dans le batiment, incrémenté à chaque ajout de noeud au batiment
+     * Nombre de noeuds dans le batiment, incrémenté à chaque ajout de noeud au
+     * batiment
      */
-    private int nbNoeuds = 0; 
+    private int nbNoeuds = 0;
 
     /*
      * Facteur multiplicatif entre le plan et la réalité
      */
     private double echelle = 0.3333;
 
+    /**
+     * Element favoris
+     */
+    private FavorisModel modelFavoris;
+    private FavorisView viewFavoris;
 
     // Constructeur
     /**
@@ -60,13 +68,16 @@ public class Batiment {
 
         // on crée les liens entre les noeuds
         parseur.initVoisins();
-    }
 
+        this.modelFavoris = new FavorisModel();
+        this.viewFavoris = new FavorisView();
+    }
 
     // Getters & setters
 
     /**
      * Renvoie l'étage max du bâtiment
+     * 
      * @return l'étage max du bâtiment
      */
     public int getMax() {
@@ -75,6 +86,7 @@ public class Batiment {
 
     /**
      * Renvoie l'étage min du bâtiment
+     * 
      * @return l'étage min du bâtiment
      */
     public int getMin() {
@@ -102,12 +114,14 @@ public class Batiment {
 
     /**
      * Renvoie la salle dont on a donné le nom en paramètre
+     * 
      * @param salle nom de la salle à trouver
      * @return la salle de nom donné en paramètre
      */
-    public Noeud getSalle(String salle){
-        for(int i=0;i<noeuds.size();i++){
-            if((noeuds.get(i) instanceof Salle) && ((((Salle) noeuds.get(i)).getNom().equalsIgnoreCase(salle)) || (salle.equalsIgnoreCase("cafe") && ((Salle) noeuds.get(i)).getNom().equalsIgnoreCase("café")))){
+    public Noeud getSalle(String salle) {
+        for (int i = 0; i < noeuds.size(); i++) {
+            if ((noeuds.get(i) instanceof Salle) && ((((Salle) noeuds.get(i)).getNom().equalsIgnoreCase(salle))
+                    || (salle.equalsIgnoreCase("cafe") && ((Salle) noeuds.get(i)).getNom().equalsIgnoreCase("café")))) {
                 return noeuds.get(i);
             }
         }
@@ -116,43 +130,63 @@ public class Batiment {
 
     /**
      * Retourne le facteur multiplicatif entre le plan du batiment et la réalité
+     * 
      * @return le facteur multiplicatif entre le plan du batiment et la réalité
      */
-    public double getEchelle(){
+    public double getEchelle() {
         return echelle;
     }
 
     /**
+     * Renvoie la view des éléments favoris.
+     * 
+     * @return la view des éléments favoris.
+     */
+    public FavorisView getViewFavoris() {
+        return viewFavoris;
+    }
+
+    /**
+     * Renvoie le modèle des éléments favoris.
+     * 
+     * @return le modèle des éléments favoris.
+     */
+    public FavorisModel getModelFavoris() {
+        return modelFavoris;
+    }
+
+    /**
      * Change le nombre de Noeuds de la classe par {@code n}
+     * 
      * @param n
      */
-    public void setNbNoeuds(int n){
+    public void setNbNoeuds(int n) {
         nbNoeuds = n;
     }
 
     /**
      * Change l'échelle du plan
+     * 
      * @param echelle
      */
-    public void setEchelle(double echelle){
+    public void setEchelle(double echelle) {
         this.echelle = echelle;
     }
 
-    
     // Methodes
 
     @Override
-    public boolean equals(Object o){
-        if(o instanceof Batiment){
-            Batiment comp = (Batiment)o;
+    public boolean equals(Object o) {
+        if (o instanceof Batiment) {
+            Batiment comp = (Batiment) o;
 
-            if(min != comp.min || max != comp.max){
+            if (min != comp.min || max != comp.max) {
                 return false;
             }
-            if(!(noeuds.equals(comp.noeuds))){
+            if (!(noeuds.equals(comp.noeuds))) {
                 return false;
             }
-            if(!(etages.equals(comp.etages))){
+            if (!(etages.equals(comp.etages))) {
                 return false;
             }
             return true;
@@ -177,13 +211,15 @@ public class Batiment {
 
     /**
      * Renvoie si une salle de nom {@code nom} se trouve dans le batiment
+     * 
      * @param nom nom de la salle recherchée
      * @return true si la salle se trouve dans le batiment et faux sinon
      */
-    public boolean findSalle(String nom){
-        for(int i = 0;i < noeuds.size();i++){
+    public boolean findSalle(String nom) {
+        for (int i = 0; i < noeuds.size(); i++) {
             // on permet à l'utilisateur d'écrire "café" sans accents
-            if((noeuds.get(i) instanceof Salle) && ((((Salle) noeuds.get(i)).getNom().equalsIgnoreCase(nom)) || (nom.equalsIgnoreCase("cafe") && ((Salle) noeuds.get(i)).getNom().equalsIgnoreCase("café")))){
+            if ((noeuds.get(i) instanceof Salle) && ((((Salle) noeuds.get(i)).getNom().equalsIgnoreCase(nom))
+                    || (nom.equalsIgnoreCase("cafe") && ((Salle) noeuds.get(i)).getNom().equalsIgnoreCase("café")))) {
                 return true;
             }
         }

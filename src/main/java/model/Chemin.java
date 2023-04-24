@@ -78,6 +78,14 @@ public class Chemin {
         return indications;
     }
 
+    /**
+     * Renvoie l'étage de départ du chemin
+     * @return l'étage de départ du chemin
+     */
+    public int getEtageDepart() {
+        return ((Carrefour) noeuds.get(1)).getEtage();
+    }
+
     public void setBat(Batiment bat){
         this.bat = bat;
     }

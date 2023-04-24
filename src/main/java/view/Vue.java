@@ -123,12 +123,15 @@ public class Vue extends JFrame {
         app.setChemin(depart, arrivee, ascenseur);
 
         if(depart != null && arrivee == null){
+            this.app.setSalle(depart);
             this.app.afficherPortes(depart);
         }
         else if(depart == null && arrivee != null){
+            this.app.setSalle(arrivee);
             this.app.afficherPortes(arrivee);
         }
         else if(depart != null && arrivee != null){
+            this.app.setSalle(null);
             this.app.afficherChemin(depart, arrivee, ascenseur);
         }
     }

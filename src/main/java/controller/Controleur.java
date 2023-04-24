@@ -29,14 +29,11 @@ public class Controleur {
 
     /**
      * Construit le controleur de l'app
-     * 
-     * @param bat le bâtiment de départ
      */
-    public Controleur(Batiment bat) {
-        this.batActuel = bat;
+    public Controleur() { 
         this.vue = new Vue(this);
 
-        bat.getViewFavoris().setcontroleur(this);
+        batActuel.getViewFavoris().setcontroleur(this);
     }
 
     // Getters & setters
@@ -99,7 +96,19 @@ public class Controleur {
         return etage.getNoeuds();
     }
 
-    // Méthodes
+    /**
+     * Change le batiment actuel par {@code bat} et si la vue est déjà initialisée, change sa liste d'images de plans
+     * @param bat nouveau batiment
+     */
+    public void setBatiment(Batiment bat){ 
+        this.batActuel = bat;
+        if(vue != null){
+            vue.initListImages();
+        }
+    }
+
+
+    //Méthodes
 
     /**
      * Vérifie que les textes contenus dans les TextFieldBox sont soit des noms de

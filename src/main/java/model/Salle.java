@@ -1,6 +1,6 @@
 package model;
 
-public class Salle extends Noeud {
+public class Salle extends Noeud{
     // Attributs
 
     /**
@@ -25,23 +25,23 @@ public class Salle extends Noeud {
     // Méthodes
 
     @Override
-    public String toString() {
+    public String toString(){
         return id + " Salle " + nom;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (!super.equals(o)) {
+    public boolean equals(Object o){
+        if(!super.equals(o)){
             return false;
         }
 
-        if (o instanceof Salle) {
-            Salle comp = (Salle) o;
-            if (nom.equals(comp.nom)) {
+        if(o instanceof Salle){
+            Salle comp = (Salle)o;
+            if(nom.equals(comp.nom)){
                 return true;
             }
         }
-
+        
         return false;
     }
 }

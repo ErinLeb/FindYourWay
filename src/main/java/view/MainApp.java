@@ -27,6 +27,7 @@ import model.Chemin;
 import model.Dijkstra;
 import model.Noeud;
 
+
 /**
  * L'écran principal de l'application,
  * sur lequel on voit les plans et itinéraires
@@ -105,13 +106,13 @@ public class MainApp extends Fenetre {
         // Création de l'image du plan
         this.listImages = lImages;
         planPanel = new PlanPanel(listImages.get(0), this);
-
         this.initPanelDroit();
 
         // on ajoute les différents panels à la pane principale
         this.add(controlPanel, BorderLayout.NORTH);
         this.add(planPanel, BorderLayout.CENTER);
         this.add(droitPanel, BorderLayout.EAST);
+        
     }
 
     // Getters
@@ -183,8 +184,7 @@ public class MainApp extends Fenetre {
     }
 
     /**
-     * renvoie la salle actuelle à afficher
-     * 
+     * Renvoie la salle actuelle à afficher
      * @return la salle actuelle à afficher
      */
     public Noeud getSalle() {
@@ -250,6 +250,7 @@ public class MainApp extends Fenetre {
         // Boutons haut et bas + Label indiquant l'étage
         this.etagesPanel = new JPanel(new GridLayout(3, 1));
         this.etagesPanel.setBackground(Color.LIGHT_GRAY);
+        this.etagesPanel.setPreferredSize(new Dimension(droitPanel.getWidth(), 300));
 
         etageLabel = new JLabel("Rez-de-chaussée");
         etageLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -273,15 +274,19 @@ public class MainApp extends Fenetre {
     /**
      * Initialise le panel de droite
      */
-    private void initPanelDroit() {
-        droitPanel = new JPanel(new GridLayout(2, 1));
+    private void initPanelDroit(){
+        droitPanel = new JPanel(new BorderLayout());
         this.droitPanel.setPreferredSize(new Dimension(300, droitPanel.getHeight()));
 
         this.initEtagesPanel();
         this.initIndicationsPanel();
 
-        droitPanel.add(etagesPanel);
-        droitPanel.add(indicationsPanel);
+        droitPanel.add(etagesPanel, BorderLayout.NORTH);
+        droitPanel.add(indicationsPanel, BorderLayout.CENTER);
+
+        ExitButton exit = new ExitButton(view);
+        exit.setPreferredSize(new Dimension(droitPanel.getWidth(), 100));
+        droitPanel.add(exit, BorderLayout.SOUTH);
     }
 
     /**

@@ -22,6 +22,7 @@ import javax.swing.SwingConstants;
 import java.util.ArrayList;
 
 import controller.Controleur;
+import model.Carrefour;
 import model.Chemin;
 import model.Dijkstra;
 import model.Noeud;
@@ -44,6 +45,11 @@ public class MainApp extends Fenetre {
     private Chemin cheminActuel;
 
     /**
+     * La salle à afficher si elle existe, null sinon
+     */
+    private Noeud salle;
+
+    /**
      * le panel permettant de changer d'étages
      */
     private JPanel etagesPanel;
@@ -63,6 +69,15 @@ public class MainApp extends Fenetre {
      */
     private PlanPanel planPanel;
 
+    /**
+     * Le Label indiquant l'étage actuel
+     */
+    private JLabel etageLabel;
+
+    /**
+     * Bouton permettant de changer d'étage
+     */
+    private JButton upButton, downButton;
 
     //Constructeur
 
@@ -105,8 +120,8 @@ public class MainApp extends Fenetre {
      * @param etage le label indiquant l'étage actuel
      * @return l'étage actuel
      */
-    private static int getEtageActuel(JLabel etagelabel) {
-        String texte = etagelabel.getText();
+    public int getEtageActuel() {
+        String texte = etageLabel.getText();
         String s = "";
         int i = 0;
         while (Character.getNumericValue(texte.charAt(i)) < 10 && (Character.getNumericValue(texte.charAt(i)) >= 0)) {
@@ -117,7 +132,15 @@ public class MainApp extends Fenetre {
         if (!s.equals("")) {
             etage = Integer.valueOf(s);
         }
-        return estEtagePositif(etagelabel)? etage:-etage;
+        return estEtagePositif()? etage:-etage;
+    }
+
+    /**
+     * Renvoie la liste des images des plans
+     * @return la liste des images des plans
+     */
+    public ArrayList<BufferedImage> getListImages() {
+        return listImages;
     }
 
     /**
@@ -140,6 +163,21 @@ public class MainApp extends Fenetre {
         }else{
             cheminActuel = Dijkstra.trouverCheminPlusCourt(depart, arrivee, ascenseur);
         }
+    }
+
+    /**
+     * Modifie la salle à afficher pour {@code salle}
+     * @param salle
+     */
+    public void setSalle(Noeud salle) {
+        this.salle = salle;
+    }
+    /**
+     * renvoie la salle actuelle à afficher
+     * @return la salle actuelle à afficher
+     */
+    public Noeud getSalle() {
+        return this.salle;
     }
 
 
@@ -201,12 +239,12 @@ public class MainApp extends Fenetre {
         this.etagesPanel = new JPanel(new GridLayout(3, 1));
         this.etagesPanel.setBackground(Color.LIGHT_GRAY);
 
-        JLabel nbEtage = new JLabel("Rez-de-chaussée");
-        nbEtage.setHorizontalAlignment(SwingConstants.CENTER);
-        JButton upButton = new JButton(new ImageIcon("src/main/ressources/graphics/pictos/arrow-up.png"));
-        JButton downButton = new JButton(new ImageIcon("src/main/ressources/graphics/pictos/arrow-down.png"));
+        etageLabel = new JLabel("Rez-de-chaussée");
+        etageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        upButton = new JButton(new ImageIcon("src/main/ressources/graphics/pictos/arrow-up.png"));
+        downButton = new JButton(new ImageIcon("src/main/ressources/graphics/pictos/arrow-down.png"));
 
-        buttonsActionListener(upButton, downButton, nbEtage);
+        buttonsActionListener();
 
         if (control.getEtageMinActuel() == 0) {
             downButton.setEnabled(false);
@@ -216,7 +254,7 @@ public class MainApp extends Fenetre {
         }
 
         this.etagesPanel.add(upButton);
-        this.etagesPanel.add(nbEtage);
+        this.etagesPanel.add(etageLabel);
         this.etagesPanel.add(downButton);
     }
 
@@ -258,62 +296,29 @@ public class MainApp extends Fenetre {
 
     /**
      * Gère les clics sur les JButton up et down et modifie le JLabel etageActuel en conséquence
-     * @param up le bouton qui va à l'étage supérieur
-     * @param down le bouton qui va à l'étage inférieur
-     * @param etageActuel le label indiquant l'étage actuel
      */
-    private void buttonsActionListener(JButton up, JButton down, JLabel etageActuel) {
-        up.addActionListener(new ActionListener() {
+    private void buttonsActionListener() {
+        upButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    //Change d'étage
-                    int nouvelEtage = getEtageActuel(etageActuel) + 1;
-                    planPanel.setImage(listImages.get(nouvelEtage));
-                    //Dessine les points et les liens
-                    planPanel.drawPointsLinks(nouvelEtage);
-                    //Modifie le label
-                    modifEtageLabel(etageActuel, nouvelEtage);
-                    //Modifie les permissions de cliquer sur les boutons si besoin
-                    if (nouvelEtage == control.getEtageMaxActuel()) {
-                        up.setEnabled(false);
-                    }
-                    down.setEnabled(true);
-                } catch (Exception exc) {
-                    exc.printStackTrace();
-                }
+                //Change d'étage
+                changeEtage(getEtageActuel() + 1);
             }
         });
-
-        down.addActionListener(new ActionListener() {
+        downButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    //Change d'étage
-                    int nouvelEtage = getEtageActuel(etageActuel) - 1;
-                    planPanel.setImage(listImages.get(nouvelEtage));
-                    //Dessine les points et les liens
-                    planPanel.drawPointsLinks(nouvelEtage);
-                    //Modifie le label
-                    modifEtageLabel(etageActuel, nouvelEtage);
-                    //Modifie les permissions de cliquer sur les boutons si besoin
-                    if (nouvelEtage == control.getEtageMinActuel()) {
-                        down.setEnabled(false);
-                    }
-                    up.setEnabled(true);
-                } catch (Exception exc) {
-                    exc.printStackTrace();
-                }
+                //Change d'étage
+                changeEtage(getEtageActuel() - 1);
             }
         });
     }
 
     /**
      * Modifie le label en fonction du nouvel étage
-     * @param etageLabel le label à modifier
      * @param nouvelEtage le numéro du nouvel étage
      */
-    private static void modifEtageLabel(JLabel etageLabel, int nouvelEtage) {
+    private void modifEtageLabel(int nouvelEtage) {
         String nouveauTexte = "";
         if (nouvelEtage == 0) {
             nouveauTexte = "Rez-de-chaussée";
@@ -332,12 +337,39 @@ public class MainApp extends Fenetre {
 
     /**
      * Vérifie si etageLabel représente un numéro d'étage positif
-     * @param etageLabel le label dont on veut vérifier le signe de l'étage qu'il représente
      * @return true si le numéro d'étage est positif, false sinon
      */
-    private static boolean estEtagePositif(JLabel etageLabel) {
+    private boolean estEtagePositif() {
         String texte = etageLabel.getText();
         return texte.charAt((texte.length() - 1)) == 'e'; //Si le texte finit par e, c'est qu'il finit par étage et non par sous-sol
+    }
+
+    /**
+     * Modifie l'étage sur la vue
+     * @param nouvelEtage le numéro du nouvel étage
+     */
+    public void changeEtage(int nouvelEtage) {
+        //Change l'image à afficher
+        planPanel.setImage(listImages.get(nouvelEtage));
+        //Dessine les points et les liens
+        planPanel.drawPointsLinks(nouvelEtage);
+        //Modifie le label
+        modifEtageLabel(nouvelEtage);
+        //Dessine le chemin s'il existe
+        if (cheminActuel != null) {
+            planPanel.drawPath(nouvelEtage);
+        }
+        //Modifie les permissions de cliquer sur les boutons si besoin
+        if (nouvelEtage <= control.getEtageMinActuel()) {
+            downButton.setEnabled(false);
+        } else {
+            downButton.setEnabled(true);
+        }
+        if (nouvelEtage >= control.getEtageMaxActuel()) {
+            upButton.setEnabled(false);
+        } else {
+            upButton.setEnabled(true);
+        }
     }
 
     /**
@@ -354,7 +386,10 @@ public class MainApp extends Fenetre {
         droitPanel.revalidate(); 
         this.add(droitPanel, BorderLayout.EAST);
 
-        // TODO : finir la fonction
+        if (cheminActuel != null) {
+            changeEtage(cheminActuel.getEtageDepart());
+            planPanel.drawPath(getEtageActuel());
+        }
     }
 
     /**
@@ -368,6 +403,14 @@ public class MainApp extends Fenetre {
         droitPanel.revalidate(); 
         this.add(droitPanel, BorderLayout.EAST);
 
-        // TODO : finir la fonction
+
+        Carrefour c = null;
+        for (Noeud voisin : salle.getVoisins().keySet()) {
+            c = (Carrefour) voisin;
+        }
+        if (c != null) {
+            changeEtage(c.getEtage());
+            planPanel.drawRoom(getEtageActuel(), salle);
+        }
     }
 }

@@ -107,7 +107,7 @@ public class Batiment {
      */
     public Noeud getSalle(String salle){
         for(int i=0;i<noeuds.size();i++){
-            if(noeuds.get(i) instanceof Salle && (((Salle) (noeuds.get(i))).getNom().equalsIgnoreCase(salle))){
+            if((noeuds.get(i) instanceof Salle) && ((((Salle) noeuds.get(i)).getNom().equalsIgnoreCase(salle)) || (salle.equalsIgnoreCase("cafe") && ((Salle) noeuds.get(i)).getNom().equalsIgnoreCase("café")))){
                 return noeuds.get(i);
             }
         }

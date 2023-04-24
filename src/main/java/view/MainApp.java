@@ -28,11 +28,11 @@ import model.Dijkstra;
 import model.Noeud;
 
 /**
- * L'écran principal de l'application, 
+ * L'écran principal de l'application,
  * sur lequel on voit les plans et itinéraires
  */
 public class MainApp extends Fenetre {
-    //Attributs 
+    // Attributs
 
     /**
      * La liste contenant les images du bâtiment actuel
@@ -79,44 +79,46 @@ public class MainApp extends Fenetre {
      */
     private JButton upButton, downButton;
 
-    //Constructeur
+    // Constructeur
 
     /**
      * Construit l'écran principal
-     * @param view la vue associée au menu principal
-     * @param control le controleur de l'app
-     * @param startStr nom de l'éventuelle salle de départ
-     * @param finishStr nom de l'éventuelle salle d'arrivée
+     * 
+     * @param view          la vue associée au menu principal
+     * @param control       le controleur de l'app
+     * @param startStr      nom de l'éventuelle salle de départ
+     * @param finishStr     nom de l'éventuelle salle d'arrivée
      * @param ascenseurBool état de la case cochable (true si cochée, false sinon)
-     * @param lImages la liste des BufferedImage des plans du bâtiment actuel
+     * @param lImages       la liste des BufferedImage des plans du bâtiment actuel
      */
-    public MainApp(Vue view, Controleur control, String startStr, String finishStr, boolean ascenseurBool, ArrayList<BufferedImage> lImages) {
+    public MainApp(Vue view, Controleur control, String startStr, String finishStr, boolean ascenseurBool,
+            ArrayList<BufferedImage> lImages) {
         this.control = control;
         this.view = view;
 
-        //Création et configuration d'un panel contenant les éléments de l'application
+        // Création et configuration d'un panel contenant les éléments de l'application
         this.setLayout(new BorderLayout());
         this.setBackground(Color.WHITE);
 
-        this.initControlPanel(startStr,finishStr,ascenseurBool);
+        this.initControlPanel(startStr, finishStr, ascenseurBool);
 
-        //Création de l'image du plan
+        // Création de l'image du plan
         this.listImages = lImages;
         planPanel = new PlanPanel(listImages.get(0), this);
 
         this.initPanelDroit();
 
-        //on ajoute les différents panels à la pane principale
+        // on ajoute les différents panels à la pane principale
         this.add(controlPanel, BorderLayout.NORTH);
         this.add(planPanel, BorderLayout.CENTER);
         this.add(droitPanel, BorderLayout.EAST);
     }
 
-
-    //Getters 
+    // Getters
 
     /**
      * Récupère l'étage affiché actuellement grâce au label d'étage
+     * 
      * @param etage le label indiquant l'étage actuel
      * @return l'étage actuel
      */
@@ -132,11 +134,12 @@ public class MainApp extends Fenetre {
         if (!s.equals("")) {
             etage = Integer.valueOf(s);
         }
-        return estEtagePositif()? etage:-etage;
+        return estEtagePositif() ? etage : -etage;
     }
 
     /**
      * Renvoie la liste des images des plans
+     * 
      * @return la liste des images des plans
      */
     public ArrayList<BufferedImage> getListImages() {
@@ -144,73 +147,81 @@ public class MainApp extends Fenetre {
     }
 
     /**
-     * Renvoie le chemin actuel déterminé par les noeuds de départ et d'arrivée s'ils sont valides, null sinon
-     * @return le chemin actuel déterminé par les noeuds de départ et d'arrivée s'ils sont valides, null sinon
+     * Renvoie le chemin actuel déterminé par les noeuds de départ et d'arrivée
+     * s'ils sont valides, null sinon
+     * 
+     * @return le chemin actuel déterminé par les noeuds de départ et d'arrivée
+     *         s'ils sont valides, null sinon
      */
-    public Chemin getChemin(){
+    public Chemin getChemin() {
         return cheminActuel;
     }
 
     /**
-     * Change le chemin actuel par le chemin le plus court entre {@code depart} et {@code arrivee}
+     * Change le chemin actuel par le chemin le plus court entre {@code depart} et
+     * {@code arrivee}
+     * 
      * @param depart
      * @param arrivee
      * @param ascenseur
      */
-    public void setChemin(Noeud depart, Noeud arrivee, boolean ascenseur){
-        if(depart == null || arrivee == null){
+    public void setChemin(Noeud depart, Noeud arrivee, boolean ascenseur) {
+        if (depart == null || arrivee == null) {
             cheminActuel = null;
-        }else{
+        } else {
             cheminActuel = Dijkstra.trouverCheminPlusCourt(depart, arrivee, ascenseur);
         }
     }
 
     /**
      * Modifie la salle à afficher pour {@code salle}
+     * 
      * @param salle
      */
     public void setSalle(Noeud salle) {
         this.salle = salle;
     }
+
     /**
      * renvoie la salle actuelle à afficher
+     * 
      * @return la salle actuelle à afficher
      */
     public Noeud getSalle() {
         return this.salle;
     }
 
-
-    //Méthodes
+    // Méthodes
 
     /**
      * Initialise le controlPanel
-     * @param startStr nom de l'éventuelle salle de départ
-     * @param finishStr nom de l'éventuelle salle d'arrivée 
+     * 
+     * @param startStr      nom de l'éventuelle salle de départ
+     * @param finishStr     nom de l'éventuelle salle d'arrivée
      * @param ascenseurBool état de la case cochable (true si cochée, false sinon)
      */
-    private void initControlPanel(String startStr,String finishStr, boolean ascenseurBool) {
-        //Création du Panel de contrôle
+    private void initControlPanel(String startStr, String finishStr, boolean ascenseurBool) {
+        // Création du Panel de contrôle
         this.controlPanel = new JPanel(new GridBagLayout());
         this.controlPanel.setBackground(Color.LIGHT_GRAY);
 
-        //Logo
+        // Logo
         ImageIcon logo = new ImageIcon("src/main/ressources/graphics/logos/placeholdermini.png");
         JLabel logoLabel = new JLabel(logo);
 
-        //Boîtes de saisie de texte
+        // Boîtes de saisie de texte
         start = new TextFieldBox(startStr, 10, view);
         finish = new TextFieldBox(finishStr, 10, view);
 
-        //Case à cocher
+        // Case à cocher
         ascenseur = new JCheckBox("Ascenseurs");
         ascenseur.setSelected(ascenseurBool);
         ascenseur.setHorizontalAlignment(SwingConstants.CENTER);
 
-        //Bouton de recherche de chemin
+        // Bouton de recherche de chemin
         GoButton mainButton = new GoButton(view);
 
-        //Placement des éléments dans le panel
+        // Placement des éléments dans le panel
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.gridx = 0;
@@ -218,16 +229,17 @@ public class MainApp extends Fenetre {
         constraints.anchor = GridBagConstraints.WEST;
         this.controlPanel.add(logoLabel, constraints);
         constraints.gridx = 1;
-        constraints.weightx = 1.0;
-        this.controlPanel.add(start, constraints);
+        this.controlPanel.add(control.getBatiment().getViewFavoris(), constraints);
         constraints.gridx = 2;
         constraints.weightx = 1.0;
-        this.controlPanel.add(finish, constraints);
+        this.controlPanel.add(start, constraints);
         constraints.gridx = 3;
         constraints.weightx = 1.0;
-        this.controlPanel.add(ascenseur, constraints);
+        this.controlPanel.add(finish, constraints);
         constraints.gridx = 4;
-        constraints.anchor = GridBagConstraints.EAST;
+        constraints.weightx = 1.0;
+        this.controlPanel.add(ascenseur, constraints);
+        constraints.gridx = 5;
         this.controlPanel.add(mainButton, constraints);
     }
 
@@ -235,7 +247,7 @@ public class MainApp extends Fenetre {
      * Initialise le panel de changement d'étages
      */
     private void initEtagesPanel() {
-        //Boutons haut et bas + Label indiquant l'étage
+        // Boutons haut et bas + Label indiquant l'étage
         this.etagesPanel = new JPanel(new GridLayout(3, 1));
         this.etagesPanel.setBackground(Color.LIGHT_GRAY);
 
@@ -261,7 +273,7 @@ public class MainApp extends Fenetre {
     /**
      * Initialise le panel de droite
      */
-    private void initPanelDroit(){
+    private void initPanelDroit() {
         droitPanel = new JPanel(new GridLayout(2, 1));
         this.droitPanel.setPreferredSize(new Dimension(300, droitPanel.getHeight()));
 
@@ -275,12 +287,12 @@ public class MainApp extends Fenetre {
     /**
      * Initialise le panel des indications
      */
-    private void initIndicationsPanel(){
+    private void initIndicationsPanel() {
         String indic;
 
-        if(cheminActuel == null){
+        if (cheminActuel == null) {
             indic = "Rentrez deux salles pour voir l'itinéraire le plus court.";
-        }else{
+        } else {
             indic = cheminActuel.getIndications();
         }
         JTextArea indications = new JTextArea(indic);
@@ -295,20 +307,21 @@ public class MainApp extends Fenetre {
     }
 
     /**
-     * Gère les clics sur les JButton up et down et modifie le JLabel etageActuel en conséquence
+     * Gère les clics sur les JButton up et down et modifie le JLabel etageActuel en
+     * conséquence
      */
     private void buttonsActionListener() {
         upButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Change d'étage
+                // Change d'étage
                 changeEtage(getEtageActuel() + 1);
             }
         });
         downButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Change d'étage
+                // Change d'étage
                 changeEtage(getEtageActuel() - 1);
             }
         });
@@ -316,6 +329,7 @@ public class MainApp extends Fenetre {
 
     /**
      * Modifie le label en fonction du nouvel étage
+     * 
      * @param nouvelEtage le numéro du nouvel étage
      */
     private void modifEtageLabel(int nouvelEtage) {
@@ -327,9 +341,9 @@ public class MainApp extends Fenetre {
         } else if (nouvelEtage == 1) {
             nouveauTexte = "1er étage";
         } else if (nouvelEtage < -1) {
-            nouveauTexte = (-nouvelEtage)+"ème sous-sol";
+            nouveauTexte = (-nouvelEtage) + "ème sous-sol";
         } else {
-            nouveauTexte = nouvelEtage+"ème étage";
+            nouveauTexte = nouvelEtage + "ème étage";
         }
 
         etageLabel.setText(nouveauTexte);
@@ -337,29 +351,32 @@ public class MainApp extends Fenetre {
 
     /**
      * Vérifie si etageLabel représente un numéro d'étage positif
+     * 
      * @return true si le numéro d'étage est positif, false sinon
      */
     private boolean estEtagePositif() {
         String texte = etageLabel.getText();
-        return texte.charAt((texte.length() - 1)) == 'e'; //Si le texte finit par e, c'est qu'il finit par étage et non par sous-sol
+        return texte.charAt((texte.length() - 1)) == 'e'; // Si le texte finit par e, c'est qu'il finit par étage et non
+                                                          // par sous-sol
     }
 
     /**
      * Modifie l'étage sur la vue
+     * 
      * @param nouvelEtage le numéro du nouvel étage
      */
     public void changeEtage(int nouvelEtage) {
-        //Change l'image à afficher
+        // Change l'image à afficher
         planPanel.setImage(listImages.get(nouvelEtage));
-        //Dessine les points et les liens
+        // Dessine les points et les liens
         planPanel.drawPointsLinks(nouvelEtage);
-        //Modifie le label
+        // Modifie le label
         modifEtageLabel(nouvelEtage);
-        //Dessine le chemin s'il existe
+        // Dessine le chemin s'il existe
         if (cheminActuel != null) {
             planPanel.drawPath(nouvelEtage);
         }
-        //Modifie les permissions de cliquer sur les boutons si besoin
+        // Modifie les permissions de cliquer sur les boutons si besoin
         if (nouvelEtage <= control.getEtageMinActuel()) {
             downButton.setEnabled(false);
         } else {
@@ -374,16 +391,17 @@ public class MainApp extends Fenetre {
 
     /**
      * Affiche le chemin entre la salle de départ et la salle d'arrivée
-     * @param depart salle de départ
-     * @param arrivée salle d'arrivée
+     * 
+     * @param depart    salle de départ
+     * @param arrivée   salle d'arrivée
      * @param ascenseur permission d'utiliser les ascenseurs
      */
-    public void afficherChemin(Noeud depart, Noeud arrivee, boolean ascenseur){        
-        //mise à jour des indications
+    public void afficherChemin(Noeud depart, Noeud arrivee, boolean ascenseur) {
+        // mise à jour des indications
         droitPanel.removeAll();
-        initPanelDroit(); 
+        initPanelDroit();
         droitPanel.repaint();
-        droitPanel.revalidate(); 
+        droitPanel.revalidate();
         this.add(droitPanel, BorderLayout.EAST);
 
         if (cheminActuel != null) {
@@ -393,16 +411,16 @@ public class MainApp extends Fenetre {
     }
 
     /**
-     * Affiche la ou les portes de la salle 
+     * Affiche la ou les portes de la salle
+     * 
      * @param salle salle dont on veut afficher la ou les portes
      */
-    public void afficherPortes(Noeud salle){
+    public void afficherPortes(Noeud salle) {
         droitPanel.removeAll();
-        initPanelDroit(); 
+        initPanelDroit();
         droitPanel.repaint();
-        droitPanel.revalidate(); 
+        droitPanel.revalidate();
         this.add(droitPanel, BorderLayout.EAST);
-
 
         Carrefour c = null;
         for (Noeud voisin : salle.getVoisins().keySet()) {

@@ -124,11 +124,17 @@ public class Vue extends JFrame {
      * @param ascenseur permission d'utiliser les ascenseurs 
      */
     public void majApp(Noeud depart, Noeud arrivee, boolean ascenseur){
-        if(this.app==null){
-            this.app = new MainApp(this, control,accueil.getStart().getText(),accueil.getFinish().getText(),accueil.getAscenseur().isSelected(), listImages);
+        if(depart != null && arrivee != null){
+            this.app = new MainApp(this, control,getApp().getStart().getText(),getApp().getFinish().getText(),getApp().getAscenseur().isSelected(), listImages);
+        }
+        else if(depart != null){
+            this.app = new MainApp(this, control,getApp().getStart().getText(),"Arrivée",getApp().getAscenseur().isSelected(), listImages);
+        }
+        else if(arrivee != null){
+            this.app = new MainApp(this, control,"Départ",getApp().getFinish().getText(),getApp().getAscenseur().isSelected(), listImages);
         }
         else{
-            this.app = new MainApp(this, control,app.getStart().getText(),app.getFinish().getText(),app.getAscenseur().isSelected(), listImages);
+            this.app = new MainApp(this, control,"Départ","Arrivée",getApp().getAscenseur().isSelected(), listImages);
         }
 
         app.setChemin(depart, arrivee, ascenseur);

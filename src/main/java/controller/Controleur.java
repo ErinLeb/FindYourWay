@@ -120,12 +120,27 @@ public class Controleur {
     public boolean verifGoButton() {
         String start = vue.getApp().getStart().getText();
         String finish = vue.getApp().getFinish().getText();
-        if ((start.equalsIgnoreCase("Départ") || estSalle(start))
-                && (finish.equalsIgnoreCase("Arrivée") || estSalle(finish))) {
+        if((start.equalsIgnoreCase("Départ") || estSalle(start) || isBlank(start)) 
+        && (finish.equalsIgnoreCase("Arrivée") || estSalle(finish) || isBlank(finish))){
             return true;
         }
         return false;
     }
+
+    /**
+     * vérifie si une chaine de caractères est composée de caractères blancs
+     * @param s chaine de caractère à tester
+     * @return true si elle est composée de caractères blancs, faux sinon
+     */
+    public boolean isBlank(String s){
+        for(int i = 0; i < s.length(); i++){
+            if(!Character.isWhitespace(s.charAt(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     /**
      * Vérifie si le nom {@code salle} est celui d'une salle du batiment
@@ -140,27 +155,28 @@ public class Controleur {
     /**
      * Met à jour l'application en fonction des entrées utilisateur
      */
-    public void majApp() {
-        if (this.vue.getApp().getStart().getText().equals("Départ")
-                && this.vue.getApp().getFinish().getText().equals("Arrivée")) {
-            // on affiche seulement les plans
+    public void majApp(){
+        if((this.vue.getApp().getStart().getText().equals("Départ") || isBlank(this.vue.getApp().getStart().getText())) 
+        && (this.vue.getApp().getFinish().getText().equals("Arrivée") || isBlank(this.vue.getApp().getFinish().getText()))){
+            //on affiche seulement les plans
             this.vue.majApp(null, null, vue.getApp().getAscenseur().isSelected());
-        } else if (this.vue.getApp().getStart().estSalle() && this.vue.getApp().getFinish().estSalle()) {
-            // on affiche le chemin le plus court entre deux salles
-            this.vue.majApp(getSalle(vue.getApp().getStart().getText()), getSalle(vue.getApp().getFinish().getText()),
-                    vue.getApp().getAscenseur().isSelected());
-        } else if ((this.vue.getApp().getStart().getText().equals("Départ")
-                && this.vue.getApp().getFinish().estSalle())) {
-            // on affiche les portes de la salle d'arrivée
-            this.vue.majApp(null, getSalle(this.vue.getApp().getFinish().getText()),
-                    vue.getApp().getAscenseur().isSelected());
-        } else if ((this.vue.getApp().getStart().estSalle()
-                && this.vue.getApp().getFinish().getText().equals("Arrivée"))) {
-            // on affiche les portes de la salle de départ
-            this.vue.majApp(getSalle(this.vue.getApp().getStart().getText()), null,
-                    this.vue.getApp().getAscenseur().isSelected());
         }
-    }
+        else if(this.vue.getApp().getStart().estSalle() && this.vue.getApp().getFinish().estSalle()){
+            //on affiche le chemin le plus court entre deux salles
+            this.vue.majApp(getSalle(vue.getApp().getStart().getText()), getSalle(vue.getApp().getFinish().getText()), vue.getApp().getAscenseur().isSelected());
+        }
+        else if(((this.vue.getApp().getStart().getText().equals("Départ") || isBlank(this.vue.getApp().getStart().getText()))
+        && this.vue.getApp().getFinish().estSalle())){
+            //on affiche les portes de la salle d'arrivée
+            this.vue.majApp(null, getSalle(this.vue.getApp().getFinish().getText()), vue.getApp().getAscenseur().isSelected());
+        }
+        else if((this.vue.getApp().getStart().estSalle() 
+        && (this.vue.getApp().getFinish().getText().equals("Arrivée") || isBlank(this.vue.getApp().getFinish().getText())))){
+            //on affiche les portes de la salle de départ
+            this.vue.majApp(getSalle(this.vue.getApp().getStart().getText()), null, this.vue.getApp().getAscenseur().isSelected());
+		}
+	}
+
 
     /**
      * Methode qui ajoute un element au favoris (Salle ou chemin)

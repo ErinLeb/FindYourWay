@@ -13,7 +13,7 @@ public class Carrefour extends Noeud {
      */
     public final boolean isAscenseur;
 
-     /**
+    /**
      * Coordonées où sera affiché le noeud dans la vue
      */
     private double x, y;

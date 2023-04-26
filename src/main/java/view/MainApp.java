@@ -80,6 +80,11 @@ public class MainApp extends Fenetre {
      */
     private JButton upButton, downButton;
 
+    /**
+     * Indique si l'application est en mode debug
+     */
+    private boolean debug = false;
+
     // Constructeur
 
     /**
@@ -189,6 +194,21 @@ public class MainApp extends Fenetre {
      */
     public Noeud getSalle() {
         return this.salle;
+    }
+
+    /**
+     * Renvoie true si l'application est en mode debug, false sinon
+     * @return true si l'application est en mode debug, false sinon
+     */
+    public boolean getDebug() {
+        return this.debug;
+    }
+
+    /**
+     * Passe du mode debug au mode normal et inversement
+     */
+    public void changeDebug() {
+        this.debug = !this.debug;
     }
 
     // Méthodes

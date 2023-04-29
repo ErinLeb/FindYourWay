@@ -8,16 +8,21 @@ import java.awt.GridLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 
+import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import java.util.ArrayList;
 
@@ -80,6 +85,11 @@ public class MainApp extends Fenetre {
      */
     private JButton upButton, downButton;
 
+    /**
+     * Indique si l'application est en mode debug
+     */
+    private boolean debug = false;
+
     // Constructeur
 
     /**
@@ -112,7 +122,9 @@ public class MainApp extends Fenetre {
         this.add(controlPanel, BorderLayout.NORTH);
         this.add(planPanel, BorderLayout.CENTER);
         this.add(droitPanel, BorderLayout.EAST);
-        
+
+        // Ajout d'un Listener pour changer le mode debug
+        this.addListenerChangeDebug();
     }
 
     // Getters
@@ -191,6 +203,21 @@ public class MainApp extends Fenetre {
         return this.salle;
     }
 
+    /**
+     * Renvoie true si l'application est en mode debug, false sinon
+     * @return true si l'application est en mode debug, false sinon
+     */
+    public boolean getDebug() {
+        return this.debug;
+    }
+
+    /**
+     * Passe du mode debug au mode normal et inversement
+     */
+    public void changeDebug() {
+        this.debug = !this.debug;
+    }
+
     // Méthodes
 
     /**
@@ -206,7 +233,7 @@ public class MainApp extends Fenetre {
         this.controlPanel.setBackground(Color.LIGHT_GRAY);
 
         // Logo
-        ImageIcon logo = new ImageIcon("src/main/ressources/graphics/logos/placeholdermini.png");
+        ImageIcon logo = new ImageIcon("src/main/ressources/graphics/logos/logomini.png");
         JLabel logoLabel = new JLabel(logo);
 
         // Boîtes de saisie de texte
@@ -333,6 +360,29 @@ public class MainApp extends Fenetre {
     }
 
     /**
+     * Ajoute un KeyListener afin de passer en mode debug quand la combinaison de touche CTRL+D est saisie
+     */
+    private void addListenerChangeDebug() {
+        // On s'assure que les combinaisons de touches sont dirigées vers le JPanel
+        this.setFocusable(true);
+        this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_DOWN_MASK), "ctrlD");
+        
+        this.getActionMap().put("ctrlD", new AbstractAction() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeDebug();
+                if (debug) {
+                    planPanel.drawDebug(getEtageActuel());
+                } else {
+                    planPanel.eraseDebug(getEtageActuel());
+                }
+            }
+            
+        });
+    }
+
+    /**
      * Modifie le label en fonction du nouvel étage
      * 
      * @param nouvelEtage le numéro du nouvel étage
@@ -373,8 +423,8 @@ public class MainApp extends Fenetre {
     public void changeEtage(int nouvelEtage) {
         // Change l'image à afficher
         planPanel.setImage(listImages.get(nouvelEtage));
-        // Dessine les points et les liens
-        planPanel.drawPointsLinks(nouvelEtage);
+        // Dessine les points et les liens si l'app est en mode debug
+        planPanel.drawDebug(nouvelEtage);
         // Modifie le label
         modifEtageLabel(nouvelEtage);
         // Dessine le chemin s'il existe

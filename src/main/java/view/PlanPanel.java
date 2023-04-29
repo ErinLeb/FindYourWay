@@ -36,13 +36,17 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
     /**
      * L'image de l'étage à afficher
      */
-    private BufferedImage planActuel;
+    private BufferedImage image;
 
     /**
      * Les plans vierges de tout dessin
      */
     private ArrayList<BufferedImage> blankPlans;
 
+    /**
+     * Les plans avec les liens et les noeuds dessinés
+     */
+    private ArrayList<BufferedImage> debugPlans;
 
     /**
      * Coordonnées de notre vision de l'image
@@ -81,12 +85,14 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
         this.app = app;
 
         setBackground(Color.WHITE);
-        planActuel = plan;
+        image = plan;
 
         blankPlans = new ArrayList<BufferedImage>();
         for (BufferedImage image : app.getListImages()) {
             blankPlans.add(image);
         }
+
+        initDebugPlans();
 
         viewX = 0;
         viewY = 0;
@@ -101,18 +107,63 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                maxScale = Math.min(getWidth() / (double) planActuel.getWidth(null), getHeight() / (double) planActuel.getHeight(null));
+                maxScale = Math.min(getWidth() / (double) image.getWidth(null), getHeight() / (double) image.getHeight(null));
                 scale = maxScale;
                 repaint();
             }
         });
 
-        //Dessine les points et liens de l'étage 0
-        drawPointsLinks(0);
+        //Dessine les points et liens de l'étage 0 si l'app est en mode debug
+        drawDebug(0);
 
         //Démarre l'animation 
         Thread thread = new Thread(this);
         thread.start();
+    }
+
+    private void initDebugPlans() {
+        debugPlans = new ArrayList<BufferedImage>();
+        for (int i = 0; i < app.getListImages().size(); i++) {
+            BufferedImage image = app.getListImages().get(i);
+            // On crée une copie de l'image sur laquelle on va dessiner
+            BufferedImage modifImage = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
+            Graphics2D g2dmodif = modifImage.createGraphics();
+            g2dmodif.drawImage(image, 0, 0, null);
+            
+            // Le facteur multiplicateur de l'emplacement des points
+            double scale = 8.23;
+
+            //On définit la couleur des points
+            g2dmodif.setColor(Color.RED);
+
+            //On définit le style des liens
+            g2dmodif.setStroke(new BasicStroke(3.0f));
+
+            //On récupère la liste des points de l'étage actuel
+            List<Noeud> noeudsEtageActuel = app.getControl().getNoeudsEtage(i);
+            //On parcourt les noeuds
+            for (Noeud n1 : noeudsEtageActuel) {
+                if (n1 instanceof Carrefour) {
+                    g2dmodif.setColor(Color.RED);
+                    Carrefour carr1 = (Carrefour) n1;
+                    //On dessine le point correspondant
+                    g2dmodif.fillOval((int) Math.round(carr1.getX()*scale), (int) Math.round(carr1.getY()*scale), 15, 15);
+                    g2dmodif.setColor(Color.BLUE);
+                    //On parcourt les voisins
+                    for (Noeud n2 : carr1.getVoisins().keySet()) {
+                        if (n2 instanceof Carrefour) {
+                            Carrefour carr2 = (Carrefour) n2;
+                            if (noeudsEtageActuel.contains(carr2)) {
+                                //S'il fait partie du bon étage on relie les deux points
+                                g2dmodif.drawLine((int) Math.round(carr1.getX()*scale), (int) Math.round(carr1.getY()*scale), (int) Math.round(carr2.getX()*scale), (int) Math.round(carr2.getY()*scale));
+                            }
+                        }
+                    }
+                }
+            }
+            debugPlans.add(modifImage);
+            g2dmodif.dispose();
+        }
     }
 
 
@@ -123,7 +174,7 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
      * @param newImage la nouvelle image
      */
     public void setImage(BufferedImage newImage) {
-        planActuel = newImage;
+        image = newImage;
         
         repaint();
     }
@@ -141,9 +192,9 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
         g2d.scale(scale, scale);
-        int x = Math.min(viewX, getWidth() - (int) (planActuel.getWidth(null) * scale));
-        int y = Math.min(viewY, getHeight() - (int) (planActuel.getHeight(null) * scale));
-        g2d.drawImage(planActuel, x, y, null);
+        int x = Math.min(viewX, getWidth() - (int) (image.getWidth(null) * scale));
+        int y = Math.min(viewY, getHeight() - (int) (image.getHeight(null) * scale));
+        g2d.drawImage(image, x, y, null);
 
         if (app.getChemin() != null) {
             drawPath(app.getEtageActuel());
@@ -222,46 +273,31 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
     }
     
     /**
-     * Dessine les points représentant les noeuds et les liens qui les relient
+     * Dessine les points représentant les noeuds et les liens qui les relient, si l'app est en mode debug
      * @param etage le numéro de l'étage dont on dessine les noeuds et les liens
      */
-    public void drawPointsLinks(int etage) {
-        //Le facteur multiplicateur de l'emplacement des points
-        double scale = 8.23;
-
-        //On récupère le Graphics du plan actuel pour pouvoir dessiner dessus
-        Graphics g = planActuel.getGraphics();
-        Graphics2D g2d = (Graphics2D) g;
-
-        //On définit la couleur des points
-        g2d.setColor(Color.RED);
-
-        //On définit le style des liens
-        g2d.setStroke(new BasicStroke(3.0f));
-
-        //On récupère la liste des points de l'étage actuel
-        List<Noeud> noeuds = app.getControl().getNoeudsEtage(etage);
-        //On parcourt les noeuds
-        for (Noeud n1 : noeuds) {
-            if (n1 instanceof Carrefour) {
-                g2d.setColor(Color.RED);
-                Carrefour carr1 = (Carrefour) n1;
-                //On dessine le point correspondant
-                g2d.fillOval((int) Math.round(carr1.getX()*scale), (int) Math.round(carr1.getY()*scale), 15, 15);
-                g2d.setColor(Color.BLUE);
-                //On parcourt les voisins
-                for (Noeud n2 : carr1.getVoisins().keySet()) {
-                    if (n2 instanceof Carrefour) {
-                        Carrefour carr2 = (Carrefour) n2;
-                        if (noeuds.contains(carr2)) {
-                            //S'il fait partie du bon étage on relie les deux points
-                            g2d.drawLine((int) Math.round(carr1.getX()*scale), (int) Math.round(carr1.getY()*scale), (int) Math.round(carr2.getX()*scale), (int) Math.round(carr2.getY()*scale));
-                        }
-                    }
-                }
+    public void drawDebug(int etage) {
+        if (app.getDebug()) {
+            setImage(debugPlans.get(etage));
+            if (app.getChemin() != null) {
+                drawPath(etage);
+            } else if (app.getSalle() != null) {
+                drawRoom(etage, app.getSalle());
             }
         }
-        g2d.dispose();
+    }
+
+    /**
+     * Efface les liens et les points de l'étage {@code etage}
+     * @param etage
+     */
+    public void eraseDebug(int etage) {
+        setImage(blankPlans.get(etage));
+        if (app.getChemin() != null) {
+            drawPath(etage);
+        } else if (app.getSalle() != null) {
+            drawRoom(etage, app.getSalle());
+        }
     }
 
     /**
@@ -270,12 +306,16 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
      */
     public void drawPath(int etage) {
         //On efface les éventuelles lignes ou points déjà présents sur le plan en réinitialisant le plan
-        setImage(blankPlans.get(etage));
+        if (app.getDebug()) {
+            setImage(debugPlans.get(etage));
+        } else {
+            setImage(blankPlans.get(etage));
+        }
         
         //on crée une copie de l'image sur laquelle on va dessiner
-        BufferedImage modifImage = new BufferedImage(planActuel.getWidth(), planActuel.getHeight(), planActuel.getType());
+        BufferedImage modifImage = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
         Graphics2D g2dmodif = modifImage.createGraphics();
-        g2dmodif.drawImage(planActuel, 0, 0, null);
+        g2dmodif.drawImage(image, 0, 0, null);
         
         //Le facteur multiplicateur de l'emplacement des points
         double scale = 8.23;
@@ -315,12 +355,16 @@ public class PlanPanel extends JPanel implements MouseListener, MouseMotionListe
      */
     public void drawRoom(int etage, Noeud room) {
         //On efface les éventuelles lignes ou points déjà présents sur le plan en réinitialisant le plan
-        setImage(blankPlans.get(etage));
+        if (app.getDebug()) {
+            setImage(debugPlans.get(etage));
+        } else {
+            setImage(blankPlans.get(etage));
+        }
         
         //On crée une copie de l'image sur laquelle on va dessiner
-        BufferedImage modifImage = new BufferedImage(planActuel.getWidth(), planActuel.getHeight(), planActuel.getType());
+        BufferedImage modifImage = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
         Graphics2D g2dmodif = modifImage.createGraphics();
-        g2dmodif.drawImage(planActuel, 0, 0, null);
+        g2dmodif.drawImage(image, 0, 0, null);
         
         //Le facteur multiplicateur de l'emplacement des points
         double scale = 8.23;

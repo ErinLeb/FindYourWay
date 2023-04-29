@@ -65,7 +65,7 @@ public class Home extends Fenetre {
         setBackground(Color.WHITE);
         
         //Ajout d'un logo centré au milieu du menu
-        ImageIcon logo = new ImageIcon("src/main/ressources/graphics/logos/placeholder.png");
+        ImageIcon logo = new ImageIcon("src/main/ressources/graphics/logos/logo.png");
         logoLabel = new JLabel(logo);
         logoLabel.setHorizontalAlignment(JLabel.CENTER);
         

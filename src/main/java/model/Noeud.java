@@ -12,13 +12,12 @@ public abstract class Noeud {
     protected static int nbNoeud;
 
     /**
-     * Numéro d'identification des noeuds qui permettra de savoir par quels noeuds
-     * on est déjà passé, initialisé par le numéro de création du noeud
+     * Numéro d'identification des noeuds initialisé par le numéro de création du noeud
      */
     protected int id;
 
     /**
-     * Batiment auquel le noeud appartient
+     * Bâtiment auquel le noeud appartient
      */
     protected final Batiment batiment;
 
@@ -29,6 +28,7 @@ public abstract class Noeud {
 
 
     // Constructeur
+
     protected Noeud(Batiment batiment) {
         this.id = nbNoeud;
         nbNoeud++;
@@ -72,12 +72,12 @@ public abstract class Noeud {
      * Renvoie le noeud de la map correspondant à l'id {@code id}, null s'il n'y en
      * a pas
      * 
-     * @param id
-     * @return
+     * @param id id du voisin que l'on veut récupérer 
+     * @return   le noeud de la map correspondant à l'id {@code id}, null s'il n'y en a pas
      */
     public Noeud getVoisin(int id) {
         // on parcourt la map
-        for (Map.Entry mapentry : voisins.entrySet()) {
+        for (Map.Entry<Noeud, Double> mapentry : voisins.entrySet()) {
             Noeud current = (Noeud) (mapentry.getKey());
             if (current.id == id) {
                 return current;
@@ -97,7 +97,7 @@ public abstract class Noeud {
 
         Noeud comp = (Noeud) o;
 
-        // on compare le numéro du noeud dans le batiment
+        // on compare le numéro du noeud dans le bâtiment
         if (id != comp.id) {
             return false;
         }
@@ -107,10 +107,10 @@ public abstract class Noeud {
     }
 
     /**
-     * Compare si les voisins de n sont les mêmes que ceux du noeud courant
+     * Compare si les voisins de {@code n} sont les mêmes que ceux du noeud courant
      * 
-     * @param n
-     * @return
+     * @param n noeud dont on veut comparer les voisins
+     * @return  true si les voisins de {@code n} sont les mêmes que celui du noeud courant, false sinon
      */
     public boolean compareVoisins(Noeud n) {
         if (voisins.size() != n.voisins.size()) {
@@ -118,14 +118,14 @@ public abstract class Noeud {
         }
 
         // on parcourt la map de voisins
-        for (Map.Entry mapentry : voisins.entrySet()) {
+        for (Map.Entry<Noeud, Double> mapentry : voisins.entrySet()) {
 
             Noeud noeudCourant = (Noeud) mapentry.getKey();
             Double distCourante = (Double) mapentry.getValue();
 
             // pour chaque voisin, on regarde s'il est dans la map de n
             boolean there = false;
-            for (Map.Entry mapentryBis : n.voisins.entrySet()) {
+            for (Map.Entry<Noeud, Double> mapentryBis : n.voisins.entrySet()) {
                 Noeud noeudComp = (Noeud) mapentryBis.getKey();
                 Double distComp = (Double) mapentryBis.getValue();
 

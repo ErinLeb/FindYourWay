@@ -11,10 +11,11 @@ import javax.swing.JButton;
  * Un bouton étiqueté GO! permettant de changer d'écran/lancer la recherche d'itinéraire
  */
 public class GoButton extends JButton {
-    //Constructeur
+    // Constructeur
 
     /**
      * Crée un bouton qui permet de changer d'écran/lancer la recherche d'itinéraire
+     * 
      * @param view la vue associée au bouton
      */
     public GoButton(Vue view) {
@@ -38,6 +39,7 @@ public class GoButton extends JButton {
             public void keyTyped(KeyEvent e) {
                 //Méthode non utilisée
             }
+
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -49,6 +51,7 @@ public class GoButton extends JButton {
                     }
                 }
             }
+            
             @Override
             public void keyReleased(KeyEvent e) {
                 //Méthode non utilisée

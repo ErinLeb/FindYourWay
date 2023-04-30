@@ -13,12 +13,13 @@ public class Parseur {
     private String path; 
 
     /**
-     * le batiment que l'on veut remplir
+     * le bâtiment que l'on veut remplir
      */
     private Batiment bat;
 
 
     // Constructeur
+    
     public Parseur(Batiment bat, String path) { 
         this.bat = bat;
         this.path = path;
@@ -100,7 +101,7 @@ public class Parseur {
             String[] line = sc.nextLine().split(";");
 
             if (line[0].equals("")) { //si on a un nouveau noeud
-                int number = Integer.parseInt(line[1]); //l'identifiant du noeud dans la liste de noeuds du batiment
+                int number = Integer.parseInt(line[1]); //l'identifiant du noeud dans la liste de noeuds du bâtiment
                 current = bat.getNoeud(number);
 
             } else { //si on parcourt les voisins d'un noeud

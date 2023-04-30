@@ -13,10 +13,16 @@ import model.Noeud;
  * L'interface graphique de l'application
  */
 public class Vue extends JFrame {
-    //Attributs
+    // Attributs
 
+    /**
+     * La page d'accueil
+     */
     private Home accueil;
 
+    /**
+     * La page principale
+     */
     private MainApp app;
 
     private Controleur control;
@@ -36,10 +42,11 @@ public class Vue extends JFrame {
     private ArrayList<BufferedImage> listImages;
 
 
-    //Constructeur
+    // Constructeur
 
     /**
      * Initialise la vue de l'app
+     * 
      * @param control le controleur de l'app
      */
     public Vue(Controleur control) {
@@ -60,7 +67,7 @@ public class Vue extends JFrame {
     }
 
 
-    //Getters
+    // Getters
 
     /**
      * Renvoie la fenêtre d'accueil de l'application
@@ -119,8 +126,9 @@ public class Vue extends JFrame {
 
     /**
      * Met à jour l'application et effectue une tache en fonction des entrées utilisateur
-     * @param depart noeud de départ du chemin
-     * @param arrivee noeud d'arrivée du chemin
+     * 
+     * @param depart    noeud de départ du chemin
+     * @param arrivee   noeud d'arrivée du chemin
      * @param ascenseur permission d'utiliser les ascenseurs 
      */
     public void majApp(Noeud depart, Noeud arrivee, boolean ascenseur){

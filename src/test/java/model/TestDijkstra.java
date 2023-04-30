@@ -1,10 +1,10 @@
 package model;
 
+import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
-import org.junit.Test;
 
 public class TestDijkstra {
 

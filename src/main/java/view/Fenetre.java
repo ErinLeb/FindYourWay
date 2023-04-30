@@ -2,14 +2,15 @@ package view;
 
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
+
 import controller.Controleur;
 
 
 /**
- * Classe abstraite correspondant à une fenêtre de l'interface graphique (menu d'accueil ou application)
+ * Classe abstraite correspondant à une fenêtre de l'interface graphique (menu d'accueil ou page principale)
  */
 public abstract class Fenetre extends JPanel{
-    //Attributs
+    // Attributs
 
     /**
      * Le panel avec lequel on peut interagir
@@ -42,7 +43,7 @@ public abstract class Fenetre extends JPanel{
     protected JCheckBox ascenseur;
 
 
-    //Getters 
+    // Getters 
 
     /**
      * Renvoie le controleur

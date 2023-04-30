@@ -11,28 +11,33 @@ import java.awt.event.ActionListener;
 import controller.Controleur;
 import model.Binome;
 
+
 /**
- * Class qui s'occupe d'afficher les éléments de gestion des chemins et ou
- * salles favoris.
+ * Classe qui gère l'affichage des éléments de gestion des salles et chemins favoris.
  */
 public class FavorisView extends JPanel {
+    // Attributs 
+
     /**
      * Bouton qui permet d'ajouter des favoris
      */
     private JButton ajout;
+
     /**
      * Bouton qui permet de supprimer des favoris
      */
     private JButton supprimer;
+
     /**
      * liste d'affichage des favoris
      */
     private JComboBox<Binome> list;
+
     private Controleur controleur;
 
-    /**
-     * constructeur
-     */
+
+    // Constructeur 
+
     public FavorisView() {
         super();
         setBackground(Color.LIGHT_GRAY);
@@ -67,15 +72,31 @@ public class FavorisView extends JPanel {
         add(supprimer);
     }
 
+
+    // Setters 
+
     public void setcontroleur(Controleur controleur) {
         this.controleur = controleur;
     }
 
+
+    // Méthodes
+
+    /**
+     * Ajoute et sélectionne {@code favoris} dans la liste des favoris
+     * 
+     * @param favoris binome que l'on ajoute
+     */
     public void addFavoris(Binome favoris) {
         list.addItem(favoris);
         list.setSelectedItem(favoris);
     }
 
+    /**
+     * Supprime l'élément à l'index {@code index} des favoris 
+     * 
+     * @param index index de l'élément que l'on retire des favoris
+     */
     public void removeFavoris(int index) {
         if (index != 0) {
             list.removeItemAt(index);

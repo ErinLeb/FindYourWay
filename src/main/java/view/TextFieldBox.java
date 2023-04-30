@@ -12,17 +12,22 @@ import javax.swing.JTextField;
  * Ce dernier disparaît quand le focus est sur la boîte.
  */
 public class TextFieldBox extends JTextField {
+    // Attributs
 
     /**
      * Vue associée à ce TextFieldBox
      */
     private Vue view;
 
+    
+    // Constructeur
+
     /**
      * Construit une zone de saisie de texte
-     * @param text le texte de fond de la boîte
-     * @param columns la longueur de la boîte
-     * @param view la vue associée à ce TextFieldBox
+     * 
+     * @param text      le texte de fond de la boîte
+     * @param columns   la longueur de la boîte
+     * @param view      la vue associée à ce TextFieldBox
      */
     public TextFieldBox(String text, int columns, Vue view) {
         super(text, columns);
@@ -71,8 +76,9 @@ public class TextFieldBox extends JTextField {
     }
 
     /**
-     * Détermine si le texte contenu dans la TextFieldBox correspond à une salle du batiment
-     * @return vrai si la salle existe dans le batiment et faux sinon
+     * Détermine si le texte contenu dans la TextFieldBox correspond à une salle du bâtiment
+     * 
+     * @return vrai si la salle existe dans le bâtiment, faux sinon
      */
     public boolean estSalle(){
         return this.view.getControl().estSalle(this.getText());

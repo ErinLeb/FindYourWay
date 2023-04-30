@@ -16,7 +16,7 @@ run (){
     
     echo "Launching..."
     
-    java -jar -Xmx2560M lib/junit-platform-console-standalone-1.9.2.jar --classpath=bin --scan-classpath --include-classname='.*';   
+    java -jar -Xmx5120M lib/junit-platform-console-standalone-1.9.2.jar --classpath=bin --scan-classpath --include-classname='.*';   
     
 }
 

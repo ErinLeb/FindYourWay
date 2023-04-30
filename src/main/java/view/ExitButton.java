@@ -8,10 +8,12 @@ import javax.swing.JButton;
 
 public class ExitButton extends JButton{
     // Attributs
+
     protected Vue view;
 
 
     // Constructeur 
+
     public ExitButton(Vue view){
         super("Exit");
         setBackground(Color.RED);

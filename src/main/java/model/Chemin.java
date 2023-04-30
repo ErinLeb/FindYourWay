@@ -23,12 +23,13 @@ public class Chemin {
     private String indications;
 
     /*
-     * Batiment des noeuds du chemin
+     * Bâtiment des noeuds du chemin
      */
     private Batiment bat;
 
 
     // Constructeurs
+
     public Chemin() {
         noeuds = new ArrayList<>();
         distance = 0;
@@ -52,14 +53,26 @@ public class Chemin {
 
     // Getters & setters
 
+    /**
+     * Renvoie la distance totale du chemin
+     * @return la distance totale du chemin
+     */
     public double getDistance() {
         return distance;
     }
 
+    /**
+     * Renvoie la liste de noeuds du chemin
+     * @return la liste de noeuds du chemin
+     */
     public List<Noeud> getNoeuds() {
         return noeuds;
     }
 
+    /**
+     * Renvoie le noeud de départ du chemin
+     * @return le noeud de départ du chemin
+     */
     public Noeud getDepart() {
         if (noeuds.isEmpty()) {
             return null;
@@ -67,6 +80,10 @@ public class Chemin {
         return noeuds.get(0);
     }
 
+    /**
+     * Renvoie le noeud d'arrivée du chemin
+     * @return le noeud d'arrivée du chemin
+     */
     public Noeud getArrivee() {
         if (noeuds.isEmpty()) {
             return null;
@@ -74,6 +91,10 @@ public class Chemin {
         return noeuds.get(noeuds.size() - 1);
     }
 
+    /**
+     * Renvoie les indications correspondant au chemin
+     * @return les indications correspondant au chemin
+     */
     public String getIndications(){
         return indications;
     }
@@ -97,17 +118,23 @@ public class Chemin {
      * Représente le segment d'un carrefour à un autre
      */
     static class Segment{
-        //Attributs
+        // Attributs
+
         /*Noeuds du segment */
         protected Carrefour n1, n2;
+
         /*Indique la direction du segment */
         protected boolean horizontal;
+
         /*Indique le nombre d'étages qui séparent les noeuds */
         protected int diffEtage;
+
         /*Distance entre n1 et n2 selon sa direction */
         protected double distance;
 
+        
         //Constructeur
+
         public Segment(Carrefour n1, Carrefour n2){
             this.n1 = n1;
             this.n2 = n2;
@@ -286,7 +313,8 @@ public class Chemin {
 
     /**
      * Ajoute le noeud {@code n} au chemin et met à jour les indications
-     * @param n
+     * 
+     * @param n noeud à ajouter au chemin
      */
     public void addNoeud(Noeud n) {
         if (!noeuds.isEmpty()) {
@@ -308,9 +336,9 @@ public class Chemin {
     }
 
     /**
-     * Retourne la distance en mètres correspondant à la distance sur le plan, selon l'échelle du batiment
-     * @param dist
-     * @return la distance en mètres correspondant à la distance sur le plan, selon l'échelle du batiment
+     * Retourne la distance en mètres correspondant à la distance sur le plan, selon l'échelle du bâtiment
+     * @param dist distance à convertir
+     * @return     la distance en mètres correspondant à la distance sur le plan, selon l'échelle du bâtiment
      */
     private String conversionMetres(double dist){
         return conversionMetres(dist, bat.getEchelle());
@@ -318,9 +346,9 @@ public class Chemin {
 
     /**
      * Retourne la distance en mètres correspondant {@code echelle}
-     * @param dist
-     * @param echelle
-     * @return la distance en mètres correspondant à l'échelle
+     * @param dist      distance à convertir
+     * @param echelle   échelle de la conversion
+     * @return          la distance en mètres correspondant à l'échelle
      */
     protected static String conversionMetres(double dist, double echelle){
         String res = "";

@@ -8,10 +8,10 @@ import java.awt.GridLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -24,6 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
+
 import java.util.ArrayList;
 
 import controller.Controleur;
@@ -90,6 +91,7 @@ public class MainApp extends Fenetre {
      */
     private boolean debug = false;
 
+
     // Constructeur
 
     /**
@@ -126,6 +128,7 @@ public class MainApp extends Fenetre {
         // Ajout d'un Listener pour changer le mode debug
         this.addListenerChangeDebug();
     }
+
 
     // Getters
 
@@ -172,11 +175,11 @@ public class MainApp extends Fenetre {
 
     /**
      * Change le chemin actuel par le chemin le plus court entre {@code depart} et
-     * {@code arrivee}
+     * {@code arrivee}, en tenant compte des permissions pour les ascenseurs
      * 
-     * @param depart
-     * @param arrivee
-     * @param ascenseur
+     * @param depart     salle de départ
+     * @param arrivee    salle d'arrivée
+     * @param ascenseur  permission pour les ascenseurs
      */
     public void setChemin(Noeud depart, Noeud arrivee, boolean ascenseur) {
         if (depart == null || arrivee == null) {
@@ -211,21 +214,22 @@ public class MainApp extends Fenetre {
         return this.debug;
     }
 
-    /**
+
+    // Méthodes
+
+     /**
      * Passe du mode debug au mode normal et inversement
      */
     public void changeDebug() {
         this.debug = !this.debug;
     }
 
-    // Méthodes
-
     /**
      * Initialise le controlPanel
      * 
      * @param startStr      nom de l'éventuelle salle de départ
      * @param finishStr     nom de l'éventuelle salle d'arrivée
-     * @param ascenseurBool état de la case cochable (true si cochée, false sinon)
+     * @param ascenseurBool permission pour les ascenseurs
      */
     private void initControlPanel(String startStr, String finishStr, boolean ascenseurBool) {
         // Création du Panel de contrôle
@@ -271,6 +275,24 @@ public class MainApp extends Fenetre {
     }
 
     /**
+     * Initialise le panel de droite
+     */
+    private void initPanelDroit(){
+        droitPanel = new JPanel(new BorderLayout());
+        this.droitPanel.setPreferredSize(new Dimension(300, droitPanel.getHeight()));
+
+        this.initEtagesPanel();
+        this.initIndicationsPanel();
+
+        droitPanel.add(etagesPanel, BorderLayout.NORTH);
+        droitPanel.add(indicationsPanel, BorderLayout.CENTER);
+
+        ExitButton exit = new ExitButton(view);
+        exit.setPreferredSize(new Dimension(droitPanel.getWidth(), 100));
+        droitPanel.add(exit, BorderLayout.SOUTH);
+    }
+
+    /**
      * Initialise le panel de changement d'étages
      */
     private void initEtagesPanel() {
@@ -296,24 +318,6 @@ public class MainApp extends Fenetre {
         this.etagesPanel.add(upButton);
         this.etagesPanel.add(etageLabel);
         this.etagesPanel.add(downButton);
-    }
-
-    /**
-     * Initialise le panel de droite
-     */
-    private void initPanelDroit(){
-        droitPanel = new JPanel(new BorderLayout());
-        this.droitPanel.setPreferredSize(new Dimension(300, droitPanel.getHeight()));
-
-        this.initEtagesPanel();
-        this.initIndicationsPanel();
-
-        droitPanel.add(etagesPanel, BorderLayout.NORTH);
-        droitPanel.add(indicationsPanel, BorderLayout.CENTER);
-
-        ExitButton exit = new ExitButton(view);
-        exit.setPreferredSize(new Dimension(droitPanel.getWidth(), 100));
-        droitPanel.add(exit, BorderLayout.SOUTH);
     }
 
     /**
@@ -411,8 +415,7 @@ public class MainApp extends Fenetre {
      */
     private boolean estEtagePositif() {
         String texte = etageLabel.getText();
-        return texte.charAt((texte.length() - 1)) == 'e'; // Si le texte finit par e, c'est qu'il finit par étage et non
-                                                          // par sous-sol
+        return texte.charAt((texte.length() - 1)) == 'e'; // Si le texte finit par e, c'est qu'il finit par étage et non par sous-sol
     }
 
     /**

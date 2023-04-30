@@ -3,27 +3,43 @@ package model;
 import java.util.ArrayList;
 
 /**
- * Class qui modélise les éléments noeuds et chemins favoris.
+ * Classe qui modélise les éléments noeuds et chemins favoris.
  */
 public class FavorisModel {
+    // Attributs 
 
     /**
-     * Liste des element favoris
+     * Liste des éléments favoris
      */
     private ArrayList<Binome> favoris;
 
-    /**
-     * Constructeur
-     */
+    
+    // Constructeur
+
     public FavorisModel() {
         favoris = new ArrayList<Binome>();
     }
 
+
+    // Getters
+
     /**
-     * methode qui ajout un favoris
+     * Retourne la liste des favoris
      * 
-     * @param b favoris à ajouter
-     * @return si il a reussi à ajouter l'élément.
+     * @return la liste des binomes favoris.
+     */
+    public ArrayList<Binome> getFavoris() {
+        return favoris;
+    }
+
+    
+    // Méthodes
+
+    /**
+     * Ajoute {@code b} aux favoris
+     * 
+     * @param b favori à ajouter
+     * @return  true si l'élément a bien été ajouté, false sinon
      */
     public boolean addFavoris(Binome b) {
         if (!contains(b)) {
@@ -33,20 +49,20 @@ public class FavorisModel {
     }
 
     /**
-     * methode qui enlève un element
+     * Enlève {@code b} des favoris
      * 
      * @param b élément à enlever
-     * @return si l'élément à été enlevé.
+     * @return  true si l'élément a été enlevé, false sinon
      */
     public boolean removeFavoris(Binome b) {
         return favoris.remove(b);
     }
 
     /**
-     * Vérifie si la liste contient déjà un binome
+     * Vérifie si la liste des favoris contient {@code b}
      * 
-     * @param b binome à vérifier
-     * @return si la liste contient l'élément b.
+     * @param b élément dont on veut vérifier sa présence
+     * @return  true si la liste de favoris contient l'élément b, false sinon
      */
     public boolean contains(Binome b) {
         for (Binome e : favoris) {
@@ -55,14 +71,5 @@ public class FavorisModel {
             }
         }
         return false;
-    }
-
-    /**
-     * getter
-     * 
-     * @return la liste des binomes favoris.
-     */
-    public ArrayList<Binome> getFavoris() {
-        return favoris;
     }
 }

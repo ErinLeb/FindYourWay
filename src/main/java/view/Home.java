@@ -1,13 +1,13 @@
 package view;
 
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.FlowLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
@@ -27,7 +27,7 @@ import model.Batiment;
  * Le menu d'accueil de l'application
  */
 public class Home extends Fenetre {
-    //Attributs
+    // Attributs
 
     /**
      * Le JLabel contenant le logo
@@ -35,26 +35,26 @@ public class Home extends Fenetre {
     private JLabel logoLabel;
     
     /*
-     * Panel du choix des batiments
+     * Panel du choix des bâtiments
      */
     private JPanel choixBatiment;
 
     /*
-     * ComboBox des batiments disponibles
+     * ComboBox des bâtiments disponibles
      */
     private JComboBox<Batiment> boxBatiment;
 
     /*
-     * Liste des batiments disponibles
+     * Liste des bâtiments disponibles
      */
     private List<Batiment> batiments;
 
 
-    //Constructeur 
+    // Constructeur 
 
     /**
      * Construit le menu d'accueil
-     * @param view la vue associée au menu Home
+     * @param view    la vue associée au menu Home
      * @param control le controleur de l'app
      */
     public Home(Vue view, Controleur control) {
@@ -82,10 +82,10 @@ public class Home extends Fenetre {
     }
     
 
-    //Méthodes
+    // Méthodes
     
     /**
-     * Initialise tous les éléments du panel de controle (batiments, départ, arrivée, ascenseurs)
+     * Initialise tous les éléments du panel de contrôle (bâtiments, départ, arrivée, ascenseurs)
      */
     private void initControlPanel() {
         //Création des deux champs de saisie de texte
@@ -125,11 +125,12 @@ public class Home extends Fenetre {
     }
 
     /**
-     * Initialise la liste des batiments disponibles et le JComboBox y correspondant
+     * Initialise la liste des bâtiments disponibles et le JComboBox y correspondant
      */
     public void initBatiments(){
         batiments = new ArrayList<>();
         batiments.add(new Batiment("Halle aux Farines", 0, 5, "src/main/ressources/csv/haf/", "src/main/ressources/graphics/plans/haf/"));
+        // ajouter les autres bâtiments disponibles ici si nécessaire
 
         boxBatiment = new JComboBox<>();
         for(Batiment b : batiments){
@@ -148,7 +149,7 @@ public class Home extends Fenetre {
     }
 
     /**
-     * Initialise le panel correspondant au choix du batiment 
+     * Initialise le panel correspondant au choix du bâtiment 
      */
     private void initBatimentPanel() {
         choixBatiment = new JPanel(new GridBagLayout());

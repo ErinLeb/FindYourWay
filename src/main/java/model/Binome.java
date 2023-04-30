@@ -1,16 +1,25 @@
 package model;
 
 /**
- * Class qui représente un groupe de deux Noeud
+ * Classe qui représente une paire de Noeuds
  */
 public class Binome {
+    // Attributs 
+
     public Noeud depart;
+
     public Noeud arrivee;
+
+
+    // Constructeur
 
     public Binome(Noeud depart, Noeud arrivee) {
         this.depart = depart;
         this.arrivee = arrivee;
     }
+
+
+    // Getters
 
     public Noeud getDepart() {
         return depart;
@@ -19,6 +28,9 @@ public class Binome {
     public Noeud getArrivee() {
         return arrivee;
     }
+
+
+    // Méthodes 
 
     @Override
     public boolean equals(Object obj) {
@@ -51,11 +63,11 @@ public class Binome {
             if (arrivee == null) {
                 return "null";
             }
-            return ((Salle) arrivee).getNom();
+            return ((Salle) arrivee).nom;
         }
         if (arrivee == null) {
-            return ((Salle) depart).getNom();
+            return ((Salle) depart).nom;
         }
-        return ((Salle) depart).getNom() + " ==> " + ((Salle) arrivee).getNom();
+        return ((Salle) depart).nom + " ==> " + ((Salle) arrivee).nom;
     }
 }

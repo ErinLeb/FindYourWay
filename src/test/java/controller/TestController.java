@@ -1,13 +1,13 @@
 package controller;
 
+import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import view.Fenetre;
-
 import java.awt.GraphicsEnvironment;
 
-import org.junit.Test;
+import view.Fenetre;
+
 
 public class TestController {
     /**
@@ -94,7 +94,7 @@ public class TestController {
     }
 
     /**
-     * test de la fenêtre d'accueil avec un nom de salle valide et un nom de salle vide et la permission pour les ascenseurs
+     * Test de la fenêtre d'accueil avec un nom de salle valide et un nom de salle vide et la permission pour les ascenseurs
      */
     @Test
     public void testAccueil6(){ 
@@ -298,5 +298,4 @@ public class TestController {
             assertTrue(!control.getVue().getApp().getAscenseur().isSelected());
         }
     }
-    
 }

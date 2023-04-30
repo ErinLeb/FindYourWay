@@ -11,8 +11,6 @@ public class Etage{
      */
     public final int nom;
 
-    private final Batiment bat;
-
     /**
      * Liste des noeuds de l'étage
      */
@@ -21,11 +19,10 @@ public class Etage{
 
     // Constructeur
     
-    public Etage(int nom, Batiment bat){
+    public Etage(int nom){
         noeuds = new ArrayList<>();
 
         this.nom = nom;
-        this.bat = bat;
     }
 
 
@@ -33,6 +30,7 @@ public class Etage{
 
     /**
      * Retourne la liste des noeuds de l'étage
+     * 
      * @return la liste des noeuds de l'étage
      */
     public List<Noeud> getNoeuds(){
@@ -41,7 +39,9 @@ public class Etage{
     
     /**
      * Retourne le noeud ayant un id correspondant à {@code id}
-     * @return le noeud ayant un id correspondant à {@code id}
+     * 
+     * @param id id du noeud que l'on veut récupérer
+     * @return   le noeud ayant un id correspondant à {@code id}
      */    
     public Noeud getNoeud(int id){
         for(Noeud n : noeuds){
@@ -54,8 +54,9 @@ public class Etage{
     
     /**
      * Retourne le noeud à l'indice i de la liste
-     * @param i indice
-     * @return le noeud à l'indice i de la liste
+     * 
+     * @param i indice de la liste dont on veut récupérer le noeud 
+     * @return  le noeud à l'indice i de la liste
      */
     public Noeud getIndNoeud(int i){
         return noeuds.get(i);
@@ -83,7 +84,9 @@ public class Etage{
     }
 
     /** 
-     * Ajoute un noeud à l'étage.
+     * Ajoute le noeud {@code n} à l'étage.
+     * 
+     * @param n noeud à ajouter
     */
     public void addNoeud(Noeud n){ 
         noeuds.add(n);

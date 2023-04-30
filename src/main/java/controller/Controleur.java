@@ -9,6 +9,7 @@ import model.Noeud;
 import model.Salle;
 import view.Vue;
 
+
 /**
  * Gère les interactions entre la vue et le modèle
  */
@@ -21,55 +22,54 @@ public class Controleur {
     private Vue vue;
 
     /**
-     * le batiment sur lequel la vue est centrée
+     * le bâtiment sur lequel la vue est centrée
      */
     private Batiment batActuel;
 
+
     // Constructeur
 
-    /**
-     * Construit le controleur de l'app
-     */
     public Controleur() { 
         this.vue = new Vue(this);
 
         batActuel.getViewFavoris().setcontroleur(this);
     }
 
+
     // Getters & setters
 
     /**
-     * Renvoie l'étage max du bâtiment sur lequel la vue est centrée
+     * Renvoie l'étage maximum du bâtiment sur lequel la vue est centrée
      * 
-     * @return l'étage max du bâtiment sur lequel la vue est centrée
+     * @return l'étage maximum du bâtiment sur lequel la vue est centrée
      */
     public int getEtageMaxActuel() {
         return batActuel.getMax();
     }
 
     /**
-     * Renvoie l'étage min du bâtiment sur lequel la vue est centrée
+     * Renvoie l'étage minimum du bâtiment sur lequel la vue est centrée
      * 
-     * @return l'étage min du bâtiment sur lequel la vue est centrée
+     * @return l'étage minimum du bâtiment sur lequel la vue est centrée
      */
     public int getEtageMinActuel() {
         return batActuel.getMin();
     }
 
     /**
-     * Renvoie le batiment actuel
+     * Renvoie le bâtiment actuel
      * 
-     * @return le batiment actuel
+     * @return le bâtiment actuel
      */
     public Batiment getBatiment() {
         return batActuel;
     }
 
     /**
-     * Renvoie la salle qui a pour nom {@code nom}
+     * Renvoie la salle qui a pour nom {@code salle}
      * 
      * @param salle nom de la salle à trouver
-     * @return le noeud de la salle qui a pour nom {@code nom}
+     * @return      le noeud de la salle qui a pour nom {@code salle}
      */
     private Noeud getSalle(String salle) {
         return batActuel.getSalle(salle);
@@ -85,10 +85,10 @@ public class Controleur {
     }
 
     /**
-     * Renvoie la liste des noeuds à afficher de l'étage numéro {@code numEtage}
+     * Renvoie la liste des noeuds de l'étage numéro {@code numEtage}
      * 
      * @param numEtage le numéro de l'étage
-     * @return la liste de ses points
+     * @return         la liste de ses noeuds
      */
     public List<Noeud> getNoeudsEtage(int numEtage) {
         Etage etage = batActuel.getEtage(numEtage);
@@ -97,8 +97,8 @@ public class Controleur {
     }
 
     /**
-     * Change le batiment actuel par {@code bat} et si la vue est déjà initialisée, change sa liste d'images de plans
-     * @param bat nouveau batiment
+     * Change le bâtiment actuel par {@code bat} et si la vue est déjà initialisée, change sa liste d'images de plans
+     * @param bat nouveau bâtiment
      */
     public void setBatiment(Batiment bat){ 
         this.batActuel = bat;
@@ -112,10 +112,11 @@ public class Controleur {
 
     /**
      * Vérifie que les textes contenus dans les TextFieldBox sont soit des noms de
-     * salles, soit "Départ", soit "Arrivée"
+     * salles, soit "Départ", soit "Arrivée", soit des caractères blancs (espaces, tabulations...)
      * 
-     * @return vrai si les textes dans les TextFieldBox sont soit des noms de
-     *         salles, soit "Départ", soit "Arrivée", faux sinon
+     * @return true si les textes dans les TextFieldBox sont soit des noms de
+     *         salles, soit "Départ", soit "Arrivée", soit des caractères blancs (espaces, tabulations...),
+     *         false sinon
      */
     public boolean verifGoButton() {
         String start = vue.getApp().getStart().getText();
@@ -128,9 +129,9 @@ public class Controleur {
     }
 
     /**
-     * vérifie si une chaine de caractères est composée de caractères blancs
-     * @param s chaine de caractère à tester
-     * @return true si elle est composée de caractères blancs, faux sinon
+     * Vérifie si une chaine de caractères est composée de caractères blancs
+     * @param s chaine de caractères à tester
+     * @return  true si elle est composée de caractères blancs, false sinon
      */
     public boolean isBlank(String s){
         for(int i = 0; i < s.length(); i++){
@@ -141,12 +142,11 @@ public class Controleur {
         return true;
     }
 
-
     /**
-     * Vérifie si le nom {@code salle} est celui d'une salle du batiment
+     * Vérifie si le nom {@code salle} est celui d'une salle du bâtiment
      * 
      * @param salle nom de la salle
-     * @return vrai si le nom correspond à celui d'une salle du batiment, faux sinon
+     * @return      true si le nom correspond à celui d'une salle du bâtiment, false sinon
      */
     public boolean estSalle(String salle) {
         return batActuel.findSalle(salle);
@@ -177,15 +177,16 @@ public class Controleur {
 		}
 	}
 
-
     /**
-     * Methode qui ajoute un element au favoris (Salle ou chemin)
+     * Méthode qui ajoute un élément aux favoris (Salle ou Chemin)
      */
     public void ajouterElementListFavori() {
         Noeud depart = batActuel.getSalle(vue.getApp().getStart().getText());
         Noeud arrivee = batActuel.getSalle(vue.getApp().getFinish().getText());
+
         if ((depart != null) || arrivee != null) {
             Binome b = new Binome(depart, arrivee);
+
             if (batActuel.getModelFavoris().addFavoris(b)) {
                 batActuel.getViewFavoris().addFavoris(b);
             }
@@ -193,9 +194,9 @@ public class Controleur {
     }
 
     /**
-     * Methode qui supprime un element des favoris (Salle ou chemin)
+     * Méthode qui supprime un élément des favoris (Salle ou Chemin)
      * 
-     * @param index  index ou est stocké l'élément dans la vue dans le JComboBox
+     * @param index  index où est stocké l'élément dans le JComboBox de la vue
      * @param binome binome que l'on souhaite supprimer
      */
     public void supprimerElementListFavori(int index, Binome binome) {
@@ -204,10 +205,10 @@ public class Controleur {
     }
 
     /**
-     * Methode qui permet de mettre à jour les valeurs lorsque l'on selectionne un
-     * favoris
+     * Méthode qui permet de mettre à jour les valeurs lorsque l'on sélectionne un
+     * favori
      * 
-     * @param b chemin ou noeud qui viens d'être séléctionné.
+     * @param b chemin ou noeud qui vient d'être sélectionné
      */
     public void selectionFavoris(Binome b) {
         if (b == null) {
@@ -216,12 +217,12 @@ public class Controleur {
             return;
         }
         if (b.getDepart() != null) {
-            vue.getApp().getStart().setText(((Salle) b.getDepart()).getNom());
+            vue.getApp().getStart().setText(((Salle) b.getDepart()).nom);
         } else {
             vue.getApp().getStart().setText("");
         }
         if (b.getArrivee() != null) {
-            vue.getApp().getFinish().setText(((Salle) b.getArrivee()).getNom());
+            vue.getApp().getFinish().setText(((Salle) b.getArrivee()).nom);
         } else {
             vue.getApp().getFinish().setText("");
         }

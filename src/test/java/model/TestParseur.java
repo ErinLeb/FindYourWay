@@ -1,12 +1,12 @@
 package model;
 
+import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
 
 public class TestParseur {
     
@@ -77,7 +77,7 @@ public class TestParseur {
         checkListeNoeuds(etage4, bat.getEtage(4).getNoeuds());
         checkListeNoeuds(etage5, bat.getEtage(5).getNoeuds());
 
-        //on compare la liste de noeuds du batiment
+        //on compare la liste de noeuds du bâtiment
         checkListeNoeuds(batiment, bat.noeuds);
     }
 
@@ -102,7 +102,7 @@ public class TestParseur {
         
         //on crée les éléments attendus
 
-        //on ajoute d'abord les noeuds au batiment
+        //on ajoute d'abord les noeuds au bâtiment
         List<Noeud> batiment = new ArrayList<>();
         Carrefour c0 = new Carrefour(false, 0, bat);
         batiment.add(c0);

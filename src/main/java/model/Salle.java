@@ -9,16 +9,11 @@ public class Salle extends Noeud{
     public final String nom;
 
 
-    // Constructeurs
+    // Constructeur
+    
     public Salle(String nom, Batiment bat) {
         super(bat);
         this.nom = nom;
-    }
-
-
-    // Getters & setters
-    public String getNom() {
-        return nom;
     }
 
 

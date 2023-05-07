@@ -6,9 +6,9 @@ package model;
 public class Binome {
     // Attributs 
 
-    public Noeud depart;
+    private Noeud depart;
 
-    public Noeud arrivee;
+    private Noeud arrivee;
 
 
     // Constructeur

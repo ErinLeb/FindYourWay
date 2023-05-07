@@ -190,6 +190,7 @@ public class Dijkstra {
      * @param voisin    noeud que l'on doit ranger correctement
      */
     private static void actualiserNoeudOrdreCroissant(List<Noeud> noeuds, Map<Noeud, Double> distances, Noeud voisin) {
+        noeuds.remove(voisin);
         if (!(noeuds.isEmpty())) {
             rangerNoeudOrdreCroissant(noeuds, distances, voisin, 0, noeuds.size() - 1);
         } else {

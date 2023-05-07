@@ -16,7 +16,10 @@ public class ExitButton extends JButton{
 
     public ExitButton(Vue view){
         super("Exit");
-        setBackground(Color.RED);
+        setBackground(new Color(140,20,46));
+        setForeground(Color.WHITE);
+        setOpaque(true);
+        setBorderPainted(false);
         this.view = view;
 
         addActionListener(new ActionListener() {

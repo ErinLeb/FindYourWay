@@ -121,6 +121,10 @@ public class Controleur {
     public boolean verifGoButton() {
         String start = vue.getApp().getStart().getText();
         String finish = vue.getApp().getFinish().getText();
+        if((start.equalsIgnoreCase("toilettes") || start.equalsIgnoreCase("wc") || start.equalsIgnoreCase("café") || start.equalsIgnoreCase("cafe")) && 
+        (!finish.equalsIgnoreCase(start) && !finish.equalsIgnoreCase("Arrivée") && !isBlank(finish))){
+            return false;
+        }
         if((start.equalsIgnoreCase("Départ") || estSalle(start) || isBlank(start)) 
         && (finish.equalsIgnoreCase("Arrivée") || estSalle(finish) || isBlank(finish))){
             return true;

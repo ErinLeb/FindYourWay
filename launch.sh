@@ -16,7 +16,7 @@ run (){
     
     echo "Launching..."
     
-    java -cp bin/ Main
+    java -Xmx5120M -cp bin/ Main
     
 }
 

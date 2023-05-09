@@ -180,8 +180,9 @@ public class Batiment {
      */
     public Noeud getSalle(String salle) {
         for (int i = 0; i < noeuds.size(); i++) {
-            if ((noeuds.get(i) instanceof Salle) && ((((Salle) noeuds.get(i)).nom).equalsIgnoreCase(salle))
-                    || (salle.equalsIgnoreCase("cafe") && ((Salle) noeuds.get(i)).nom.equalsIgnoreCase("café"))) {
+            if ((noeuds.get(i) instanceof Salle) && (((((Salle) noeuds.get(i)).nom).equalsIgnoreCase(salle))
+                    || ((salle.equalsIgnoreCase("cafe") && ((Salle) noeuds.get(i)).nom.equalsIgnoreCase("café")))
+                    || ((salle.equalsIgnoreCase("wc") && ((Salle) noeuds.get(i)).nom.equalsIgnoreCase("toilettes"))))) {
                 return noeuds.get(i);
             }
         }
@@ -273,7 +274,8 @@ public class Batiment {
     public boolean findSalle(String nom) {
         for (int i = 0; i < noeuds.size(); i++) {
             if ((noeuds.get(i) instanceof Salle) && ((((Salle) noeuds.get(i)).nom.equalsIgnoreCase(nom))
-                    || (nom.equalsIgnoreCase("cafe") && ((Salle) noeuds.get(i)).nom.equalsIgnoreCase("café")))) {
+                    || (nom.equalsIgnoreCase("cafe") && ((Salle) noeuds.get(i)).nom.equalsIgnoreCase("café"))
+                    || (nom.equalsIgnoreCase("wc") && ((Salle) noeuds.get(i)).nom.equalsIgnoreCase("toilettes")))) {
                 return true;
             }
         }

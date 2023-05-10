@@ -208,7 +208,12 @@ public class Controleur {
         Noeud arrivee = batActuel.getSalle(vue.getApp().getFinish().getText());
 
         if ((depart != null) || arrivee != null) {
-            Binome b = new Binome(depart, arrivee);
+            Binome b;
+            if (depart.equals(arrivee)) {
+                b = new Binome(depart, null);
+            } else {
+                b = new Binome(depart, arrivee);
+            }
 
             if (batActuel.getModelFavoris().addFavoris(b)) {
                 batActuel.getViewFavoris().addFavoris(b);

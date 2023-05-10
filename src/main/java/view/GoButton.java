@@ -31,6 +31,9 @@ public class GoButton extends JButton {
                     view.repaint();
                     view.setVisible(true);
                 }
+                else{
+                    view.getControl().erreurTexte();
+                }
             }
         });
 
@@ -48,6 +51,9 @@ public class GoButton extends JButton {
                         view.setContentPane(view.getApp());
                         view.repaint();
                         view.setVisible(true);
+                    }
+                    else{
+                        view.getControl().erreurTexte();
                     }
                 }
             }

@@ -66,6 +66,9 @@ public class TextFieldBox extends JTextField {
                         view.repaint();
                         view.setVisible(true);
                     }
+                    else{
+                        view.getControl().erreurTexte();
+                    }
                 }
             }
             @Override

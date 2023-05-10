@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+import java.awt.Color;
 
 import model.Batiment;
 import model.Binome;
@@ -130,6 +131,24 @@ public class Controleur {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Change la couleur des textes invalides des TextFieldBox en rouge
+     */
+    public void erreurTexte() {
+        String start = vue.getApp().getStart().getText();
+        String finish = vue.getApp().getFinish().getText();
+        if(!(start.equalsIgnoreCase("Départ") || estSalle(start) || isBlank(start))){
+            vue.getApp().getStart().setForeground(Color.RED);
+        }
+        if(!(finish.equalsIgnoreCase("Arrivée") || estSalle(finish) || isBlank(finish))){
+            vue.getApp().getFinish().setForeground(Color.RED);
+        }
+        if((start.equalsIgnoreCase("toilettes") || start.equalsIgnoreCase("wc") || start.equalsIgnoreCase("café") || start.equalsIgnoreCase("cafe")) && 
+        (!finish.equalsIgnoreCase(start) && !finish.equalsIgnoreCase("Arrivée") && !isBlank(finish))){
+            vue.getApp().getStart().setForeground(Color.RED);
+        }
     }
 
     /**

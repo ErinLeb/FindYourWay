@@ -1,0 +1,24 @@
+image: openjdk:11
+
+before_script:
+  - chmod +x launch.sh
+  - chmod +x test.sh
+  - java --version # print java version for debugging
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script: "./launch.sh"
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+
+test:
+  stage: test
+  script: "./test.sh"
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push

@@ -103,6 +103,8 @@ public class Vue extends JFrame {
      * Met app à null et retourne sur la fenêtre d'accueil
      */
     public void resetApp(){
+        this.accueil.getStart().setText(this.app.getStart().getText());
+        this.accueil.getFinish().setText(this.app.getFinish().getText());
         this.app = null;
         this.setContentPane(accueil);
         repaint();

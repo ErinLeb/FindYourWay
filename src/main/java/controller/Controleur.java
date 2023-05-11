@@ -33,7 +33,7 @@ public class Controleur {
     public Controleur() { 
         this.vue = new Vue(this);
 
-        batActuel.getViewFavoris().setcontroleur(this);
+        batActuel.getViewFavoris().setControleur(this);
     }
 
 

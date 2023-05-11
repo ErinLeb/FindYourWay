@@ -21,7 +21,7 @@ public class FavorisView extends JPanel {
     /**
      * Bouton qui permet d'ajouter des favoris
      */
-    private JButton ajout;
+    private JButton ajouter;
 
     /**
      * Bouton qui permet de supprimer des favoris
@@ -50,8 +50,8 @@ public class FavorisView extends JPanel {
                 controleur.selectionFavoris((Binome) list.getSelectedItem());
             }
         });
-        ajout = new JButton("+");
-        ajout.addActionListener(new ActionListener() {
+        ajouter = new JButton("+");
+        ajouter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controleur.ajouterElementListFavori();
@@ -68,14 +68,14 @@ public class FavorisView extends JPanel {
             }
         });
         add(list);
-        add(ajout);
+        add(ajouter);
         add(supprimer);
     }
 
 
     // Setters 
 
-    public void setcontroleur(Controleur controleur) {
+    public void setControleur(Controleur controleur) {
         this.controleur = controleur;
     }
 

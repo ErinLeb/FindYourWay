@@ -327,7 +327,7 @@ public class MainApp extends Fenetre {
         String indic;
 
         if (cheminActuel == null) {
-            indic = "Rentrez deux salles pour voir l'itinéraire le plus court.";
+            indic = "Rentrez une salle pour voir ses portes, ou deux salles pour voir l'itinéraire le plus court.";
         } else {
             indic = cheminActuel.getIndications();
         }
